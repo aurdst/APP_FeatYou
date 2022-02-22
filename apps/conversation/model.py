@@ -1,10 +1,9 @@
 from sqlalchemy import Float,Column,ForeignKey, Integer, String, DateTime
 from database import Base
 
-class MessageModel(Base):
-    __tablename__ = "message"
+class ConversationModel(Base):
+    __tablename__ = "conversation"
 
     id = Column(Integer, primary_key = True)
-    content = Column(String)
-    idUser = Column(int)
-    date = Column(DateTime)
+    idUsers = Column(String)
+    idMessages = Column(String)
