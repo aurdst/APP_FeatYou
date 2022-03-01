@@ -1,5 +1,5 @@
 from sqlalchemy import Float,Column,ForeignKey, Integer, String, DateTime
-from database import Base
+from database.database import Base
 
 class SubCategorieModel(Base):
     __tablename__ = "subcartegorie"
