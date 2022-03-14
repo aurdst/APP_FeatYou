@@ -16,8 +16,9 @@ router: APIRouter = APIRouter()
 # Create a post routes for create à categorie
 @router.post("/categories/", response_model=schemas.CategoriesSchema)
 def createCategory(category: schemas.CategoriesSchema, db: Session = Depends(get_db)):
+    db.query(models.CategorieModel).filter_by(models.CategorieModel.labelCategorie).first()
     if models.CategorieModel.labelCategorie == category.labelCategorie:
-        raise HTTPException(sttus_code=404, details="Categorie already exist")
+        raise HTTPException(status_code=404, details="Categorie already exist")
     else:
         insert_data_in_db = models.CategorieModel(
             labelCategorie = category.labelCategorie,
@@ -31,4 +32,6 @@ def createCategory(category: schemas.CategoriesSchema, db: Session = Depends(get
 
 # Create a get routes for get all categories in the db.
 @router.get("/categories/get_all", response_model=List[schemas.CategoriesSchema])
-def getAllCategories()
+def getAllCategories(db: Session = Depends(get_db)):
+    query = db.query(models.CategorieModel).all()
+    return query
