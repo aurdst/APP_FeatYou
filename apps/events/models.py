@@ -7,6 +7,6 @@ class EventModel(Base):
     id = Column(Integer, primary_key = True)
     label = Column(String)
     description = Column(String)
-    idCategorie = Column(int)
-    idUser = Column(int)
+    idCategorie = Column(Integer)
+    idUser = Column(Integer)
     price = Column(Float)

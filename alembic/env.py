@@ -1,17 +1,8 @@
+from asyncio import events
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
-
-from apps.categories import models
-from apps.conversation import models
-from apps.events import models
-from apps.messages import models
-from apps.subcategories import models
-from apps.token import models
-from apps.users import models
-from apps.videos import models
 
 import os, sys
 from dotenv import load_dotenv
@@ -28,7 +19,7 @@ config = context.config
 
 # this will overwrite the ini-file sqlalchemy.url path
 # with the path given in the config of the main code
-config.set_main_option("sqlalchemy.url", "postgresql://postgres:postgres@localhost:5432/featyou")
+config.set_main_option("sqlalchemy.url", "postgresql://postgres:4851C2a172@127.0.0.1:5432/featyou")
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -37,9 +28,14 @@ fileConfig(config.config_file_name)
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
-target_metadata = models.Base.metadata
-#target_metadata = None
+# target_metadata = mymodel.Base.metadata
 
+import apps.categories.models as models
+#import apps.conversation.models as conv_models
+
+#here target_metadata was equal to None
+target_metadata = models.Base.metadata
+#target_metadata = conv_models.Base.metadata
 
 
 # other values from the config, defined by the needs of env.py,

@@ -6,5 +6,5 @@ class MessageModel(Base):
 
     id = Column(Integer, primary_key = True)
     content = Column(String)
-    idUser = Column(int)
+    idUser = Column(Integer)
     date = Column(DateTime)
