@@ -31,11 +31,24 @@ fileConfig(config.config_file_name)
 # target_metadata = mymodel.Base.metadata
 
 import apps.categories.models as models
-#import apps.conversation.models as conv_models
+import apps.conversation.models as conv_models
+import apps.subcategories.models as sub_models
+import apps.events.models as event_models
+import apps.messages.models as mess_models
+import apps.videos.models as video_models
+import apps.token.models as token_models
+import apps.users.models as user_models
+
 
 #here target_metadata was equal to None
 target_metadata = models.Base.metadata
-#target_metadata = conv_models.Base.metadata
+target_metadata = conv_models.Base.metadata
+target_metadata = event_models.Base.metadata
+target_metadata = mess_models.Base.metadata
+target_metadata = video_models.Base.metadata
+target_metadata = sub_models.Base.metadata
+target_metadata = token_models.Base.metadata
+target_metadata = user_models.Base.metadata
 
 
 # other values from the config, defined by the needs of env.py,
