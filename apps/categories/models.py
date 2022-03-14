@@ -7,4 +7,3 @@ class CategorieModel(Base):
     id = Column(Integer, primary_key = True)
     labelCategorie = Column(String)
     descCategorie = Column(String)
-    
