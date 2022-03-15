@@ -36,6 +36,15 @@ def get_all_categories(db: Session = Depends(get_db)):
     query = db.query(models.CategorieModel).all()
     return query
 
+# Create a get routes for get one categories in the db.
+@router.get("/categories/{categorie_id}/", response_model=List[schemas.CategoriesSchema])
+def get_all_categories(categorie_id: str, db: Session = Depends(get_db)):
+    query = db.query(models.CategorieModel.id).filter()
+    if not query:
+        raise HTTPException(status_code=404, detail="[Not Found] Categorie doesn't exist")
+
+    return query
+
 
 @router.put("/categories/update/{categorie_id}", response_model=schemas.CategoriesSchema, status_code=status.HTTP_202_ACCEPTED)
 def update_categorie(categorie_id: str, update_category: schemas.CategoriesSchema, db: Session = Depends(get_db)):
