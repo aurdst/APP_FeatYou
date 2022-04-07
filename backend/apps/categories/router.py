@@ -13,7 +13,12 @@ router: APIRouter = APIRouter()
 #Here we are a routes for Categories
 
 # Create a post routes for create a categorie
-@router.post("/categories/", response_model=schemas.CategoriesSchema, status_code=status.HTTP_201_CREATED)
+@router.post(
+    path="/add",
+    response_model=schemas.CategoriesSchema,
+    status_code=status.HTTP_201_CREATED,
+    summary="Add a categorie"
+    )
 def create_categorie(category: schemas.CategoriesSchema, db: Session = Depends(get_db)):
     new_datas = models.CategorieModel(
         labelCategorie = category.labelCategorie,
@@ -31,24 +36,36 @@ def create_categorie(category: schemas.CategoriesSchema, db: Session = Depends(g
         return new_datas 
 
 # Create a get routes for get all categories in the db.
-@router.get("/categories/get_all", response_model=List[schemas.CategoriesSchema])
+@router.get(
+    path = "/",
+    response_model=List[schemas.CategoriesSchema],
+    summary="Get all categorie"
+    )
 def get_all_categories(db: Session = Depends(get_db)):
     query = db.query(models.CategorieModel).all()
     return query
 
 # Create a get routes for get one categories in the db.
-@router.get("/categories/{category_id}/", response_model=List[schemas.CategoriesSchema])
+@router.get(
+    path="/{category_id}",
+    response_model=schemas.CategoriesSchema,
+    summary="Get categorie by id"
+    )
 def get_all_categories(category_id: str, db: Session = Depends(get_db)):
-    query = db.query(models.CategorieModel.id).filter(id == category_id).first()
+    query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] Categorie doesn't exist")
 
     return query
 
 # Route for update one categories
-@router.put("/categories/update/{category_id}", response_model=schemas.CategoriesSchema, status_code=status.HTTP_202_ACCEPTED)
-def update_categorie(category_id: str, update_category: schemas.CategoriesSchema, db: Session = Depends(get_db)):
-    query = db.query(models.CategorieModel).filter_by(id == category_id).first()
+@router.put(
+    path="/{category_id}", 
+    response_model=schemas.UpdateCategorieSchema, 
+    status_code=status.HTTP_202_ACCEPTED,
+    summary="Update category")
+def update_categorie(category_id: str, update_category: schemas.UpdateCategorieSchema, db: Session = Depends(get_db)):
+    query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] Categorie doesn't exist")
 
@@ -62,11 +79,14 @@ def update_categorie(category_id: str, update_category: schemas.CategoriesSchema
     return update_data
 
 #Route for deleted categorie
-@router.delete("categories/{category_id}")
+@router.delete(
+    path="/{category_id}", 
+    summary="Delete a category"
+    )
 def delete_categorie_by_id(category_id: str, db: Session = Depends(get_db)):
-    query : db.query(models.CategorieModel).filter_by(id == category_id).first()
+    query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] Categorie doesn't exist")
     else:
-        db.delete()
+        db.delete(query)
         return "[204] No Content"

@@ -12,14 +12,19 @@ router: APIRouter = APIRouter()
 
 
 #Route for create a conversation
-@router.post("/conversation/", response_model=schemas.ConversationSchema, status_code=status.HTTP_201_CREATED)
+@router.post(
+    path="/add_conversation", 
+    response_model=schemas.ConversationSchema, 
+    status_code=status.HTTP_201_CREATED,
+    summary="Add conversation"
+    )
 def create_conversation(conversation: schemas.ConversationSchema, db: Session = Depends(get_db)):
     datas = models.ConversationModel(
         idMessages = conversation.idMessages,
         idUsers = conversation.idUsers
     )
 
-    query = db.query(models.ConversationModel).filter(conversation.id == datas.id).first()
+    query = db.query(models.ConversationModel).filter(models.ConversationModel.id == datas.id).first()
     if query:
         raise HTTPException(status_code=404, detail="Conversation already exist")
     else:
@@ -30,22 +35,35 @@ def create_conversation(conversation: schemas.ConversationSchema, db: Session = 
         return datas
 
 #Create a get all categorie
-@router.get("/conversation/get_all", response_model=List[schemas.ConversationSchema])
+@router.get(
+    path="/conversation/", 
+    response_model=List[schemas.ConversationSchema],
+    summary="Get all conversation"
+    )
 def get_all_conversation(db: Session = Depends(get_db)):
     query = db.query(models.ConversationModel).all()
     return query
 
 # Create a get routes for get one conversation in the db.
-@router.get("/conversation/{conversation_id}/", response_model=List[schemas.ConversationSchema])
+@router.get(
+    path="/{conversation_id}",
+    response_model=List[schemas.ConversationSchema],
+    summary="Get conversation by id"
+    )
 def get_all_conversation(conversation_id: str, db: Session = Depends(get_db)):
-    query = db.query(models.ConversationModel.id).filter(id == conversation_id)
+    query = db.query(models.ConversationModel).filter(models.ConversationModel.id == conversation_id)
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] Conversation doesn't exist")
 
     return query
 
 # Route for update one conversation
-@router.put("/conversation/update/{conversation_id}", response_model=schemas.ConversationSchema, status_code=status.HTTP_202_ACCEPTED)
+@router.put(
+    path="/{conversation_id}", 
+    response_model=schemas.ConversationSchema, 
+    status_code=status.HTTP_202_ACCEPTED,
+    summary="Update Conversation"
+    )
 def update_categorie(conversation_id: str, update_conversation: schemas.ConversationSchema, db: Session = Depends(get_db)):
     query = db.query(models.ConversationModel).filter(update_conversation.id == conversation_id).first()
     if not query:
@@ -61,7 +79,10 @@ def update_categorie(conversation_id: str, update_conversation: schemas.Conversa
     return update_data
 
 #Route for deleted categorie
-@router.delete("conversation/{conversation_id}")
+@router.delete(
+    path="/{conversation_id}",
+    summary="Delete a conversation"
+    )
 def delete_categorie_by_id(conversation_id: str, db: Session = Depends(get_db)):
     query : db.query(models.ConversationModel).filter_by(id == conversation_id).first()
     if not query:
