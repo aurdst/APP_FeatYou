@@ -4,8 +4,11 @@
       app
       elevation="6"
     >
-      <v-img :src="logo" max-width="150" class="ma-auto"></v-img>
-      <!-- <v-spacer/> -->
+    <v-spacer/>
+      <router-link to="/">
+        <v-img :src="logo" max-width="150" class="ma-auto"></v-img>
+      </router-link>
+    <v-spacer/>
       <v-avatar
         color="primary"
         size="46"
