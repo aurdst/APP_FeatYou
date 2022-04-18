@@ -5,3 +5,31 @@
 .text_conseil{
     text-decoration: none;
 }
+
+.profile_text{
+    height: 200px;
+    background-color: rgb(142, 202, 255);
+    width: 80%;
+}
+
+.div_action{
+    height: 150px;
+    background-color: rgb(0, 111, 207);
+    width: 30%;
+    margin-top:5%;
+    margin-left: 5%;
+    display: inline-block;
+}
+
+.div_action_btn{
+    width: 50%;
+    display: inline-block;
+    margin-left: 5%;
+}
+
+.btn_profile{
+    display: block;
+    width: 33%;
+    margin-left: 33%;
+    margin-top: 5%;
+}

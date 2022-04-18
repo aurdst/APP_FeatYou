@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ConseilsView from '../views/ConseilsView.vue'
 import ConseilsDetailsView  from '../views/ConseilsDetailsView.vue'
+import SportCategorie from '../views/SportCategorie.vue'
+import SportDetails from '../views/SportDetails.vue'
+import ProfileView from '../views/ProfileView.vue'
 
 Vue.use(VueRouter)
 
@@ -26,7 +29,22 @@ const routes = [
     path: '/conseils_details',
     name: 'conseilsdetails',
     component: ConseilsDetailsView
-  }
+  },
+  {
+    path: '/sport',
+    name: 'sport',
+    component: SportCategorie
+  },
+  {
+    path: '/sport_details',
+    name: 'sportdetails',
+    component: SportDetails
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView
+  },
 ]
 
 const router = new VueRouter({

@@ -18,43 +18,49 @@
     <v-main>
       <router-view/>
     </v-main>
-
-    <v-app-bar
-    app
-    elevation="6"
-    bottom
-    >
-      <v-spacer/>
-      <router-link to="/">
-        <v-avatar
-          color="primary"
-          size="40"
-        ></v-avatar>
-      </router-link>
-      <v-spacer/>
-        <v-avatar
-          color="primary"
-          size="40"
-        ></v-avatar>
-      <v-spacer/>
-        <v-avatar
-        color="primary"
-        size="40"
-        ></v-avatar>
-      <v-spacer/>
-        <v-avatar 
-        color="primary"
-        size="40"
-        ></v-avatar>
-      <v-spacer/>
+      <v-app-bar
+      app
+      elevation="6"
+      bottom
+      >
+        <v-spacer/>
+        <router-link to="/">
+            <v-avatar
+            color="primary"
+            size="40"
+            ></v-avatar>
+        </router-link>
+        <v-spacer/>
+            <v-avatar
+            color="primary"
+            size="40"
+            ></v-avatar>
+        <v-spacer/>
+            <v-avatar
+            color="primary"
+            size="40"
+            ></v-avatar>
+        <v-spacer/>
+          <router-link to="/profile">
+            <v-avatar 
+            color="primary"
+            size="40"
+            ></v-avatar>
+          </router-link>
+        <v-spacer/>
     </v-app-bar>
   </v-app>
 </template>
 
 <script>
+import NavBottom from './components/NavBottom.vue'
 
 export default {
   name: 'App',
+
+  component:{
+    NavBottom
+  },
 
   data: () => ({
     logo: require("@/assets/img/final.svg")

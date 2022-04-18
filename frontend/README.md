@@ -1,7 +1,9 @@
-# frontend
+# FRONTEND (JavaScript Framework with VueJS x Vuetify)
 
 ## Project setup
 ```
+cd frontend/
+
 npm install
 ```
 
@@ -9,16 +11,10 @@ npm install
 ```
 npm run serve
 ```
+# BACKEND (Python Framework with FASTAPI)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+cd backend
 
-### Lints and fixes files
-```
-npm run lint
-```
+env\Script\activate
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+python.exe .\main.py

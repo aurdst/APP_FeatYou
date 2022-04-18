@@ -7,7 +7,9 @@
         <Carrousel to="/conseils"/>
       </v-col>
       <v-col cols="4">
-        <Cards/>
+        <router-link to="/sport">
+          <Cards/>
+        </router-link>
       </v-col>
 
       <v-col cols="4">
@@ -36,7 +38,7 @@
 
 <script>
   import Carrousel from '../components/CarrouselView'
-  import Cards from '../components/CardsSprotView.vue'
+  import Cards from '../components/CardsSportView.vue'
   import List from '../components/ListCoachView.vue'
 
   export default {
