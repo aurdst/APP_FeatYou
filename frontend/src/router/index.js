@@ -6,6 +6,8 @@ import ConseilsDetailsView  from '../views/ConseilsDetailsView.vue'
 import SportCategorie from '../views/SportCategorie.vue'
 import SportDetails from '../views/SportDetails.vue'
 import ProfileView from '../views/ProfileView.vue'
+import ConversationView from '../views/ConversationView.vue'
+import InfosView from '../views/InfosView.vue'
 
 Vue.use(VueRouter)
 
@@ -44,6 +46,16 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: ProfileView
+  },
+  {
+    path: '/conversation',
+    name: 'conversation',
+    component: ConversationView
+  },
+  {
+    path: '/infos',
+    name: 'infos',
+    component: InfosView
   },
 ]
 

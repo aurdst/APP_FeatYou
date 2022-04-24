@@ -9,10 +9,14 @@
         <v-img :src="logo" max-width="150" class="ma-auto"></v-img>
       </router-link>
     <v-spacer/>
+    
+    <router-link to="/infos">
       <v-avatar
         color="primary"
         size="46"
       ></v-avatar>
+    </router-link>
+    
     </v-app-bar>
 
     <v-main>
@@ -24,29 +28,41 @@
       bottom
       >
         <v-spacer/>
+
         <router-link to="/">
             <v-avatar
             color="primary"
             size="40"
             ></v-avatar>
         </router-link>
+
         <v-spacer/>
+
+          <router-link to="/conversation">
             <v-avatar
             color="primary"
             size="40"
             ></v-avatar>
+          </router-link>
+
         <v-spacer/>
+
+          <router-link to="/conseils">
             <v-avatar
             color="primary"
             size="40"
             ></v-avatar>
+          </router-link>
+
         <v-spacer/>
+
           <router-link to="/profile">
             <v-avatar 
             color="primary"
             size="40"
             ></v-avatar>
           </router-link>
+
         <v-spacer/>
     </v-app-bar>
   </v-app>

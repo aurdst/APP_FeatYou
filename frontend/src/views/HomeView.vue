@@ -22,12 +22,17 @@
     </v-row>
 
     <v-row class="mb-6 mx-5">
-      <h2>
-        Hello text here ! So good 
-      </h2>
-      <p>
-        Lorem impsum extrano torime ameno ameno latiré oh latiré ah torime 
-      </p>
+      <v-col cols="12">
+        <h2 class="text-center">
+          Hello text here ! So good 
+        </h2>
+      </v-col>
+
+      <v-col cols="12">
+        <p class="text-center">
+          Lorem impsum extrano torime ameno ameno latiré oh latiré ah torime 
+        </p>
+      </v-col>
     </v-row>
 
     <v-row class="mb-6 mx-5">

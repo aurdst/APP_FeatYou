@@ -9,11 +9,9 @@
                 <div class="div_action">
                 </div>
                 <div class="div_action_btn">
-                    <v-btn block class="mt-3">Text</v-btn>
-                    <v-btn block class="mt-3">Text</v-btn>
+                    <v-btn block>Text</v-btn>
+                    <v-btn block class="mt-3" to="/">Réserver une séance</v-btn>
                 </div>
-
-
             </div>
         </v-col>
     </v-row>
