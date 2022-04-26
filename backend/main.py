@@ -14,6 +14,7 @@ from apps.token.router import router as token_router
 from apps.users.router import router as user_router
 from apps.videos.router import router as video_router
 
+
 app = FastAPI()
 
 API_VERSION = "v1"

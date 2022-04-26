@@ -8,6 +8,11 @@ from typing import List
 from . import models
 from . import schemas
 
+#Auth with OAuth2
+from fastapi.security import OAuth2PasswordBearer
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
 router: APIRouter = APIRouter()
 
 #Here we are a routes for Categories
@@ -19,7 +24,7 @@ router: APIRouter = APIRouter()
     status_code=status.HTTP_201_CREATED,
     summary="Add a categorie"
     )
-def create_categorie(category: schemas.CategoriesSchema, db: Session = Depends(get_db)):
+def create_categorie(category: schemas.CategoriesSchema, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
     new_datas = models.CategorieModel(
         labelCategorie = category.labelCategorie,
         descCategorie = category.descCategorie
@@ -64,7 +69,7 @@ def get_all_categories(category_id: str, db: Session = Depends(get_db)):
     response_model=schemas.UpdateCategorieSchema, 
     status_code=status.HTTP_202_ACCEPTED,
     summary="Update category")
-def update_categorie(category_id: str, update_category: schemas.UpdateCategorieSchema, db: Session = Depends(get_db)):
+def update_categorie(category_id: str, update_category: schemas.UpdateCategorieSchema, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
     query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] Categorie doesn't exist")
