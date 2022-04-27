@@ -6,7 +6,7 @@ class UserSchema(BaseModel):
     firstName: str
     lastName: str
     username: str
-    role: str
+    isadmin: bool
     phone: str
     email: str
     password: str
@@ -21,7 +21,7 @@ class UserSchema(BaseModel):
 class UserViewSchema(BaseModel):
     firstName: str
     lastName: str
-    role: int
+    isadmin: bool
     phone: str
     mail: str
     postalCode: int

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Boolean
 from database.database import Base
 
 class UserModel(Base):
@@ -8,7 +8,7 @@ class UserModel(Base):
     firstName = Column(String)
     lastName = Column(String)
     username = Column(String)
-    role = Column(String)
+    isadmin = Column(Boolean)
     phone = Column(String)
     email = Column(String)
     password = Column(String)

@@ -9,7 +9,7 @@ from . import schemas
 router: APIRouter = APIRouter()
 
 #Route for create a token
-@router.post("/token/", response_model=schemas.TokenSchema, status_code=status.HTTP_201_CREATED)
+@router.post("/coin", response_model=schemas.TokenSchema, status_code=status.HTTP_201_CREATED)
 def create_token(token: schemas.TokenSchema, db: Session = Depends(get_db)):
     datas = models.tokenModel(
         id  = token.id,
@@ -28,13 +28,13 @@ def create_token(token: schemas.TokenSchema, db: Session = Depends(get_db)):
         return datas
 
 #Create a get all token
-@router.get("/token/get_all", response_model=List[schemas.TokenSchema])
+@router.get("/coin/get_all", response_model=List[schemas.TokenSchema])
 def get_all_token(db: Session = Depends(get_db)):
     query = db.query(models.tokenModel).all()
     return query
 
 # Create a get routes for get one token in the db.
-@router.get("/token/{token_id}/", response_model=List[schemas.TokenSchema])
+@router.get("/coin/{token_id}/", response_model=List[schemas.TokenSchema])
 def get_all_token(token_id: str, db: Session = Depends(get_db)):
     query = db.query(models.tokenModel.id).filter(id == token_id)
     if not query:
@@ -43,7 +43,7 @@ def get_all_token(token_id: str, db: Session = Depends(get_db)):
     return query
 
 # Route for update one token
-@router.put("/token/update/{token_id}", response_model=schemas.TokenSchema, status_code=status.HTTP_202_ACCEPTED)
+@router.put("/coin/update/{token_id}", response_model=schemas.TokenSchema, status_code=status.HTTP_202_ACCEPTED)
 def update_categorie(token_id: str, update_token: schemas.TokenSchema, db: Session = Depends(get_db)):
     query = db.query(models.tokenModel).filter(update_token.id == token_id).first()
     if not query:
@@ -59,7 +59,7 @@ def update_categorie(token_id: str, update_token: schemas.TokenSchema, db: Sessi
     return update_data
 
 #Route for deleted token
-@router.delete("token/{token_id}")
+@router.delete("coin/{token_id}")
 def delete_categorie_by_id(token_id: str, db: Session = Depends(get_db)):
     query : db.query(models.tokenModel).filter_by(id == token_id).first()
     if not query:
