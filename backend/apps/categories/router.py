@@ -19,7 +19,7 @@ router: APIRouter = APIRouter()
     response_model=schemas.CategoriesSchema,
     status_code=status.HTTP_201_CREATED,
     summary="Add a categorie"
-    )
+)
 def create_categorie(category: schemas.CategoriesSchema, db: Session = Depends(get_db)):
     new_datas = models.CategorieModel(
         labelCategorie = category.labelCategorie,
@@ -41,7 +41,7 @@ def create_categorie(category: schemas.CategoriesSchema, db: Session = Depends(g
     path = "/",
     response_model=List[schemas.CategoriesSchema],
     summary="Get all categorie"
-    )
+)
 def get_all_categories(db: Session = Depends(get_db)):
     query = db.query(models.CategorieModel).all()
     return query
@@ -51,7 +51,7 @@ def get_all_categories(db: Session = Depends(get_db)):
     path="/{category_id}",
     response_model=schemas.CategoriesSchema,
     summary="Get categorie by id"
-    )
+)
 def get_all_categories(category_id: str, db: Session = Depends(get_db)):
     query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
     if not query:
@@ -64,7 +64,8 @@ def get_all_categories(category_id: str, db: Session = Depends(get_db)):
     path="/{category_id}", 
     response_model=schemas.UpdateCategorieSchema, 
     status_code=status.HTTP_202_ACCEPTED,
-    summary="Update category")
+    summary="Update category"
+)
 def update_categorie(category_id: str, update_category: schemas.UpdateCategorieSchema, db: Session = Depends(get_db)):
     query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
     if not query:
@@ -83,7 +84,7 @@ def update_categorie(category_id: str, update_category: schemas.UpdateCategorieS
 @router.delete(
     path="/{category_id}", 
     summary="Delete a category"
-    )
+)
 def delete_categorie_by_id(category_id: str, db: Session = Depends(get_db)):
     query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
     if not query:
