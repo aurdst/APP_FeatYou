@@ -11,7 +11,7 @@ class UserModel(Base):
     isadmin = Column(Boolean)
     phone = Column(String)
     email = Column(String)
-    password = Column(String)
+    hashed_password = Column(String)
     postalCode = Column(Integer)
     banqCardNumb = Column(Integer)
     adress = Column(String)

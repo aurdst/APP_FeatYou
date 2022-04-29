@@ -20,9 +20,8 @@ SECRET_KEY = "891f3561c61fabf5dc401d15d6730986902b1e92e6e5be20f5567ebf358cd7db"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-
 # OAuth2 security
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/")
 
 # Create a PassLib "context". This is what will be used to hash and verify passwords.
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -36,18 +35,21 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 #Récupère l'utilisateur
-def get_user(db, username: str):
-    if username in db:
-        user_dict = db[username]
-        return UserInDB(**user_dict)
+def get_user(username: str, db: Session):
+    user = db.query(UserModel).filter(username == UserModel.username).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User is not found")
+    
+    return user
 
 # Et un autre utilitaire pour vérifier si un mot de passe reçu correspond au hachage stocké.
-def authenticate_user(username: str, password: str, db: Session = Depends(get_db)):
-    user = db.query(UserModel).filter(username == UserModel.username).first()
+def authenticate_user(username: str, password: str, db: Session):
+    user = get_user(username, db)
     if not user:
         return False
     if not verify_password(password, user.hashed_password):
         return False
+
     return user
 
 #Créez une fonction utilitaire pour générer un nouveau jeton d'accès.
@@ -59,6 +61,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
         expire = datetime.utcnow() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
     return encoded_jwt
 
 #Récupère l'utilisateur en cours
@@ -77,10 +80,11 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
     except JWTError:
         raise credentials_exception
 
-    get_user = db.query(UserModel).filter_by(username).first()
+    get_user = db.query(UserModel).all()
     user = get_user(get_user, username=token_data.username)
     if user is None:
         raise credentials_exception
+        
     return user
 
 #Check si l'user est actif

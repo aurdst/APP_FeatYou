@@ -1,5 +1,3 @@
-from msilib import schema
-from urllib import response
 from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from database.database import get_db
@@ -10,8 +8,6 @@ from . import schemas
 
 #Auth with OAuth2
 from fastapi.security import OAuth2PasswordBearer
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 router: APIRouter = APIRouter()
 
@@ -24,7 +20,7 @@ router: APIRouter = APIRouter()
     status_code=status.HTTP_201_CREATED,
     summary="Add a categorie"
     )
-def create_categorie(category: schemas.CategoriesSchema, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+def create_categorie(category: schemas.CategoriesSchema, db: Session = Depends(get_db)):
     new_datas = models.CategorieModel(
         labelCategorie = category.labelCategorie,
         descCategorie = category.descCategorie
@@ -69,7 +65,7 @@ def get_all_categories(category_id: str, db: Session = Depends(get_db)):
     response_model=schemas.UpdateCategorieSchema, 
     status_code=status.HTTP_202_ACCEPTED,
     summary="Update category")
-def update_categorie(category_id: str, update_category: schemas.UpdateCategorieSchema, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+def update_categorie(category_id: str, update_category: schemas.UpdateCategorieSchema, db: Session = Depends(get_db)):
     query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] Categorie doesn't exist")

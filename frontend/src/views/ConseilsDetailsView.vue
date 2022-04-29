@@ -1,9 +1,12 @@
 <template>
     <div>
         <v-row class="ma-auto">
+
             <v-col cols="4">
-                <div  style="background-color: lightblue; height: 170px;" rounded>
-                </div>
+                <router-link to="/conseils_nutri">  
+                    <div  style="background-color: lightblue; height: 170px;" rounded>
+                    </div>
+                 </router-link>
             </v-col>
 
             <v-col cols="4">

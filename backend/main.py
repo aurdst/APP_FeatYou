@@ -20,15 +20,15 @@ app = FastAPI()
 
 API_VERSION = "v1"
 
+app.include_router(auth_router, tags=["Auth"], prefix=f"/api/{API_VERSION}/auth")
+app.include_router(user_router, tags=["User"], prefix=f"/api/{API_VERSION}/user")
 app.include_router(categories_router, tags=["Categories"], prefix=f"/api/{API_VERSION}/categories")
 app.include_router(conversation_router, tags=["Conversation"], prefix=f"/api/{API_VERSION}/conversation")
 app.include_router(events_router, tags=["Events"], prefix=f"/api/{API_VERSION}/events")
 app.include_router(messages_router, tags=["Messages"], prefix=f"/api/{API_VERSION}/messages")
 app.include_router(subcategories_router, tags=["SubCategories"], prefix=f"/api/{API_VERSION}/subcategories")
-app.include_router(token_router, tags=["Token"], prefix=f"/api/{API_VERSION}/token")
-app.include_router(user_router, tags=["User"], prefix=f"/api/{API_VERSION}/user")
+app.include_router(token_router, tags=["Coin"], prefix=f"/api/{API_VERSION}/coin")
 app.include_router(video_router, tags=["Video"], prefix=f"/api/{API_VERSION}/video")
-app.include_router(auth_router, tags=["Auth"], prefix=f"/api/{API_VERSION}/auth")
 
 
 if __name__=="__main__":

@@ -9,7 +9,7 @@ class UserSchema(BaseModel):
     isadmin: bool
     phone: str
     email: str
-    password: str
+    hashed_password: str
     postalCode: int
     banqCardNumb: int
     dateRegister: datetime

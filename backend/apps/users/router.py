@@ -2,11 +2,15 @@ from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from database.database import get_db
 from typing import List
+from apps.auth.tools import pwd_context
+from passlib.context import CryptContext
 from apps.users.schemas import UserAuthSchema
 
 from . import models
 from . import schemas
 
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 router: APIRouter = APIRouter()
 
 #Route for create a user
@@ -16,10 +20,10 @@ def create_user(user: schemas.UserSchema, db: Session = Depends(get_db)):
         firstName = user.firstName,
         lastName = user.lastName,
         username = user.username,
-        role = user.role,
+        isadmin = user.isadmin,
         phone = user.phone,
         email = user.email,
-        password = user.password,
+        hashed_password = pwd_context.hash(user.hashed_password),
         postalCode = user.postalCode,
         banqCardNumb = user.banqCardNumb,
         dateRegister = user.dateRegister,
@@ -54,7 +58,7 @@ def get_user(user_id: str, db: Session = Depends(get_db)):
 # Route for update one user
 @router.put("/user/update/{user_id}", response_model=schemas.UserSchema, status_code=status.HTTP_202_ACCEPTED)
 def update_user(user_id: str, update_user: schemas.UserSchema, db: Session = Depends(get_db)):
-    query = db.query(models.UserModel).filter(update_user.id == user_id).first()
+    query = db.query(models.UserModel).filter(models.UserModel.id == user_id).first()
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
 
@@ -70,9 +74,10 @@ def update_user(user_id: str, update_user: schemas.UserSchema, db: Session = Dep
 #Route for deleted user
 @router.delete("user/{user_id}")
 def delete_categorie_by_id(user_id: str, db: Session = Depends(get_db)):
-    query : db.query(models.UserModel).filter_by(id == user_id).first()
+    query = db.query(models.UserModel).filter(models.UserModel.id == user_id).first()
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
     else:
-        db.delete()
-        return "[204] No Content"
+        db.delete(query)
+    
+    return query
