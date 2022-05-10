@@ -14,6 +14,7 @@ from apps.token.router import router as token_router
 from apps.users.router import router as user_router
 from apps.videos.router import router as video_router
 from apps.auth.router import router as auth_router
+from tools.send_email import router as email_router
 
 
 app = FastAPI()
@@ -29,6 +30,7 @@ app.include_router(messages_router, tags=["Messages"], prefix=f"/api/{API_VERSIO
 app.include_router(subcategories_router, tags=["SubCategories"], prefix=f"/api/{API_VERSION}/subcategories")
 app.include_router(token_router, tags=["Coin"], prefix=f"/api/{API_VERSION}/coin")
 app.include_router(video_router, tags=["Video"], prefix=f"/api/{API_VERSION}/video")
+app.include_router(email_router, tags=['Email'], prefix=f"/api/{API_VERSION}/email")
 
 
 if __name__=="__main__":

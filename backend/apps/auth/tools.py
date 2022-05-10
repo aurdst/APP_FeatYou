@@ -35,7 +35,7 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 #Récupère l'utilisateur
-def get_user(username: str, db: Session):
+def get_user(db: Session, username: str):
     user = db.query(UserModel).filter(username == UserModel.username).first()
     if not user:
         raise HTTPException(status_code=404, detail="User is not found")
@@ -44,7 +44,7 @@ def get_user(username: str, db: Session):
 
 # Et un autre utilitaire pour vérifier si un mot de passe reçu correspond au hachage stocké.
 def authenticate_user(username: str, password: str, db: Session):
-    user = get_user(username, db)
+    user = get_user(db, username)
     if not user:
         return False
     if not verify_password(password, user.hashed_password):
@@ -80,8 +80,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
     except JWTError:
         raise credentials_exception
 
-    get_user = db.query(UserModel).all()
-    user = get_user(get_user, username=token_data.username)
+    user = get_user(db, username=token_data.username)
     if user is None:
         raise credentials_exception
         

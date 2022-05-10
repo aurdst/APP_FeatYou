@@ -86,9 +86,8 @@ def update_categorie(category_id: str, update_category: schemas.UpdateCategorieS
     summary="Delete a category"
 )
 def delete_categorie_by_id(category_id: str, db: Session = Depends(get_db)):
-    query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
+    query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).delete()
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] Categorie doesn't exist")
     else:
-        db.delete(query)
         return "[204] No Content"
