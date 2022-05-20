@@ -15,7 +15,25 @@ from apps.users.router import router as user_router
 from apps.videos.router import router as video_router
 from apps.auth.router import router as auth_router
 from tools.send_email import router as email_router
+from fastapi.middleware.cors import CORSMiddleware
 
+app = FastAPI()
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:8000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app = FastAPI()
 

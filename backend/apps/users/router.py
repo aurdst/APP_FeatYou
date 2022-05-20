@@ -17,7 +17,7 @@ router: APIRouter = APIRouter()
 
 #Route for create a user
 @router.post(
-    path="/user/",
+    path="/create",
     response_model=schemas.UserSchema,
     status_code=status.HTTP_201_CREATED,
     summary="Create new user"
@@ -49,7 +49,7 @@ def create_user(user: schemas.UserSchema, db: Session = Depends(get_db)):
 
 #Create a get all user
 @router.get(
-    path="/user/get_all",
+    path="/get_all",
     response_model=List[schemas.UserViewSchema],
     summary="Get all user"
 )
@@ -59,7 +59,7 @@ def get_all_user(db: Session = Depends(get_db), user: Log = Depends(get_current_
 
 # Create a get routes for get one user in the db.
 @router.get(
-    "/user/{user_id}/", 
+    "/{user_id}/", 
     response_model=List[schemas.UserViewSchema],
     summary="Get user by id"
 )
@@ -72,7 +72,7 @@ def get_user(user_id: str, db: Session = Depends(get_db)):
 
 # Route for update one user
 @router.put(
-    path="/user/update/{user_id}",
+    path="/update/{user_id}",
     response_model=schemas.UserSchema,
     status_code=status.HTTP_202_ACCEPTED,
     summary="Update user by id"
@@ -93,7 +93,7 @@ def update_user(user_id: str, update_user: schemas.UserSchema, db: Session = Dep
 
 #Route for deleted user
 @router.delete(
-    path="user/{user_id}",
+    path="/{user_id}",
     status_code=status.HTTP_204_NO_CONTENT,
     summary="Delete user by id",
     response_class=Response

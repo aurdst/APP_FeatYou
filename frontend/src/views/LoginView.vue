@@ -2,22 +2,18 @@
     <v-row no-gutters>
       <v-col>
         <div class="bg_login">
-          <v-img
-            :src="require('@/assets/img/final.svg')"
-            class="mx-auto mb-8"
-            max-width="128"
-          />
           <h2 class="text-center mt-10 Title_log">
             LOGIN
           </h2>
 
           <form
-            class="form_login"
+            class="form_login mx-auto"
           >
             <v-text-field
               v-model="email_log"
               outlined
               color="black"
+              :rules="EmailRulesValidation"
               background-color="#F5F5F5"
               label="Email"
               required
@@ -66,15 +62,11 @@
     },
 
     methods: {
-      resetValidation () {
-        this.lastname = ''
-        this.name = ''
-        this.email_log = ''
-        this.message = ''
-        this.agreeToTerms = false
-      },
       loginAccount() {
-        console.log(this.email_log, this.password_log)
+        this.$store.dispatch('loginAccount', {
+          email: this.email_log,
+          password: this.password_log
+        })
       }
     },
   })

@@ -11,6 +11,7 @@ import InfosView from '../views/InfosView.vue'
 import ConseilsNutri from '../views/ConseilsNutri.vue'
 import ConseilsSport from '../views/ConseilsSport.vue'
 import LoginView from '../views/LoginView.vue'
+import RegisterView from '../views/RegisterView.vue'
 
 Vue.use(VueRouter)
 
@@ -36,8 +37,8 @@ const routes = [
     component: ConseilsDetailsView
   },
   {
-    path: '/sport',
-    name: 'sport',
+    path: '/sports',
+    name: 'sports',
     component: SportCategorie
   },
   {
@@ -74,6 +75,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterView
   },
 ]
 
