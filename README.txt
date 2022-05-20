@@ -27,7 +27,7 @@ now run :
 
 config : 
 
-Bdd : postgresql://postgres:4851C2a172@127.0.0.1:5432/featyou
+Bdd : postgresql://user:pass@127.0.0.1:5432/dbname
 
 # Backend (Python / FastAPI):
 
