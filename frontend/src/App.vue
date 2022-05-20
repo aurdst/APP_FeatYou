@@ -56,7 +56,7 @@
 
         <v-spacer/>
 
-          <router-link to="/profile">
+          <router-link to="/register">
             <v-avatar 
             color="primary"
             size="40"

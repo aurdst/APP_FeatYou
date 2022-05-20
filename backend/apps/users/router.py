@@ -18,7 +18,7 @@ router: APIRouter = APIRouter()
 #Route for create a user
 @router.post(
     path="/create",
-    response_model=schemas.UserSchema,
+    # response_model=schemas.UserSchema,
     status_code=status.HTTP_201_CREATED,
     summary="Create new user"
 )
@@ -44,8 +44,8 @@ def create_user(user: schemas.UserSchema, db: Session = Depends(get_db)):
     db.add(datas)
     db.commit()
     db.refresh(datas)
-    
-    return datas
+
+    return "201"
 
 #Create a get all user
 @router.get(

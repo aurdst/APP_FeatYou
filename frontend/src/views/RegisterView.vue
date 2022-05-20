@@ -84,7 +84,7 @@
             />
 
             <div class="text-center">
-              <v-btn @click="createAccount()" primary>
+              <v-btn @click="createAccount()" primary mb-5>
                 Connexion
               </v-btn>
             </div>
