@@ -19,8 +19,8 @@ class EmailSchema(BaseModel):
         orm_mode = True
 
 conf = ConnectionConfig(
-    MAIL_USERNAME = os.getenv("SMTP_EMAIL", "aureliendestailleur@outlook.fr"),
-    MAIL_PASSWORD = os.getenv("SMTP_PASSWORD", """4851C2a172-mi"""),
+    MAIL_USERNAME = os.getenv("SMTP_EMAIL", ""),
+    MAIL_PASSWORD = os.getenv("SMTP_PASSWORD", """"""),
     MAIL_FROM = "aureliendestailleur@outlook.fr",
     MAIL_PORT = 587,
     MAIL_SERVER = os.getenv("SMTP_HOST", "smtp.office365.com"),

@@ -1,7 +1,7 @@
-from imp import reload
-from typing import Optional
-from fastapi import FastAPI, Response, Request
+from fastapi import FastAPI
 import uvicorn
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 
 from sqlalchemy import schema
 
@@ -17,8 +17,6 @@ from apps.auth.router import router as auth_router
 from tools.send_email import router as email_router
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
-
 origins = [
     "http://localhost",
     "http://localhost:8080",
@@ -26,15 +24,18 @@ origins = [
     "http://localhost:8000",
 ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+middleware = [
+    Middleware(
+        CORSMiddleware,
+        allow_origins=['*'],
+        allow_credentials=True,
+        allow_methods=['*'],
+        allow_headers=['*']
+    )
+]
 
-app = FastAPI()
+app = FastAPI(middleware=middleware)
+
 
 API_VERSION = "v1"
 
