@@ -20,10 +20,10 @@ export default new Vuex.Store({
     createAccount: ({commit}, userInfos) => {
       commit;
       instance.post('/create', userInfos)
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
     }   
