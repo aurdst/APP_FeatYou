@@ -10,3 +10,4 @@ class EventModel(Base):
     idCategorie = Column(Integer)
     idUser = Column(Integer)
     price = Column(Float)
+    pict = Column(String)

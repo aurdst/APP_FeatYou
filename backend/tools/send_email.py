@@ -8,7 +8,7 @@ from typing import List
 from dotenv import dotenv_values
 import os
 
-credentials = dotenv_values(".env")
+credentials = dotenv_values('')
 # print(credentials)
 
 

@@ -10,6 +10,7 @@ import ConversationView from '../views/ConversationView.vue'
 import InfosView from '../views/InfosView.vue'
 import ConseilsNutri from '../views/ConseilsNutri.vue'
 import ConseilsSport from '../views/ConseilsSport.vue'
+import LoginView from '../views/LoginView.vue'
 
 Vue.use(VueRouter)
 
@@ -68,6 +69,11 @@ const routes = [
     path: '/infos',
     name: 'infos',
     component: InfosView
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView
   },
 ]
 

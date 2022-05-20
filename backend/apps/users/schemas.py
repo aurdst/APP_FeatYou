@@ -14,6 +14,7 @@ class UserSchema(BaseModel):
     banqCardNumb: int
     dateRegister: datetime
     adress: str
+    pict: str
 
     class Config:
         orm_mode = True
@@ -26,6 +27,7 @@ class UserViewSchema(BaseModel):
     mail: str
     postalCode: int
     dateRegister: datetime
+    pict: str
 
     class Config:
         orm_mode = True

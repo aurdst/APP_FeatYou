@@ -7,3 +7,4 @@ class EventSchema(BaseModel):
     idCategorie: int
     idUser: int 
     price: float
+    pict: str

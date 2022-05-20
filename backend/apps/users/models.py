@@ -16,3 +16,4 @@ class UserModel(Base):
     banqCardNumb = Column(Integer)
     adress = Column(String)
     dateRegister = Column(DateTime)
+    pict = Column(String)

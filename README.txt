@@ -22,9 +22,12 @@ To create project with alembic use :
 now run : 
 
 - alembic init alembic
-- alemebic revivion -m --autogenerate "text here"
+- alemebic revivion --autogenerate -m "text here"
 - alembic upgrade head
 
+config : 
+
+Bdd : postgresql://postgres:4851C2a172@127.0.0.1:5432/featyou
 
 # Backend (Python / FastAPI):
 

@@ -4,6 +4,7 @@ class CategoriesSchema(BaseModel):
     id: int
     labelCategorie: str
     descCategorie: str
+    # url: str
 
     class Config:
         orm_mode = True
@@ -11,6 +12,7 @@ class CategoriesSchema(BaseModel):
 class UpdateCategorieSchema(BaseModel):
     labelCategorie: str
     descCategorie: str
+    # url: str
 
     class Config:
         orm_mode = True
