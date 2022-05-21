@@ -13,21 +13,25 @@ Praticipant :
 #14 march 2022
 Start of developpement, the application run on FastApi with alembic for configuration of the database.
 
+# STEP 1
 # Alembic 
 
 To create project with alembic use :
 
 - pip install alembic
+- alembic init alembic
+
+Create a Database with Postgres and add a config into env file, alembic ini, and database file connection.
+
+exemple to config : 
+
+Bdd : postgresql://user:pass@127.0.0.1:5432/dbname
 
 now run : 
 
-- alembic init alembic
 - alemebic revivion --autogenerate -m "text here"
 - alembic upgrade head
 
-config : 
-
-Bdd : postgresql://user:pass@127.0.0.1:5432/dbname
 
 # Backend (Python / FastAPI):
 

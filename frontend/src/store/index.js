@@ -4,7 +4,10 @@ import Vuex from 'vuex'
 const axios = require('axios');
 
 const instance = axios.create({
-  baseURL: "http://localhost:8000/api/v1/user"
+  baseURL: 'http://localhost:8000/api/v1/user/',
+  headers: { 
+    'Content-Type': 'application/json'
+  }
 })
 
 Vue.use(Vuex)

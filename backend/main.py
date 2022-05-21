@@ -15,7 +15,8 @@ from apps.users.router import router as user_router
 from apps.videos.router import router as video_router
 from apps.auth.router import router as auth_router
 from tools.send_email import router as email_router
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 
 origins = [
     "http://localhost",
