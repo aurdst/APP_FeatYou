@@ -123,15 +123,15 @@
     methods: {
       createAccount() {
         this.$store.dispatch('createAccount', {
-          firstName: this.username_reg,
-          lastName: this.lastname_reg,
-          username: this.username_reg,
-          phone: this.phone_reg,
-          adress: this.adress_reg,
-          postalCode: this.postal_reg,
-          mail: this.email_reg,
+          firstName      : this.username_reg,
+          lastName       : this.lastname_reg,
+          username       : this.username_reg,
+          phone          : this.phone_reg,
+          adress         : this.adress_reg,
+          postalCode     : this.postal_reg,
+          mail           : this.email_reg,
           hashed_password: this.password_reg,
-          iscoach: false,
+          iscoach        : false,
         })
       }
     }

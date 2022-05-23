@@ -19,18 +19,14 @@ export default new Vuex.Store({
   actions  : {
     createAccount: ({commit}, userInfos) => {
       commit;
-      console.log('test');
 
       instance.post('/create', userInfos).then(
         (response) => {
-          console.log('OK');
           console.log(response);
         }
       ).catch(
         (error) => {
-          console.log('K.O');
           console.log(error);
-          console.log(userInfos);
         }
       );
     }
