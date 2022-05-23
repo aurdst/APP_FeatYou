@@ -40,10 +40,7 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
         adress          = user.adress
     )
 
-    try:
-        query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
-    except exc.SQLAlchemyError as E:
-        print(E)
+    query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
     if query:
         raise HTTPException(status_code=409, detail="user already exist")
     
