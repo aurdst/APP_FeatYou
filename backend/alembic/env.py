@@ -19,7 +19,7 @@ config = context.config
 
 # this will overwrite the ini-file sqlalchemy.url path
 # with the path given in the config of the main code
-config.set_main_option("sqlalchemy.url", "postgresql://postgres:4851C2a172@127.0.0.1:5432/featyou")
+config.set_main_option("sqlalchemy.url", "postgresql://postgres:azerty@127.0.0.1:5432/featyou")
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

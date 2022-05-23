@@ -13,24 +13,24 @@ const instance = axios.create({
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
+  state    : {},
+  getters  : {},
+  mutations: {},
+  actions  : {
     createAccount: ({commit}, userInfos) => {
       commit;
-      instance.post('/create', userInfos)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }   
+      console.log(console.log(userInfos));
+      instance.post('/create', userInfos).then(
+        (response) => {
+          console.log(response);
+        }
+      ).catch(
+        (error) => {
+          console.log(error.response);
+          console.log(userInfos);
+        }
+      );
+    }
   },
-  modules: {
-  }
+  modules: {}
 })

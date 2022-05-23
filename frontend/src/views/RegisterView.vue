@@ -124,16 +124,17 @@
 
     methods: {
       createAccount() {
+        console.log(this.username_reg);
+
         this.$store.dispatch('createAccount', {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          username: this.username,
-          phone: this.phone,
-          adress: this.adress,
-          postalCode: this.postalCode,
+          firstName: this.username_reg,
+          lastName: this.lastname_reg,
+          username: this.username_reg,
+          phone: this.phone_reg,
+          adress: this.adress_reg,
+          postalCode: this.postal_reg,
           email: this.email_reg,
-          isadmin: false,
-          hashed_password: this.password_reg
+          hashed_password: this.password_reg,
         })
       }
     },

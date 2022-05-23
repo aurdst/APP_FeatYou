@@ -19,6 +19,18 @@ class UserSchema(BaseModel):
     class Config:
         orm_mode = True
 
+class UserCreateSchema(BaseModel):
+    firstName: str
+    lastName: str
+    isadmin: bool
+    phone: str
+    mail: str
+    postalCode: int
+    dateRegister: datetime = datetime.datetime.now()
+
+    class Config:
+        orm_mode = True
+
 class UserViewSchema(BaseModel):
     firstName: str
     lastName: str

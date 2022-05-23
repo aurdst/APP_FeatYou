@@ -51,7 +51,6 @@ now run :
 # from sqlalchemy.exc import SQLAlchemyError
 
 # Create requirements dependencies file
-pip install pip-upgrader
 pip freeze > requirements.txt
 
 # Update requirements.txt

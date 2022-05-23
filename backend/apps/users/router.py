@@ -22,17 +22,17 @@ router: APIRouter = APIRouter()
     status_code=status.HTTP_201_CREATED,
     summary="Create new user"
 )
-def create_user(user: schemas.UserSchema, db: Session = Depends(get_db)):
+def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
     datas = models.UserModel(
         firstName       = user.firstName,
         lastName        = user.lastName,
         username        = user.username,
-        isadmin         = user.isadmin,
+        isadmin         = False,
         phone           = user.phone,
         email           = user.email,
         hashed_password = pwd_context.hash(user.hashed_password),
         postalCode      = user.postalCode,
-        banqCardNumb    = user.banqCardNumb,
+        banqCardNumb    = 0000000000000000,
         dateRegister    = user.dateRegister,
         adress          = user.adress
     )
