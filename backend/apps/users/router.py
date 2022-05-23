@@ -12,8 +12,6 @@ from apps.auth.schemas import Log
 from . import models
 from . import schemas
 
-from sqlalchemy import exc
-
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 router: APIRouter = APIRouter()
 
