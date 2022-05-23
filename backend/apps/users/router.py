@@ -12,6 +12,8 @@ from apps.auth.schemas import Log
 from . import models
 from . import schemas
 
+from sqlalchemy import exc
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 router: APIRouter = APIRouter()
 
@@ -28,8 +30,9 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
         lastName        = user.lastName,
         username        = user.username,
         isadmin         = False,
+        iscoach         = False,
         phone           = user.phone,
-        email           = user.email,
+        email            = user.mail,
         hashed_password = pwd_context.hash(user.hashed_password),
         postalCode      = user.postalCode,
         banqCardNumb    = 0000000000000000,
@@ -37,7 +40,10 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
         adress          = user.adress
     )
 
-    query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
+    try:
+        query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
+    except exc.SQLAlchemyError as E:
+        print(E)
     if query:
         raise HTTPException(status_code=409, detail="user already exist")
     

@@ -9,6 +9,7 @@ class UserModel(Base):
     lastName = Column(String)
     username = Column(String)
     isadmin = Column(Boolean)
+    iscoach = Column(Boolean)
     phone = Column(String)
     email = Column(String)
     hashed_password = Column(String)

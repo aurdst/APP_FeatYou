@@ -22,7 +22,7 @@ router: APIRouter = APIRouter()
     status_code=status.HTTP_201_CREATED,
     summary="Add a categorie"
 )
-async def create_categorie(category: schemas.CategoriesSchema,file : UploadFile, db : Session = Depends(get_db)):
+async def create_categorie(category: schemas.CategoriesSchema, db : Session = Depends(get_db)):
 
     new_datas = models.CategorieModel(
         labelCategorie = category.labelCategorie,

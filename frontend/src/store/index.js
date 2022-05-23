@@ -6,7 +6,7 @@ const axios = require('axios');
 const instance = axios.create({
   baseURL: 'http://localhost:8000/api/v1/user/',
   headers: { 
-    'Content-Type': 'application/json'
+    'Content-Type': 'Access-Control-Allow-Origin'
   }
 })
 
@@ -19,14 +19,17 @@ export default new Vuex.Store({
   actions  : {
     createAccount: ({commit}, userInfos) => {
       commit;
-      console.log(console.log(userInfos));
+      console.log('test');
+
       instance.post('/create', userInfos).then(
         (response) => {
+          console.log('OK');
           console.log(response);
         }
       ).catch(
         (error) => {
-          console.log(error.response);
+          console.log('K.O');
+          console.log(error);
           console.log(userInfos);
         }
       );

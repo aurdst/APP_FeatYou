@@ -7,6 +7,7 @@ class UserSchema(BaseModel):
     lastName: str
     username: str
     isadmin: bool
+    iscoach: bool
     phone: str
     email: str
     hashed_password: str
@@ -20,13 +21,16 @@ class UserSchema(BaseModel):
         orm_mode = True
 
 class UserCreateSchema(BaseModel):
+    username: str
     firstName: str
     lastName: str
-    isadmin: bool
     phone: str
+    iscoach: bool
+    adress: str
     mail: str
     postalCode: int
-    dateRegister: datetime = datetime.datetime.now()
+    dateRegister: datetime = datetime.utcnow()
+    hashed_password: str
 
     class Config:
         orm_mode = True

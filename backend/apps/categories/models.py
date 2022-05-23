@@ -9,4 +9,4 @@ class CategorieModel(Base):
     labelCategorie = Column(String)
     descCategorie = Column(String)
     url = Column(String)
-    img = Column(BLOB)
+    img = Column(String)
