@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import qs from "qs"
+import router from "../router"; 
 
 const axios = require('axios');
 
@@ -43,22 +44,17 @@ export default new Vuex.Store({
     }
   },
   actions  : {
-    loginAccount: ({commit}, userInfos) =>{
+    loginAccount: async function ({commit}, userInfos) {
       commit('setStatus', 'loading');
-      return new Promise((resolve, reject) => {
-        auth.post('/login', qs.stringify(userInfos)).then(
-          (response) => {
-            commit('setStatus', '');
-            commit('logUser', response.data.user);
-            this.$router.push('profile');
-          }
-        ).catch(
-          (error) => {
-            commit('setStatus', 'failed_log');
-            reject(error);
-          }
-        );
-      })
+      const response = await auth.post('/login', qs.stringify(userInfos))
+        if (response.status === 200) {
+          commit('setStatus', '');
+          router.push('profile');
+          return
+        }
+          
+        commit('setStatus', 'failed_log');
+        //TODO Gerer erreur
     },
     createAccount: ({commit}, userInfos) => {
       return new Promise((resolve, reject) => {

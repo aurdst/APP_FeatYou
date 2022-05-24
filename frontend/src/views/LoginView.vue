@@ -6,9 +6,9 @@
             LOGIN
           </h2>
 
-          <div v-if="status == 'failed_log'" class="text-center mt-5">
-            <p>Invalid Mail or Password</p>
-          </div>
+          <v-alert type="error" v-if="status == 'failed_log'" class="mt-5 mx-auto" width="300">
+            Invalid username or password !
+          </v-alert>
 
           <form
             class="form_login mx-auto"
@@ -33,19 +33,19 @@
             />
 
             <div class="text-center">
+              <v-btn @click="loginAccount()" primary class="mb-3" v-if="status == 'loading'">
+                Connexion en cours ...
+              </v-btn>
+
+              <v-btn @click="loginAccount()" primary class="mb-3" v-else>
+                Connexion
+              </v-btn>
+
               <router-link to="/register">
                 <p>
                   Register
                 </p>
               </router-link>
-
-              <v-btn @click="loginAccount()" primary v-if="status == 'loading'">
-                Connexion en cours ...
-              </v-btn>
-
-              <v-btn @click="loginAccount()" primary v-else>
-                Connexion
-              </v-btn>
             </div>
 
 

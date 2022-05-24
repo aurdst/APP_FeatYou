@@ -6,6 +6,7 @@
             Register
           </h2>
 
+
           <form
             class="form_login mx-auto"
           >
@@ -84,16 +85,24 @@
             />
 
             <div class="text-center">
-
-             <router-link to="/">
-                <p>
-                  Login
-                </p>
-              </router-link>
-
+              
               <v-btn @click="createAccount()" primary mb-5>
-                Connexion
+                Créer un compte
               </v-btn>
+
+                <v-alert type="success" v-if="status == 'created'" class="mt-5 mx-auto" width="300">
+                  Account has been create !
+                </v-alert>
+
+                <v-alert type="error" v-if="status == 'failed_create'" class="mt-5 mx-auto" width="300">
+                  Error. Please check all fields !
+                </v-alert>
+
+              <router-link to="/">
+                 <p class="mt-5">             
+                  Already have an account ? Login here
+                 </p>
+               </router-link>
             </div>
           </form>
         </div>
@@ -102,6 +111,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
   export default ({
     data: () => ({
       email_reg   : '',
@@ -125,7 +136,9 @@
       ],
     }),
 
-    computed:{},
+    computed:{
+      ...mapState(['status'])
+    },
 
     methods: {
       createAccount() {
