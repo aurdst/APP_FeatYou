@@ -12,11 +12,12 @@ router: APIRouter = APIRouter()
 
 # OAuth2PasswordRequestFormest une dépendance de classe qui déclare un corps de formulaire avec username et password
 @router.post(
-    path="/",
+    path="/login",
     summary="Authenticate Access Token"
 )
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db : Session = Depends(get_db)):
     user = authenticate_user(form_data.username, form_data.password, db)
+    print(user, 'test')
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -27,4 +28,4 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "user": user}

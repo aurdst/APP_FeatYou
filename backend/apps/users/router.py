@@ -46,7 +46,7 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(datas)
 
-    return "201"
+    return "201 Succes Account has been create"
 
 #Create a get all user
 @router.get(

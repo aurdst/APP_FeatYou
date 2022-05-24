@@ -6,14 +6,17 @@
             LOGIN
           </h2>
 
+          <div v-if="status == 'failed_log'" class="text-center mt-5">
+            <p>Invalid Mail or Password</p>
+          </div>
+
           <form
             class="form_login mx-auto"
           >
             <v-text-field
-              v-model="email_log"
+              v-model="user_log"
               outlined
               color="black"
-              :rules="EmailRulesValidation"
               background-color="#F5F5F5"
               label="Email"
               required
@@ -22,17 +25,30 @@
             <v-text-field
               v-model="password_log"
               outlined
+              type="password"
               color="black"
               background-color="#F5F5F5"
-              label="Name"
+              label="Password"
               required
             />
 
             <div class="text-center">
-              <v-btn @click="loginAccount()" primary>
+              <router-link to="/register">
+                <p>
+                  Register
+                </p>
+              </router-link>
+
+              <v-btn @click="loginAccount()" primary v-if="status == 'loading'">
+                Connexion en cours ...
+              </v-btn>
+
+              <v-btn @click="loginAccount()" primary v-else>
                 Connexion
               </v-btn>
             </div>
+
+
           </form>
         </div>
       </v-col>
@@ -40,17 +56,13 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
   export default ({
     data: () => ({
-      email_log: '',
+      user_log: '',
       password_log: '',
-      EmailRulesValidation: [
-        value => !!value || 'Email is required.',
-        value => value.indexOf('@') !== 0 || 'Email should have a username.',
-        value => value.includes('@') || 'Email should have an @.',
-        value => value.indexOf('.') - value.indexOf('@') > 1 || 'Email should contain a valid domain',
-        value => value.indexOf('.') <= value.length - 3 || 'Email should contain a valid domain extention.',
-      ],
       message: '',
       ValidatePasswordRules: [
         value => !!value || 'Password is required.',
@@ -58,14 +70,16 @@
     }),
 
     computed:{
-
+      // For get the status into store
+      ...mapState(['status'])
     },
 
     methods: {
       loginAccount() {
+        // const self = this;
         this.$store.dispatch('loginAccount', {
-          email: this.email_log,
-          password: this.password_log
+          username: this.user_log,
+          password: this.password_log,
         })
       }
     },

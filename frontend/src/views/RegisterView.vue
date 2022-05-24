@@ -84,6 +84,13 @@
             />
 
             <div class="text-center">
+
+             <router-link to="/">
+                <p>
+                  Login
+                </p>
+              </router-link>
+
               <v-btn @click="createAccount()" primary mb-5>
                 Connexion
               </v-btn>
@@ -132,6 +139,10 @@
           mail           : this.email_reg,
           hashed_password: this.password_reg,
           iscoach        : false,
+        }).then((response) => {
+          console.log(response);
+        }, (error) => {
+          console.log(error);
         })
       }
     }
