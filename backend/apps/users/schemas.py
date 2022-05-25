@@ -1,5 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel
+from pydantic.schema import Optional
 
 class UserSchema(BaseModel):
     id: int
@@ -38,11 +39,11 @@ class UserCreateSchema(BaseModel):
 class UserViewSchema(BaseModel):
     firstName: str
     lastName: str
-    isadmin: bool
+    isadmin: Optional[bool]
     phone: str
-    mail: str
+    mail: Optional[str]
     postalCode: int
-    dateRegister: datetime
+    dateRegister: datetime = datetime.utcnow()
     # pict: str
 
     class Config:

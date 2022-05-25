@@ -18,7 +18,7 @@
               outlined
               color="black"
               background-color="#F5F5F5"
-              label="Email"
+              label="Username"
               required
             />
 
@@ -56,8 +56,8 @@
 </template>
 
 <script>
-
 import { mapState } from 'vuex'
+import { EventBus } from '@/main'
 
   export default ({
     data: () => ({
@@ -76,11 +76,12 @@ import { mapState } from 'vuex'
 
     methods: {
       loginAccount() {
-        // const self = this;
         this.$store.dispatch('loginAccount', {
           username: this.user_log,
           password: this.password_log,
-        })
+        },
+        EventBus.$emit('sendLogin')
+        )
       }
     },
   })

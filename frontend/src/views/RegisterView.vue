@@ -95,7 +95,7 @@
                 </v-alert>
 
                 <v-alert type="error" v-if="status == 'failed_create'" class="mt-5 mx-auto" width="300">
-                  Error. Please check all fields !
+                  Error: Email already exist. Please check all fields !
                 </v-alert>
 
               <router-link to="/">
@@ -112,6 +112,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import {EventBus} from '../main.js'
 
   export default ({
     data: () => ({
@@ -136,9 +137,14 @@ import { mapState } from 'vuex'
       ],
     }),
 
+    mounted() {
+      EventBus.$on('sendLogin')
+    },
+
     computed:{
       ...mapState(['status'])
     },
+
 
     methods: {
       createAccount() {
@@ -153,11 +159,13 @@ import { mapState } from 'vuex'
           hashed_password: this.password_reg,
           iscoach        : false,
         }).then((response) => {
+          // sendLogin();
+          // TODO connect when account has been created
           console.log(response);
         }, (error) => {
           console.log(error);
         })
       }
-    }
+    },
   })
 </script>

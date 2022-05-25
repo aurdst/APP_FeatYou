@@ -29,6 +29,22 @@ export default new Vuex.Store({
       user: {
         id: -1,
         access_token: '',
+      },
+      userInfos: {
+        adress: '',
+        banqCardNumb: '',
+        dateRegister: '',
+        email: '',
+        firstName: '',
+        hashed_password: '',
+        id: '',
+        isadmin: '',
+        iscoach: '',
+        lastName: '',
+        phone: '',
+        pict: '',
+        postalCode: '',
+        username: ''
       }
   },
   getters  : {
@@ -40,14 +56,19 @@ export default new Vuex.Store({
       state.status = status
     },
     logUser: (state, user) => {
+      instance.defaults.headers.common['Authorization'] = user.access_token;
       state.user = user
+    },
+    userInfos: (state, userInfos) => {
+      state.userInfos = userInfos
     }
   },
   actions  : {
     loginAccount: async function ({commit}, userInfos) {
       commit('setStatus', 'loading');
       const response = await auth.post('/login', qs.stringify(userInfos))
-        if (response.status === 200) {
+      if (response.status === 200) {
+        commit('logUser', response.data)
           commit('setStatus', '');
           router.push('profile');
           return
@@ -72,6 +93,18 @@ export default new Vuex.Store({
           }
         );
       })
+    },
+    getUserInfos: ({commit}) => {
+      instance.get('/').then(
+        (response) => {
+          console.log(response.data)
+          commit('userInfos', response.data);
+        }
+      ).catch(
+        () => {
+          commit('setStatus', 'failed_create');
+        }
+      );
     }
   },
   modules: {}

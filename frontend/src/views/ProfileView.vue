@@ -18,9 +18,20 @@
 </template>
 
 <script>
+import router from "../router";
+
 export default ({
     data: () => ({
         img: require("@/assets/img/halt.jpeg")
-    })
+    }),
+
+    // When the vue is generate     
+    mounted: function () {
+        if (this.$store.state.user.id == -1) {
+            router.push('/');
+            return;
+        }
+        this.$store.dispatch('getUserInfos')
+    }
 })
 </script>

@@ -7,6 +7,8 @@ import './assets/css/style.css'
 
 Vue.config.productionTip = false
 
+export const EventBus = new Vue();
+
 new Vue({
   router,
   store,

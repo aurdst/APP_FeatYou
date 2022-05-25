@@ -82,7 +82,7 @@ def get_all_categories(db: Session = Depends(get_db)):
     response_model=schemas.CategoriesSchema,
     summary="Get categorie by id"
 )
-def get_all_categories(category_id: str, db: Session = Depends(get_db)):
+def get_categories(category_id: str, db: Session = Depends(get_db)):
     query = db.query(models.CategorieModel).filter(models.CategorieModel.id == category_id).first()
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] Categorie doesn't exist")

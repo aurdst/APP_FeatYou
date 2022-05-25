@@ -60,12 +60,12 @@ def get_all_user(db: Session = Depends(get_db), user: Log = Depends(get_current_
 
 # Create a get routes for get one user in the db.
 @router.get(
-    "/{user_id}/", 
-    response_model=List[schemas.UserViewSchema],
+    "/{user_id}", 
+    response_model=schemas.UserViewSchema,
     summary="Get user by id"
 )
 def get_user(user_id: str, db: Session = Depends(get_db)):
-    user = db.query(models.UserModel.id).filter(id == user_id)
+    user = db.query(models.UserModel).filter(models.UserModel.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
 
