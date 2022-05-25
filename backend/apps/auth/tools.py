@@ -21,7 +21,7 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # OAuth2 security
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 
 # Create a PassLib "context". This is what will be used to hash and verify passwords.
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
