@@ -42,6 +42,7 @@ class UserViewSchema(BaseModel):
     lastName: str
     isadmin: Optional[bool]
     phone: str
+    adress: str
     email: str
     postalCode: int
     banqCardNumb: int

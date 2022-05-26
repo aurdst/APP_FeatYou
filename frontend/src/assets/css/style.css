@@ -12,13 +12,12 @@
 
 .profile_text{
     height: auto;
-    background-color: rgb(142, 202, 255);
-    width: 80%;
+    box-shadow: 1px 3px 5px 5px rgb(172, 172, 172);
+    width:90%;
 }
 
 .div_action{
     height: 150px;
-    background-color: rgb(0, 111, 207);
     width: 30%;
     margin-top:8%;
     margin-left: 5%;
@@ -31,6 +30,13 @@
     margin-left: 5%;
     margin-top: 15%;
     position: absolute;
+}
+
+.label_profil{
+    color: #7C7B7B;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
 }
 
 .btn_profile{
@@ -85,4 +91,19 @@
     color: #FFD200;
     width: 70%;
     margin: auto;
+}
+
+.zone_data{
+    background-color: #EEDCFF;
+    color: #5C3C90;
+    padding: 5px;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.btn_lowercase{
+    text-transform: none !important;
+    background-color : #5C3C90 !important;
+    color: white!important;
 }
