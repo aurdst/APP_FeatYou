@@ -40,6 +40,11 @@
     margin-top: 5%;
 }
 
+.btn_alignement{
+    display: block;
+    margin: auto;
+}
+
 .choose_conv{
     display: block;
     width: 100%;

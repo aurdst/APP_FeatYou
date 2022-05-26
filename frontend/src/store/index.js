@@ -37,8 +37,20 @@ if(!user){
     id: -1,
     access_token: '',
     token_type: '',
-  };
+  } 
+} else {
+  try {
+    user = JSON.parse(user);
+    instance.defaults.headers.common['Authorization'] = user.access_token;
+  } catch (error) {
+    user = {
+      id: -1,
+      access_token: '',
+      token_type: '',
+    } 
+  }
 }
+
 
 let userInfos = window.localStorage.getItem('userInfos');
 if(!userInfos){
@@ -61,7 +73,7 @@ if(!userInfos){
 }
 
 export default new Vuex.Store({
-  state    : {
+  state : {
       status: null,
       user: user,
       userInfos: userInfos,
@@ -77,7 +89,7 @@ export default new Vuex.Store({
     logUser: (state, user) => {
       instance.defaults.headers.common['Authorization'] = user.access_token;
       state.user = user
-      localStorage.setItem('user', user);
+      localStorage.setItem('user', JSON.stringify(user));
     },
     userInfos: (state, userInfos) => {
       state.userInfos = userInfos
@@ -125,9 +137,9 @@ export default new Vuex.Store({
       })
     },
     getUserInfos: async function ({commit}) {
-      const response = await getInstance.get('/infos/'+ this.state.user.user.id)
+      const response = await getInstance.get(`/infos/${JSON.parse(localStorage.user).user.id}`)
       commit('userInfos', response.data)
-      return response.data;
+      return 'Data loaded';
     },
   },
   modules: {}

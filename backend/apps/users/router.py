@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends, status, HTTPException, UploadFile
 from sqlalchemy.orm import Session
 from apps.auth.tools import get_current_user
 from database.database import get_db
@@ -22,7 +22,7 @@ router: APIRouter = APIRouter()
     status_code=status.HTTP_201_CREATED,
     summary="Create new user"
 )
-def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
+def create_user(user: schemas.UserCreateSchema, file: UploadFile, db: Session = Depends(get_db)):
     datas = models.UserModel(
         firstName       = user.firstName,
         lastName        = user.lastName,
@@ -35,7 +35,8 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
         postalCode      = user.postalCode,
         banqCardNumb    = 0000000000000000,
         dateRegister    = user.dateRegister,
-        adress          = user.adress
+        adress          = user.adress,
+        pict = file
     )
 
     query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
@@ -45,6 +46,8 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
     db.add(datas)
     db.commit()
     db.refresh(datas)
+
+    print(type(datas.file))
 
     return "201 Succes Account has been create"
 

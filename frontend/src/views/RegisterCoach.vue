@@ -3,11 +3,11 @@
       <v-col>
         <div class="bg_login">
           <h2 class="text-center mt-10 mb-5 Title_log">
-            Devenir Coach FeatYou
+            Devenir adhérant
           </h2>
 
-          <router-link to='/registerCoach'>
-            <v-btn class="btn_log mb-5 btn_alignement" rounded>Vous êtes Coach ?</v-btn>
+          <router-link to='/register'>
+            <v-btn class="btn_log mb-5 btn_alignement" rounded>Vous êtes Sportif ?</v-btn>
           </router-link>
 
           <form
@@ -87,6 +87,24 @@
               required
             />
 
+            <v-text-field
+              v-model="sport_reg"
+              outlined
+              color="black"
+              background-color="#F5F5F5"
+              label="Insérez un ou plusieurs sport"
+              required
+            />
+
+            <v-text-field
+              v-model="lieu_reg"
+              outlined
+              color="black"
+              background-color="#F5F5F5"
+              label="Insérez un ou plusieurs lieux"
+              required
+            />
+
             <div class="text-center">
               
               <v-btn @click="createAccount()" primary mb-5 class="btn_log">
@@ -126,6 +144,8 @@ import { mapState } from 'vuex'
       postal_reg  : '',
       phone_reg   : '',
       password_reg: '',
+      sport_reg: '',
+      lieu_reg: '',
       EmailRulesValidation: [
         value => !!value || 'Email is required.',
         value => value.indexOf('@') !== 0 || 'Email should have a username.',
@@ -155,7 +175,7 @@ import { mapState } from 'vuex'
           postalCode     : this.postal_reg,
           mail           : this.email_reg,
           hashed_password: this.password_reg,
-          iscoach        : false,
+          iscoach        : true,
           isadmin        : false,
         }).then((response) => {
           // sendLogin();

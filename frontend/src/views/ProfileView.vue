@@ -35,7 +35,7 @@
                 </div>
                 <div class="div_action_btn">
                     <v-btn block>Acheter des fitcoin</v-btn>
-                    <v-btn block class="mt-3" to="/">Réserver une séance</v-btn>
+                    <v-btn block class="mt-3" to="/home">Réserver une séance</v-btn>
                 </div>
             </div>
 
@@ -57,16 +57,16 @@ export default ({
     }),
 
     // When the vue is generate     
-    mounted: function () {
+    mounted: function() {
+        //* If not connect
         if (this.$store.state.user.id == -1) {
             router.push('/');
-            return;
+            return
         }
-        
-        console.log('in mounted')
 
+        //* Get user info
         this.$store.dispatch('getUserInfos').then((rs) => {
-            console.log(rs);
+            console.log(rs)
         }).catch((error) => {
             console.log(error)
         })

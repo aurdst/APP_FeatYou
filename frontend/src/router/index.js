@@ -12,6 +12,7 @@ import ConseilsNutri from '../views/ConseilsNutri.vue'
 import ConseilsSport from '../views/ConseilsSport.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import registerCoach from '../views/RegisterCoach.vue'
 
 Vue.use(VueRouter)
 
@@ -80,6 +81,11 @@ const routes = [
     path: '/register',
     name: 'register',
     component: RegisterView
+  },
+  {
+    path: '/registerCoach',
+    name: 'registerCoach',
+    component: registerCoach
   },
 ]
 
