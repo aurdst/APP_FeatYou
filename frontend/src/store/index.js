@@ -13,6 +13,14 @@ const instance = axios.create({
   }
 })
 
+const getInstance = axios.create({
+  baseURL: 'http://localhost:8000/api/v1/user/',
+  headers: { 
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json'
+  }
+})
+
 const auth = axios.create({
   baseURL: 'http://localhost:8000/api/v1/auth/',
   headers: { 
@@ -23,29 +31,40 @@ const auth = axios.create({
 
 Vue.use(Vuex)
 
+let user = localStorage.getItem('user');
+if(!user){
+  user = {
+    id: -1,
+    access_token: '',
+    token_type: '',
+  };
+}
+
+let userInfos = window.localStorage.getItem('userInfos');
+if(!userInfos){
+  userInfos = {
+    adress: '',
+    banqCardNumb: '',
+    dateRegister: '',
+    mail: '',
+    firstName: '',
+    hashed_password: '',
+    id: '',
+    isadmin: '',
+    iscoach: '',
+    lastName: '',
+    phone: '',
+    pict: '',
+    postalCode: '',
+    username: ''
+  }
+}
+
 export default new Vuex.Store({
   state    : {
       status: null,
-      user: {
-        id: -1,
-        access_token: '',
-      },
-      userInfos: {
-        adress: '',
-        banqCardNumb: '',
-        dateRegister: '',
-        email: '',
-        firstName: '',
-        hashed_password: '',
-        id: '',
-        isadmin: '',
-        iscoach: '',
-        lastName: '',
-        phone: '',
-        pict: '',
-        postalCode: '',
-        username: ''
-      }
+      user: user,
+      userInfos: userInfos,
   },
   getters  : {
     isAuth: state => !!state.user,
@@ -58,10 +77,17 @@ export default new Vuex.Store({
     logUser: (state, user) => {
       instance.defaults.headers.common['Authorization'] = user.access_token;
       state.user = user
+      localStorage.setItem('user', user);
     },
     userInfos: (state, userInfos) => {
       state.userInfos = userInfos
-    }
+    },
+    logout: (state) => {
+      state.user = {
+        id: -1
+      }
+      localStorage.removeItem('user')
+    },
   },
   actions  : {
     loginAccount: async function ({commit}, userInfos) {
@@ -69,22 +95,26 @@ export default new Vuex.Store({
       const response = await auth.post('/login', qs.stringify(userInfos))
       if (response.status === 200) {
         commit('logUser', response.data)
-          commit('setStatus', '');
-          router.push('profile');
-          return
-        }
+        commit('setStatus', '');
+        router.push('profile');
+        return
+      }
           
-        commit('setStatus', 'failed_log');
-        //TODO Gerer erreur
+      commit('setStatus', 'failed_log');
+      console.log('Connection Failed');
+      //TODO Gerer erreur
     },
     createAccount: ({commit}, userInfos) => {
       return new Promise((resolve, reject) => {
         commit;
-  
+        
         instance.post('/create', userInfos).then(
           (response) => {
+            commit('logUser', response.data)
             commit('setStatus', 'created');
             resolve(response);
+            router.push('profile');
+            return
           }
         ).catch(
           (error) => {
@@ -94,18 +124,11 @@ export default new Vuex.Store({
         );
       })
     },
-    getUserInfos: ({commit}) => {
-      instance.get('/').then(
-        (response) => {
-          console.log(response.data)
-          commit('userInfos', response.data);
-        }
-      ).catch(
-        () => {
-          commit('setStatus', 'failed_create');
-        }
-      );
-    }
+    getUserInfos: async function ({commit}) {
+      const response = await getInstance.get('/infos/'+ this.state.user.user.id)
+      commit('userInfos', response.data)
+      return response.data;
+    },
   },
   modules: {}
 })

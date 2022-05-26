@@ -2,23 +2,23 @@
     <v-row no-gutters>
       <v-col>
         <div class="bg_login">
-          <h2 class="text-center mt-10 Title_log">
-            LOGIN
-          </h2>
+          <h3 class="text-center mt-16 mb-5 Title_log">
+            Nous sommes ravi de te revoir parmis nous
+          </h3>
 
           <v-alert type="error" v-if="status == 'failed_log'" class="mt-5 mx-auto" width="300">
             Invalid username or password !
           </v-alert>
 
           <form
-            class="form_login mx-auto"
+            class="form_login mx-auto mt-10"
           >
             <v-text-field
               v-model="user_log"
               outlined
               color="black"
               background-color="#F5F5F5"
-              label="Username"
+              label="Identifiant"
               required
             />
 
@@ -28,22 +28,22 @@
               type="password"
               color="black"
               background-color="#F5F5F5"
-              label="Password"
+              label="Mot de passe"
               required
             />
 
             <div class="text-center">
-              <v-btn @click="loginAccount()" primary class="mb-3" v-if="status == 'loading'">
+              <v-btn @click="loginAccount()" class="btn_log mb-3" v-if="status == 'loading'">
                 Connexion en cours ...
               </v-btn>
 
-              <v-btn @click="loginAccount()" primary class="mb-3" v-else>
+              <v-btn @click="loginAccount()" class="btn_log mb-3" v-else>
                 Connexion
               </v-btn>
 
               <router-link to="/register">
                 <p>
-                  Register
+                  S'inscrire ici
                 </p>
               </router-link>
             </div>
@@ -57,7 +57,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { EventBus } from '@/main'
+import router from '../router'
 
   export default ({
     data: () => ({
@@ -69,6 +69,12 @@ import { EventBus } from '@/main'
       ],
     }),
 
+    mounted: function () {
+      if (this.$store.state.user.id != -1){
+        router.push('profile')
+      }
+    },
+
     computed:{
       // For get the status into store
       ...mapState(['status'])
@@ -79,9 +85,7 @@ import { EventBus } from '@/main'
         this.$store.dispatch('loginAccount', {
           username: this.user_log,
           password: this.password_log,
-        },
-        EventBus.$emit('sendLogin')
-        )
+        })
       }
     },
   })

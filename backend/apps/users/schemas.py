@@ -16,7 +16,7 @@ class UserSchema(BaseModel):
     banqCardNumb: int
     dateRegister: datetime
     adress: str
-    # pict: str
+    pict: Optional[str]
 
     class Config:
         orm_mode = True
@@ -41,10 +41,11 @@ class UserViewSchema(BaseModel):
     lastName: str
     isadmin: Optional[bool]
     phone: str
-    mail: Optional[str]
+    email: str
     postalCode: int
+    banqCardNumb: int
     dateRegister: datetime = datetime.utcnow()
-    # pict: str
+    pict: Optional[str]
 
     class Config:
         orm_mode = True

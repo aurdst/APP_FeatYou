@@ -2,15 +2,15 @@
     <v-row no-gutters>
       <v-col>
         <div class="bg_login">
-          <h2 class="text-center mt-10 Title_log">
-            Register
+          <h2 class="text-center mt-10 mb-5 Title_log">
+            S'inscrire
           </h2>
 
 
           <form
             class="form_login mx-auto"
           >
-
+            <v-text class="text-center">Données Personnelles</v-text>
             <v-text-field
               v-model="username_reg"
               outlined
@@ -86,7 +86,7 @@
 
             <div class="text-center">
               
-              <v-btn @click="createAccount()" primary mb-5>
+              <v-btn @click="createAccount()" primary mb-5 class="btn_log">
                 Créer un compte
               </v-btn>
 
@@ -112,7 +112,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import {EventBus} from '../main.js'
 
   export default ({
     data: () => ({
@@ -136,10 +135,6 @@ import {EventBus} from '../main.js'
         value => !!value || 'Password is required.',
       ],
     }),
-
-    mounted() {
-      EventBus.$on('sendLogin')
-    },
 
     computed:{
       ...mapState(['status'])

@@ -60,7 +60,7 @@ def get_all_user(db: Session = Depends(get_db), user: Log = Depends(get_current_
 
 # Create a get routes for get one user in the db.
 @router.get(
-    "/{user_id}", 
+    "/infos/{user_id}", 
     response_model=schemas.UserViewSchema,
     summary="Get user by id"
 )

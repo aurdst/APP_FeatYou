@@ -11,7 +11,7 @@
 }
 
 .profile_text{
-    height: 200px;
+    height: auto;
     background-color: rgb(142, 202, 255);
     width: 80%;
 }
@@ -66,4 +66,18 @@
 
 .form_login{
     width: 90%;
+    padding: 5%;
+    border-radius: 20px;
+    box-shadow: 1px 3px 5px 5px rgb(172, 172, 172);
+}
+
+.btn_log{
+    background-color : #5C3C90 !important;
+    color: white!important;
+}
+
+.Title_log{
+    color: #FFD200;
+    width: 70%;
+    margin: auto;
 }

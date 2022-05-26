@@ -29,21 +29,12 @@
       >
         <v-spacer/>
 
-        <router-link to="/">
+        <router-link to="/home">
             <v-avatar
             color="primary"
             size="40"
             ></v-avatar>
         </router-link>
-
-        <v-spacer/>
-
-          <router-link to="/conversation">
-            <v-avatar
-            color="primary"
-            size="40"
-            ></v-avatar>
-          </router-link>
 
         <v-spacer/>
 
@@ -56,7 +47,16 @@
 
         <v-spacer/>
 
-          <router-link to="/register">
+          <router-link to="/conversation">
+            <v-avatar
+            color="primary"
+            size="40"
+            ></v-avatar>
+          </router-link>
+
+        <v-spacer/>
+
+          <router-link to="/profile">
             <v-avatar 
             color="primary"
             size="40"
