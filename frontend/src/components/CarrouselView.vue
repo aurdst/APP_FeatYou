@@ -1,32 +1,22 @@
 <template>
      <v-carousel hide-delimiters class="px-1 mt-5" height="350" rounded-lg>
         <v-carousel-item
-        v-for="(item,i) in items"
-        :key="i"
-        :src="item.src"
+        v-for="image in images"
+        :key="image"
+        :src="image.url"
         ></v-carousel-item>
   </v-carousel>
 </template>
 <script>
 export default ({
-    data: () => {
-        return {
-            items: [
-              {
-                src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-              },
-              {
-                src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-              },
-              {
-                src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-              },
-              {
-                src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-              },
-            ],
-        }
-    },
+    data: () => ({
+        images: [
+              { url: require("@/assets/img/1.jpg"), alt: 'Commencer une activité sportive' },
+              { url: require("@/assets/img/2.jpg"), alt: 'Feat you est officiellement ouvert' },
+              { url: require("@/assets/img/3.jpg"), alt: 'I love you nature' },
+              { url: require("@/assets/img/4.jpg"), alt: 'Quel genre de sportif es tu ?' },
+          ]
+      }),
 })
 </script>
 

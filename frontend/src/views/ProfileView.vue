@@ -56,7 +56,7 @@ export default ({
         img: require("@/assets/img/halt.jpeg")
     }),
 
-    // When the vue is generate     
+    //* When the vue is generate     
     mounted: function() {
         //* If not connect
         if (this.$store.state.user.id == -1) {
@@ -74,7 +74,7 @@ export default ({
 
     computed:{
       ...mapState({
-          user: 'userInfos',
+          user: 'user',
       })
     },
     methods: {

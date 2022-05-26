@@ -31,36 +31,52 @@
 
         <router-link to="/home">
             <v-avatar
-            color="primary"
             size="40"
-            ></v-avatar>
+            >
+            <img
+              :src="icon_home"
+              alt="home"
+            >   
+            </v-avatar>
         </router-link>
 
         <v-spacer/>
 
           <router-link to="/conseils">
             <v-avatar
-            color="primary"
             size="40"
-            ></v-avatar>
+            >
+            <img
+              :src="icon_conseil"
+              alt="conseils"
+            >   
+            </v-avatar>
           </router-link>
 
         <v-spacer/>
 
           <router-link to="/conversation">
             <v-avatar
-            color="primary"
             size="40"
-            ></v-avatar>
+            >
+            <img
+              :src="icon_messag"
+              alt="message"
+            >   
+            </v-avatar>
           </router-link>
 
         <v-spacer/>
 
           <router-link to="/profile">
             <v-avatar 
-            color="primary"
             size="40"
-            ></v-avatar>
+            >
+            <img
+              :src="icon_profile"
+              alt="profile"
+            >         
+            </v-avatar>
           </router-link>
 
         <v-spacer/>
@@ -79,7 +95,11 @@ export default {
   },
 
   data: () => ({
-    logo: require("@/assets/img/final.svg")
+    logo: require("@/assets/img/final.svg"),
+    icon_profile: require("@/assets/img/icone_profile.png"),
+    icon_home: require("@/assets/img/icon_home.png"),
+    icon_messag: require("@/assets/img/icon_message.png"),
+    icon_conseil: require("@/assets/img/icon_conseil.png"),
   }),
 };
 </script>

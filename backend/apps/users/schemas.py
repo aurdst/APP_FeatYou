@@ -32,6 +32,7 @@ class UserCreateSchema(BaseModel):
     postalCode: int
     dateRegister: datetime = datetime.utcnow()
     hashed_password: str
+    pict: str
 
     class Config:
         orm_mode = True
