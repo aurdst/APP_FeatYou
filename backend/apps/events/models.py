@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy import Float,Column,ForeignKey, Integer, String, DateTime
 from database.database import Base
 
@@ -11,3 +12,4 @@ class EventModel(Base):
     idUser = Column(Integer)
     price = Column(Float)
     pict = Column(String)
+    date = datetime.utcnow()

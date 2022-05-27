@@ -23,14 +23,20 @@
 
     <v-row class="mb-6 mx-5">
       <v-col cols="12">
-        <h2 class="text-center">
-          Hello text here ! So good 
+        <h2 class="text-center bg_home_seance">
+          Séances à venir 
         </h2>
       </v-col>
 
       <v-col cols="12">
         <p class="text-center">
-          Lorem impsum extrano torime ameno ameno latiré oh latiré ah torime 
+          {{}} 
+        </p>
+      </v-col>
+
+      <v-col cols="12">
+        <p class="text-center btn_seance">
+          Voir toutes mes séances 
         </p>
       </v-col>
     </v-row>

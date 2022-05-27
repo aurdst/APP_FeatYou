@@ -1,5 +1,5 @@
 <template>
-     <v-carousel hide-delimiters class="px-1 mt-5" height="350" rounded-lg>
+     <v-carousel hide-delimiters show-arrows-on-hover class="px-1 mt-5" height="350" rounded-lg>
         <v-carousel-item
         v-for="image in images"
         :key="image"

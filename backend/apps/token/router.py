@@ -5,6 +5,7 @@ from typing import List
 
 from . import models
 from . import schemas
+from apps.users.models import UserModel
 
 router: APIRouter = APIRouter()
 
@@ -17,7 +18,7 @@ def create_token(token: schemas.TokenSchema, db: Session = Depends(get_db)):
         idOwnUser = token.idOwnUser
     )
 
-    query = db.query(models.tokenModel).filter(token.id == datas.id).first()
+    query = db.query(models.UserModel).filter(token.id == datas.id).first()
     if query:
         raise HTTPException(status_code=404, detail="token already exist")
     else:

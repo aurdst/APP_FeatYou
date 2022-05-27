@@ -5,7 +5,6 @@ from database.database import get_db
 from typing import List
 from apps.auth.tools import pwd_context
 from passlib.context import CryptContext
-from apps.users.schemas import UserAuthSchema
 from fastapi.responses import Response
 from apps.auth.schemas import Log
 
@@ -36,7 +35,9 @@ def create_user(user: schemas.UserCreateSchema, file: UploadFile, db: Session = 
         banqCardNumb    = 0000000000000000,
         dateRegister    = user.dateRegister,
         adress          = user.adress,
-        pict = file
+        pict = file,
+        lieux = user.lieux,
+        sport = user.sport
     )
 
     query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
@@ -77,23 +78,29 @@ def get_user(user_id: str, db: Session = Depends(get_db)):
 # Route for update one user
 @router.put(
     path="/update/{user_id}",
-    response_model=schemas.UserSchema,
+    response_model=schemas.UpdateUserSchema,
     status_code=status.HTTP_202_ACCEPTED,
     summary="Update user by id"
 )
-def update_user(user_id: str, update_user: schemas.UserSchema, db: Session = Depends(get_db), user: Log = Depends(get_current_user)):
-    query = db.query(models.UserModel).filter(models.UserModel.id == user_id).first()
-    if not query:
+def update_user(user_id: str, update_user: schemas.UpdateUserSchema, db: Session = Depends(get_db), user: Log = Depends(get_current_user)):
+
+    item_to_update = db.query(models.UserModel).filter(models.UserModel.id == user_id).first()
+    if not item_to_update:
         raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
+    else:
+        item_to_update.firstName       = update_user.firstName,
+        item_to_update.lastName        = update_user.lastName,
+        item_to_update.username        = update_user.username,
+        item_to_update.phone           = update_user.phone,
+        item_to_update.email            = update_user.email,
+        item_to_update.hashed_password = pwd_context.hash(update_user.hashed_password),
+        item_to_update.postalCode      = update_user.postalCode,
+        item_to_update.banqCardNumb    = update_user.banqCardNumb,
+        item_to_update.adress          = update_user.adress,
 
-    update_data = models.UserModel(
-        labelCategorie = update_user.labelCategorie,
-        descCategorie = update_user.descCategorie,
-    )
+        db.commit()
 
-    db.commit()
-
-    return update_data
+    return '202'
 
 #Route for deleted user
 @router.delete(

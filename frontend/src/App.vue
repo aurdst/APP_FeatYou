@@ -5,16 +5,20 @@
       elevation="6"
     >
     <v-spacer/>
-      <router-link to="/">
+      <router-link to="/home">
         <v-img :src="logo" max-width="150" class="ma-auto"></v-img>
       </router-link>
     <v-spacer/>
     
     <router-link to="/infos">
       <v-avatar
-        color="primary"
         size="46"
-      ></v-avatar>
+      >
+        <img
+          :src="icon_faq"
+          alt="faq"
+        >   
+      </v-avatar>
     </router-link>
     
     </v-app-bar>
@@ -31,7 +35,7 @@
 
         <router-link to="/home">
             <v-avatar
-            size="40"
+            size="45"
             >
             <img
               :src="icon_home"
@@ -44,7 +48,7 @@
 
           <router-link to="/conseils">
             <v-avatar
-            size="40"
+            size="45"
             >
             <img
               :src="icon_conseil"
@@ -57,7 +61,7 @@
 
           <router-link to="/conversation">
             <v-avatar
-            size="40"
+            size="45"
             >
             <img
               :src="icon_messag"
@@ -70,7 +74,7 @@
 
           <router-link to="/profile">
             <v-avatar 
-            size="40"
+            size="45"
             >
             <img
               :src="icon_profile"
@@ -95,11 +99,12 @@ export default {
   },
 
   data: () => ({
-    logo: require("@/assets/img/final.svg"),
+    logo: require("@/assets/img/logo.png"),
     icon_profile: require("@/assets/img/icone_profile.png"),
     icon_home: require("@/assets/img/icon_home.png"),
     icon_messag: require("@/assets/img/icon_message.png"),
     icon_conseil: require("@/assets/img/icon_conseil.png"),
+    icon_faq: require("@/assets/img/icon_faq.png"),
   }),
 };
 </script>

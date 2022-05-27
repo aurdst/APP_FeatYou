@@ -21,6 +21,14 @@ const auth = axios.create({
   }
 })
 
+// const instCategorie = axios.create({
+//   baseURL: 'http://localhost:8000/api/v1/categorie/',
+//   headers: { 
+//     'Access-Control-Allow-Origin': '*',
+//     'Content-Type': 'application/json'
+//   }
+// })
+
 Vue.use(Vuex)
 
 let user = localStorage.getItem('user');
@@ -72,6 +80,14 @@ export default new Vuex.Store({
       }
       localStorage.removeItem('user')
     },
+    updateData: (state, user) => {
+      instance.defaults.headers.common['Authorization'] = user.access_token;
+      state.user = user
+      localStorage.setItem('user', JSON.stringify(user));
+    }
+    // categorie: (state, categorie) => {
+    //   state.categorie = categorie
+    // }
   },
 
   actions  : {
@@ -114,6 +130,11 @@ export default new Vuex.Store({
       commit('user', response.data);
       return response;
     },
+    updateData: async function ({commit}) {
+      const response = await instance.get(`/update/${JSON.parse(localStorage.user).user.id}`)
+      commit('user', response.data);
+      return response;
+    }
   },
   modules: {}
 })

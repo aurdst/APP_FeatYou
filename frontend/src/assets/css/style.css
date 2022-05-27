@@ -4,6 +4,21 @@
     float: right;
 }
 
+.bg_home_seance{
+    background-color: #FFD200;
+    border-radius: 10px;
+    color: white;
+    font-size: medium;
+}
+
+.btn_seance{
+    background-color: #B3AEAE;
+    color: white;
+    font-size: large;
+    border-radius: 10px;
+    width: 70%;
+    margin: auto;
+}
 /* ConseilView */
 
 .text_conseil{
@@ -72,7 +87,8 @@
 }
 
 .bg_news{
-    background-color: #f5f5f5;
+    background-color: #B3AEAE;
+    padding: 10px;
 }
 
 .form_login{
@@ -93,6 +109,36 @@
     margin: auto;
 }
 
+.btn_news{
+    display: inline-block;
+    margin: auto;
+    width: 35%;
+    height: 37px!important;
+}
+
+.v_fields_mail{
+    width: 85%;
+    display: inline-block;
+    margin: auto;
+}
+
+.bg_fields_mail{
+    width: 90%;
+    display: block;
+    margin: auto;
+}
+
+/* ProfileView */
+
+.text_fitcoins{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    margin: auto;
+    padding-bottom: 15px;
+    display: block;
+    color: #504F4F;
+}
+
 .zone_data{
     background-color: #EEDCFF;
     color: #5C3C90;
@@ -106,4 +152,45 @@
     text-transform: none !important;
     background-color : #5C3C90 !important;
     color: white!important;
+}
+
+.container_logout{
+    background-color: #f5f5f5;
+    box-shadow: 1px 1px 5px 3px rgb(172, 172, 172);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.container_fitcoin{
+    background-color: #f5f5f5;
+    width: 90%;
+}
+
+.container_faq{
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    background-color: #5C3C90;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.text_follow{
+    margin: 4px !important;
+}
+
+
+
+/* ConseilView */
+
+.bg_conseils_sport{
+    background-image: url('../img/sportif.png');
+}
+
+.bg_conseils_nutritif{
+    background-image: url('../img/nutritionnel.png');
+}
+
+.bg_conseils_pratique{
+    background-image: url('../img/vie\ pratique.png');
 }

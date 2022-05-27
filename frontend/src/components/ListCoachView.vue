@@ -38,7 +38,9 @@
 </template>
 
 <script>
-  export default {
+import router from "../router";
+
+  export default ({
     data: () => ({
       items: [
         { header: 'Coach' },
@@ -67,5 +69,26 @@
         },
       ],
     }),
-  }
+
+    mounted: function() {
+    //* If not connect
+    if (this.$store.state.user.id == -1) {
+        router.push('/');
+        return
+    }
+
+    //* Get user info
+    this.$store.dispatch('getUserInfos').then((rs) => {
+        console.log(rs)
+    }).catch((error) => {
+        console.log(error)
+    }),
+
+    this.$store.dispatch('updateData').then((rs) => {
+        console.log(rs)
+    }).catch((error) => {
+        console.log(error)
+    })
+  },
+})
 </script>

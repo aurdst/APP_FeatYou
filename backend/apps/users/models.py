@@ -18,3 +18,5 @@ class UserModel(Base):
     adress = Column(String)
     dateRegister = Column(DateTime)
     pict = Column(String)
+    # sport = Column(String)
+    # lieux = Column(String)
