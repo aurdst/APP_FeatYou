@@ -6,8 +6,10 @@
                 <v-icon @click="logout()" class="btn_profile mt-0" color="red">mdi-logout-variant</v-icon>
             </div>
         </v-col>
+        
         <v-col cols="12" class="mt-5">
             <v-img class="rounded-circle text-center mx-auto" :src="img" width="150" height="150"></v-img>
+
             <div class="profile_text ma-auto mt-5 pa-5">
                 <p class="text-left label_profil remove_margin">Nom :</p>
                 <p class="text-left zone_data">{{ user.lastName }}</p>
@@ -46,116 +48,118 @@
                     </template>
                     <v-card>
                         <v-card-title>
-                        <span class="text-h5">User Profile</span>
+                            <span class="text-h5">User Profile</span>
                         </v-card-title>
+
                         <v-card-text>
-                        <v-container>
-                            <v-row>
-                            <v-col
-                                cols="12"
-                                sm="6"
-                                md="4"
+                            <v-container>
+                                <v-row>
+                                    <v-col
+                                        cols="12"
+                                        sm="6"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="current_username"
+                                            outlined
+                                            color="black"
+                                            background-color="#F5F5F5"
+                                            label="Username"
+                                            required
+                                        />
+
+                                        <v-text-field
+                                            v-model="current_name"
+                                            outlined
+                                            color="black"
+                                            background-color="#F5F5F5"
+                                            label="Name"
+                                            required
+                                        />
+
+                                        <v-text-field
+                                            v-model="current_lastname"
+                                            outlined
+                                            color="black"
+                                            background-color="#F5F5F5"
+                                            label="LastName"
+                                            required
+                                        />
+
+                                        <v-text-field
+                                            v-model="current_email"
+                                            outlined
+                                            color="black"
+                                            :rules="EmailRulesValidation"
+                                            background-color="#F5F5F5"
+                                            label="Email"
+                                            required
+                                        />
+
+                                        <v-text-field
+                                            v-model="current_phone"
+                                            outlined
+                                            color="black"
+                                            background-color="#F5F5F5"
+                                            label="Phone Number"
+                                            required
+                                        />
+
+                                        <v-text-field
+                                            v-model="current_adress"
+                                            outlined
+                                            color="black"
+                                            background-color="#F5F5F5"
+                                            label="Adress"
+                                            required
+                                        />
+
+                                        <v-text-field
+                                            v-model="current_postal"
+                                            outlined
+                                            color="black"
+                                            background-color="#F5F5F5"
+                                            label="PostalCode"
+                                            required
+                                        />
+
+                                        <v-text-field
+                                            v-model="current_password"
+                                            outlined
+                                            color="black"
+                                            background-color="#F5F5F5"
+                                            label="Password"
+                                            required
+                                        />
+
+                                        <div class="text-center">
+                                            <v-alert type="success" v-if="status == 'created'" class="mt-5 mx-auto" width="300">
+                                            Account has been create !
+                                            </v-alert>
+                                        </div>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                color="blue darken-1"
+                                text
+                                @click="dialog = false"
                             >
-                            <v-text-field
-                            v-model="username_reg"
-                            outlined
-                            color="black"
-                            background-color="#F5F5F5"
-                            label="Username"
-                            required
-                            />
-
-                            <v-text-field
-                            v-model="name_reg"
-                            outlined
-                            color="black"
-                            background-color="#F5F5F5"
-                            label="Name"
-                            required
-                            />
-
-                            <v-text-field
-                            v-model="lastname_reg"
-                            outlined
-                            color="black"
-                            background-color="#F5F5F5"
-                            label="LastName"
-                            required
-                            />
-
-                            <v-text-field
-                            v-model="email_reg"
-                            outlined
-                            color="black"
-                            :rules="EmailRulesValidation"
-                            background-color="#F5F5F5"
-                            label="Email"
-                            required
-                            />
-
-                            <v-text-field
-                            v-model="phone_reg"
-                            outlined
-                            color="black"
-                            background-color="#F5F5F5"
-                            label="Phone Number"
-                            required
-                            />
-
-                            <v-text-field
-                            v-model="adress_reg"
-                            outlined
-                            color="black"
-                            background-color="#F5F5F5"
-                            label="Adress"
-                            required
-                            />
-
-                            <v-text-field
-                            v-model="postal_reg"
-                            outlined
-                            color="black"
-                            background-color="#F5F5F5"
-                            label="PostalCode"
-                            required
-                            />
-
-                            <v-text-field
-                            v-model="password_reg"
-                            outlined
-                            color="black"
-                            background-color="#F5F5F5"
-                            label="Password"
-                            required
-                            />
-
-                            <div class="text-center">
-                                <v-alert type="success" v-if="status == 'created'" class="mt-5 mx-auto" width="300">
-                                Account has been create !
-                                </v-alert>
-                            </div>
-                        </v-col>
-                </v-row>
-            </v-container>
-            </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                    <v-btn
-                        color="blue darken-1"
-                        text
-                        @click="dialog = false"
-                    >
-                        Close
-                    </v-btn>
-                    <!-- <v-btn
-                        color="blue darken-1"
-                        text
-                        @click="updateData()" 
-                    >
-                        Save
-                    </v-btn> -->
-                    </v-card-actions>
-                </v-card>
+                                Close
+                            </v-btn>
+                            <!-- <v-btn
+                                color="blue darken-1"
+                                text
+                                @click="updateData()" 
+                            >
+                                Save
+                            </v-btn> -->
+                        </v-card-actions>
+                    </v-card>
                 </v-dialog>
             </v-col>
 
@@ -164,6 +168,7 @@
                     <img :src="fitcoin" />
                     <p class="text_fitcoins">{{}} Fitcoins</p>
                 </div>
+
                 <div class="div_action_btn">
                     <router-link to="/home">
                         <v-btn block class="btn_lowercase">Acheter des fitcoin</v-btn>
@@ -175,7 +180,6 @@
                 </div>
             </div>
         </v-col>
-
     </v-row>
 </template>
 
@@ -186,53 +190,58 @@
 </style>
 
 <script>
-import router from "../router";
-import store from "../store"
-import { mapState } from 'vuex'
+    import router from "../router";
+    import store from "../store"
+    import { mapState } from 'vuex'
 
-export default ({
-    data: () => ({
-        img: require("@/assets/img/halt.jpeg"),
-        fitcoin: require("@/assets/img/fitcoin.png"),
-        // dialogm1: '',
-        // dialog: false,
-    }),
+    export default ({
+        data: () => ({
+            img: require("@/assets/img/halt.jpeg"),
+            fitcoin: require("@/assets/img/fitcoin.png"),
+            // dialogm1: '',
+            // dialog: false,
+        }),
 
-    //* When the vue is generate     
-    mounted: function() {
-        //* If not connect
-        if (this.$store.state.user.id == -1) {
-            router.push('/');
-            return
-        }
+        //* When the vue is generate     
+        mounted: function() {
+            //* If not connect
+            if (this.$store.state.user.id == -1) {
+                router.push('/');
+                return
+            }
 
-        //* Get user info
-        this.$store.dispatch('getUserInfos').then((rs) => {
-            console.log(rs)
-        }).catch((error) => {
-            console.log(error)
-        })
+            //* Get user info
+            this.$store.dispatch('getUserInfos').then((rs) => {
+                console.log(rs)
+            }).catch((error) => {
+                console.log(error)
+            })
 
-        // this.$store.dispatch('updateData').then((rs) => {
-        //     console.log(rs)
-        // }).catch((error) => {
-        //     console.log(error)
-        // })
-    },
-
-    computed:{
-      ...mapState({
-          user: 'user',
-      })
-    },
-    methods: {
-        logout: () => {
-            store.commit('logout');
-            router.push('/');
+            //* Update user info
+            /*
+                this.$store.dispatch('updateData').then((rs) => {
+                    console.log(rs)
+                }).catch((error) => {
+                    console.log(error)
+                })
+            */
         },
-        // updateData: () => {
-        //     store.commit('updateData');
-        // }
-    }
-})
+
+        computed:{
+            ...mapState({
+                user: 'user',
+            })
+        },
+        methods: {
+            logout: () => {
+                store.commit('logout');
+                router.push('/');
+            },
+            /*
+                updateData: () => {
+                    store.commit('updateData');
+                } 
+            */
+        }
+    })
 </script>

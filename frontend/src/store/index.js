@@ -120,15 +120,12 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         commit;
         
-        console.log("erreur avant axios")
-        console.log(userInfos)
-
         instance.post('/create', userInfos).then(
           (response) => {
             commit('logUser', response.data)
             commit('setStatus', 'created');
             resolve(response);
-            // router.push('profile');
+            router.push('profile');
             return
           }
         ).catch(
