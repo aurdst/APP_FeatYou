@@ -39,6 +39,7 @@
 
 <script>
 import router from "../router";
+import { mapState } from 'vuex'
 
   export default ({
     data: () => ({
@@ -71,24 +72,24 @@ import router from "../router";
     }),
 
     mounted: function() {
-    //* If not connect
-    if (this.$store.state.user.id == -1) {
-        router.push('/');
-        return
-    }
-
-    //* Get user info
-    this.$store.dispatch('getUserInfos').then((rs) => {
-        console.log(rs)
-    }).catch((error) => {
-        console.log(error)
-    }),
-
-    this.$store.dispatch('updateData').then((rs) => {
-        console.log(rs)
-    }).catch((error) => {
-        console.log(error)
-    })
-  },
+      //* If not connect
+      if (this.$store.state.user.id == -1) {
+          router.push('/');
+          return
+      }
+      console.log("intomounted")
+      //* Get user info
+      this.$store.dispatch('getAllUserInfos').then((rs) => {
+          console.log("intodispatch")
+          console.log(rs)
+      }).catch((error) => {
+          console.log(error)
+      })
+    },
+    computed:{
+      ...mapState({
+          user: 'alluser',
+      })
+    },
 })
 </script>

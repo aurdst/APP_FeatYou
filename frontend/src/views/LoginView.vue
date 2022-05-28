@@ -18,7 +18,7 @@
               outlined
               color="black"
               background-color="#F5F5F5"
-              label="Identifiant"
+              label="Identifiant (Pseudo)"
               required
             />
 

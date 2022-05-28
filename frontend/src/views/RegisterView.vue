@@ -82,6 +82,7 @@
               v-model="password_reg"
               outlined
               color="black"
+              type="password"
               background-color="#F5F5F5"
               label="Password"
               required

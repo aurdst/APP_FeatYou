@@ -133,10 +133,6 @@
                                 <v-alert type="success" v-if="status == 'created'" class="mt-5 mx-auto" width="300">
                                 Account has been create !
                                 </v-alert>
-
-                                <v-alert type="error" v-if="status == 'failed_create'" class="mt-5 mx-auto" width="300">
-                                Error: Please check all fields !
-                                </v-alert>
                             </div>
                         </v-col>
                 </v-row>
@@ -151,13 +147,13 @@
                     >
                         Close
                     </v-btn>
-                    <v-btn
+                    <!-- <v-btn
                         color="blue darken-1"
                         text
                         @click="updateData()" 
                     >
                         Save
-                    </v-btn>
+                    </v-btn> -->
                     </v-card-actions>
                 </v-card>
                 </v-dialog>
@@ -198,8 +194,8 @@ export default ({
     data: () => ({
         img: require("@/assets/img/halt.jpeg"),
         fitcoin: require("@/assets/img/fitcoin.png"),
-        dialogm1: '',
-        dialog: false,
+        // dialogm1: '',
+        // dialog: false,
     }),
 
     //* When the vue is generate     
@@ -215,13 +211,13 @@ export default ({
             console.log(rs)
         }).catch((error) => {
             console.log(error)
-        }),
-
-        this.$store.dispatch('updateData').then((rs) => {
-            console.log(rs)
-        }).catch((error) => {
-            console.log(error)
         })
+
+        // this.$store.dispatch('updateData').then((rs) => {
+        //     console.log(rs)
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
     },
 
     computed:{
@@ -234,9 +230,9 @@ export default ({
             store.commit('logout');
             router.push('/');
         },
-        updateData: () => {
-            store.commit('updateData');
-        }
+        // updateData: () => {
+        //     store.commit('updateData');
+        // }
     }
 })
 </script>

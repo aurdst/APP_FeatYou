@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import List
 from pydantic import BaseModel
 from pydantic.schema import Optional
 
@@ -18,8 +17,6 @@ class UserSchema(BaseModel):
     dateRegister: datetime
     adress: str
     pict: Optional[str]
-    # lieux: Optional[List[str]]
-    # sports: Optional[List[str]]
 
     class Config:
         orm_mode = True
@@ -51,9 +48,7 @@ class UserCreateSchema(BaseModel):
     postalCode: int
     dateRegister: datetime = datetime.utcnow()
     hashed_password: str
-    pict: str
-    # lieux: Optional[List[str]]
-    # sports: Optional[List[str]]
+    pict: Optional[str]
 
     class Config:
         orm_mode = True

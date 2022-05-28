@@ -21,7 +21,7 @@ router: APIRouter = APIRouter()
     status_code=status.HTTP_201_CREATED,
     summary="Create new user"
 )
-def create_user(user: schemas.UserCreateSchema, file: UploadFile, db: Session = Depends(get_db)):
+def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
     datas = models.UserModel(
         firstName       = user.firstName,
         lastName        = user.lastName,
@@ -35,9 +35,7 @@ def create_user(user: schemas.UserCreateSchema, file: UploadFile, db: Session = 
         banqCardNumb    = 0000000000000000,
         dateRegister    = user.dateRegister,
         adress          = user.adress,
-        pict = file,
-        lieux = user.lieux,
-        sport = user.sport
+        pict = "null"
     )
 
     query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
@@ -87,18 +85,18 @@ def update_user(user_id: str, update_user: schemas.UpdateUserSchema, db: Session
     item_to_update = db.query(models.UserModel).filter(models.UserModel.id == user_id).first()
     if not item_to_update:
         raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
-    else:
-        item_to_update.firstName       = update_user.firstName,
-        item_to_update.lastName        = update_user.lastName,
-        item_to_update.username        = update_user.username,
-        item_to_update.phone           = update_user.phone,
-        item_to_update.email            = update_user.email,
-        item_to_update.hashed_password = pwd_context.hash(update_user.hashed_password),
-        item_to_update.postalCode      = update_user.postalCode,
-        item_to_update.banqCardNumb    = update_user.banqCardNumb,
-        item_to_update.adress          = update_user.adress,
 
-        db.commit()
+    item_to_update.firstName       = update_user.firstName,
+    item_to_update.lastName        = update_user.lastName,
+    item_to_update.username        = update_user.username,
+    item_to_update.phone           = update_user.phone,
+    item_to_update.email            = update_user.email,
+    item_to_update.hashed_password = pwd_context.hash(update_user.hashed_password),
+    item_to_update.postalCode      = update_user.postalCode,
+    item_to_update.banqCardNumb    = update_user.banqCardNumb,
+    item_to_update.adress          = update_user.adress,
+
+    db.commit()
 
     return '202'
 

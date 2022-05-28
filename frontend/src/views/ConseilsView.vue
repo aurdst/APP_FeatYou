@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-row no-gutters>
         <v-col cols="12">
             <h2 class="text-center">NOS CONSEILS</h2>
         </v-col>
@@ -20,7 +20,7 @@
                 </div>
             </router-link>
         </v-col>
-    </div>
+    </v-row>
 </template>
 <script>
 

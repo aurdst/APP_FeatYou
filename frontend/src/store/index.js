@@ -21,14 +21,6 @@ const auth = axios.create({
   }
 })
 
-// const instCategorie = axios.create({
-//   baseURL: 'http://localhost:8000/api/v1/categorie/',
-//   headers: { 
-//     'Access-Control-Allow-Origin': '*',
-//     'Content-Type': 'application/json'
-//   }
-// })
-
 Vue.use(Vuex)
 
 let user = localStorage.getItem('user');
@@ -51,10 +43,37 @@ if(!user) {
   }
 }
 
+let alluser = localStorage.getItem('alluser');
+if(!alluser) {
+  alluser = {
+    id          : -1,
+    access_token: '',
+    token_type  : '',
+  } 
+} else {
+  try {
+    alluser = JSON.parse(alluser);
+  } catch (error) {
+    alluser = {
+      firstName: "",
+      lastName: "",
+      isadmin: false,
+      phone: "",
+      adress: "",
+      email: "",
+      postalCode: 59999,
+      banqCardNumb: 0,
+      dateRegister: "2022-05-24T09:31:50.950885",
+      pict: null
+    } 
+  }
+}
+
 export default new Vuex.Store({
   state : {
       status: null,
       user: user,
+      alluser : alluser
   },
 
   getters  : {
@@ -80,14 +99,6 @@ export default new Vuex.Store({
       }
       localStorage.removeItem('user')
     },
-    updateData: (state, user) => {
-      instance.defaults.headers.common['Authorization'] = user.access_token;
-      state.user = user
-      localStorage.setItem('user', JSON.stringify(user));
-    }
-    // categorie: (state, categorie) => {
-    //   state.categorie = categorie
-    // }
   },
 
   actions  : {
@@ -109,12 +120,15 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         commit;
         
+        console.log("erreur avant axios")
+        console.log(userInfos)
+
         instance.post('/create', userInfos).then(
           (response) => {
             commit('logUser', response.data)
             commit('setStatus', 'created');
             resolve(response);
-            router.push('profile');
+            // router.push('profile');
             return
           }
         ).catch(
@@ -130,11 +144,11 @@ export default new Vuex.Store({
       commit('user', response.data);
       return response;
     },
-    updateData: async function ({commit}) {
-      const response = await instance.get(`/update/${JSON.parse(localStorage.user).user.id}`)
-      commit('user', response.data);
+    getAllUserInfos: async function ({commit}) {
+      const response = await instance.get('/getall')
+      commit('alluser', response.data);
       return response;
-    }
+    },
   },
   modules: {}
 })
