@@ -1,6 +1,7 @@
 from datetime import datetime
 from pydantic import BaseModel
 from pydantic.schema import Optional
+from typing import List
 
 class UserSchema(BaseModel):
     id: int
@@ -21,6 +22,15 @@ class UserSchema(BaseModel):
     class Config:
         orm_mode = True
 
+
+class Sport(BaseModel):
+    sport: Optional[str]
+
+
+class Lieu(BaseModel):
+    sport: Optional[str]
+
+
 class UpdateUserSchema(BaseModel):
     firstName: str
     lastName: str
@@ -32,6 +42,8 @@ class UpdateUserSchema(BaseModel):
     banqCardNumb: int
     adress: str
     pict: Optional[str]
+    sport: List[Sport] = []
+    lieux: List[Lieu] = []
 
     class Config:
         orm_mode = True
@@ -49,6 +61,8 @@ class UserCreateSchema(BaseModel):
     dateRegister: datetime = datetime.utcnow()
     hashed_password: str
     pict: Optional[str]
+    sport: Optional[str]
+    lieux: Optional[str]
 
     class Config:
         orm_mode = True

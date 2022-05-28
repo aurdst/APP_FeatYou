@@ -14,6 +14,19 @@
             class="form_login mx-auto"
           >
             <v-text class="text-center">Données Personnelles</v-text>
+
+            <v-checkbox
+              v-model="checkbox"
+              label="Coaching exterieur"
+              required
+            ></v-checkbox>
+
+            <v-checkbox
+              v-model="checkbox_interieur"
+              label="Coaching interieur"
+              required
+            ></v-checkbox>
+            
             <v-text-field
               v-model="username_reg"
               outlined
@@ -87,23 +100,26 @@
               required
             />
 
-            <v-text-field
-              v-model="sport_reg"
-              outlined
-              color="black"
-              background-color="#F5F5F5"
-              label="Insérez un ou plusieurs sport"
+            <v-select
+              v-model="selectSport"
+              :items="sports"
+              :error-messages="selectErrors"
+              label="Sport"
               required
-            />
+              multiple
+              @change="$v.select.$touch()"
+              @blur="$v.select.$touch()"
+            ></v-select>
 
-            <v-text-field
-              v-model="lieu_reg"
-              outlined
-              color="black"
-              background-color="#F5F5F5"
-              label="Insérez un ou plusieurs lieux"
+            <v-select
+              v-model="selectLieux"
+              :items="lieux"
+              label="Lieux"
               required
-            />
+              multiple
+              @change="$v.select.$touch()"
+              @blur="$v.select.$touch()"
+            ></v-select>
 
             <div class="text-center">
               
@@ -144,8 +160,22 @@ import { mapState } from 'vuex'
       postal_reg  : '',
       phone_reg   : '',
       password_reg: '',
-      sport_reg: '',
-      lieu_reg: '',
+      select_sport: '',
+      selectLieux: '',
+      sports: [
+        'Musculation',
+        'Yoga',
+        'Running',
+        'Zumba',
+      ],
+      lieux: [
+        'Lille',
+        'Lomme',
+        'Running',
+        'Zumba',
+      ],
+      checkbox: false,
+      checkbox_interieur: false,
       EmailRulesValidation: [
         value => !!value || 'Email is required.',
         value => value.indexOf('@') !== 0 || 'Email should have a username.',
@@ -177,6 +207,8 @@ import { mapState } from 'vuex'
           hashed_password: this.password_reg,
           iscoach        : true,
           isadmin        : false,
+          sport          : this.select_sport,
+          lieu           : this.selectLieux
         }).then((response) => {
           // sendLogin();
           // TODO connect when account has been created

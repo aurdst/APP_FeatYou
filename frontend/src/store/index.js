@@ -119,7 +119,6 @@ export default new Vuex.Store({
     createAccount: ({commit}, userInfos) => {
       return new Promise((resolve, reject) => {
         commit;
-        
         instance.post('/create', userInfos).then(
           (response) => {
             commit('logUser', response.data)

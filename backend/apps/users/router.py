@@ -27,7 +27,7 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
         lastName        = user.lastName,
         username        = user.username,
         isadmin         = False,
-        iscoach         = False,
+        iscoach         = user.iscoach,
         phone           = user.phone,
         email            = user.mail,
         hashed_password = pwd_context.hash(user.hashed_password),
@@ -35,7 +35,9 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
         banqCardNumb    = 0000000000000000,
         dateRegister    = user.dateRegister,
         adress          = user.adress,
-        pict = "null"
+        sport           = user.sport,
+        lieux           = user.lieux,
+        pict            = ''
     )
 
     query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
