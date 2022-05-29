@@ -3,7 +3,8 @@ from sqlalchemy.orm import Session
 from apps.auth.tools import get_current_user
 from database.database import get_db
 from typing import List
-from apps.auth.tools import pwd_context
+from apps.auth.tools import pwd_context, authenticate_user
+from fastapi.security import OAuth2PasswordRequestForm
 from passlib.context import CryptContext
 from fastapi.responses import Response
 from apps.auth.schemas import Log
@@ -14,7 +15,7 @@ from . import schemas
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 router: APIRouter = APIRouter()
 
-#Route for create a user
+#* Route for create a user
 @router.post(
     path="/create",
     # response_model=schemas.UserSchema,
@@ -35,9 +36,13 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
         banqCardNumb    = 0000000000000000,
         dateRegister    = user.dateRegister,
         adress          = user.adress,
+<<<<<<< HEAD
         sport           = user.sport,
         lieux           = user.lieux,
         pict            = ''
+=======
+        pict            = "null"
+>>>>>>> 73d1e3d (putuser & login error)
     )
 
     query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
@@ -50,7 +55,7 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
 
     return datas
 
-#Create a get all user
+#* Create a get all user
 @router.get(
     path="/get_all",
     response_model=List[schemas.UserViewSchema],
@@ -60,7 +65,7 @@ def get_all_user(db: Session = Depends(get_db), user: Log = Depends(get_current_
     query = db.query(models.UserModel).all()
     return query
 
-# Create a get routes for get one user in the db.
+#* Create a get routes for get one user in the db.
 @router.get(
     "/infos/{user_id}", 
     response_model=schemas.UserViewSchema,
@@ -73,34 +78,47 @@ def get_user(user_id: str, db: Session = Depends(get_db)):
 
     return user
 
-# Route for update one user
+#* Route for update one user
 @router.put(
     path="/update/{user_id}",
-    response_model=schemas.UpdateUserSchema,
     status_code=status.HTTP_202_ACCEPTED,
+    response_model=schemas.UserSchema,
     summary="Update user by id"
 )
-def update_user(user_id: str, update_user: schemas.UpdateUserSchema, db: Session = Depends(get_db), user: Log = Depends(get_current_user)):
-
-    item_to_update = db.query(models.UserModel).filter(models.UserModel.id == user_id).first()
-    if not item_to_update:
+def update_user(user_id: str, update_user: schemas.UpdateUserSchema, db: Session = Depends(get_db)):
+    to_put = db.query(models.UserModel).filter(models.UserModel.id == user_id).first()
+    if not to_put:
         raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
 
-    item_to_update.firstName       = update_user.firstName,
-    item_to_update.lastName        = update_user.lastName,
-    item_to_update.username        = update_user.username,
-    item_to_update.phone           = update_user.phone,
-    item_to_update.email            = update_user.email,
-    item_to_update.hashed_password = pwd_context.hash(update_user.hashed_password),
-    item_to_update.postalCode      = update_user.postalCode,
-    item_to_update.banqCardNumb    = update_user.banqCardNumb,
-    item_to_update.adress          = update_user.adress,
+    if update_user.new_password:
+        if update_user.old_password:
+            user = authenticate_user(to_put.username, update_user.old_password, db)
+            if not user:
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Incorrect username or password",
+                    headers={"WWW-Authenticate": "Bearer"},
+                )
 
+            user.hashed_password = pwd_context.hash(update_user.new_password),
+        else :
+            raise HTTPException(status_code=401, detail="Please enter your old password")
+    else :
+        user = to_put
+    
+    user.firstName   = update_user.firstName,
+    user.lastName    = update_user.lastName,
+    user.username    = update_user.username,
+    user.phone       = update_user.phone,
+    user.email       = update_user.email,
+    user.adress      = update_user.adress,
+    user.postalCode  = update_user.postalCode,
+    
     db.commit()
 
-    return '202'
+    return user
 
-#Route for deleted user
+#* Route for deleted user
 @router.delete(
     path="/{user_id}",
     status_code=status.HTTP_204_NO_CONTENT,

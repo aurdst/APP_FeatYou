@@ -37,10 +37,10 @@ class UpdateUserSchema(BaseModel):
     username: str
     phone: str
     email: str
-    hashed_password: str
-    postalCode: int
-    banqCardNumb: int
     adress: str
+    postalCode: int
+    new_password: Optional[str]
+    old_password: Optional[str]
     pict: Optional[str]
     sport: List[Sport] = []
     lieux: List[Lieu] = []
@@ -68,6 +68,7 @@ class UserCreateSchema(BaseModel):
         orm_mode = True
 
 class UserViewSchema(BaseModel):
+    username: str
     firstName: str
     lastName: str
     isadmin: Optional[bool]

@@ -6,7 +6,7 @@
                 <v-icon @click="logout()" class="btn_profile mt-0" color="red">mdi-logout-variant</v-icon>
             </div>
         </v-col>
-        
+
         <v-col cols="12" class="mt-5">
             <v-img class="rounded-circle text-center mx-auto" :src="img" width="150" height="150"></v-img>
 
@@ -38,7 +38,8 @@
                     v-model="dialog"
                     persistent
                     max-width="600px"
-                    >
+                >
+
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn 
                             class="btn_profile btn_log"
@@ -46,6 +47,7 @@
                             v-on="on"
                         >Modifier</v-btn>
                     </template>
+
                     <v-card>
                         <v-card-title>
                             <span class="text-h5">User Profile</span>
@@ -60,7 +62,7 @@
                                         md="4"
                                     >
                                         <v-text-field
-                                            v-model="current_username"
+                                            v-model="current_data.username"
                                             outlined
                                             color="black"
                                             background-color="#F5F5F5"
@@ -69,7 +71,7 @@
                                         />
 
                                         <v-text-field
-                                            v-model="current_name"
+                                            v-model="current_data.firstName"
                                             outlined
                                             color="black"
                                             background-color="#F5F5F5"
@@ -78,7 +80,7 @@
                                         />
 
                                         <v-text-field
-                                            v-model="current_lastname"
+                                            v-model="current_data.lastName"
                                             outlined
                                             color="black"
                                             background-color="#F5F5F5"
@@ -87,7 +89,7 @@
                                         />
 
                                         <v-text-field
-                                            v-model="current_email"
+                                            v-model="current_data.email"
                                             outlined
                                             color="black"
                                             :rules="EmailRulesValidation"
@@ -97,8 +99,9 @@
                                         />
 
                                         <v-text-field
-                                            v-model="current_phone"
+                                            v-model="current_data.phone"
                                             outlined
+                                            :rules="phoneNumberValidation"
                                             color="black"
                                             background-color="#F5F5F5"
                                             label="Phone Number"
@@ -106,7 +109,7 @@
                                         />
 
                                         <v-text-field
-                                            v-model="current_adress"
+                                            v-model="current_data.adress"
                                             outlined
                                             color="black"
                                             background-color="#F5F5F5"
@@ -115,28 +118,42 @@
                                         />
 
                                         <v-text-field
-                                            v-model="current_postal"
+                                            v-model="current_data.postalCode"
                                             outlined
+                                            :rules="zipCodeValidation"
                                             color="black"
                                             background-color="#F5F5F5"
                                             label="PostalCode"
                                             required
                                         />
 
+                                        <v-subheader class="sub-title-dialog"> 
+                                            Change your password
+                                        </v-subheader>
+
+                                        <v-divider></v-divider>
+
                                         <v-text-field
-                                            v-model="current_password"
                                             outlined
+                                            v-model="old_password"
                                             color="black"
                                             background-color="#F5F5F5"
-                                            label="Password"
+                                            label="Old password"
                                             required
                                         />
 
-                                        <div class="text-center">
-                                            <v-alert type="success" v-if="status == 'created'" class="mt-5 mx-auto" width="300">
-                                            Account has been create !
-                                            </v-alert>
-                                        </div>
+                                        <v-text-field
+                                            outlined
+                                            v-model="new_password"
+                                            color="black"
+                                            background-color="#F5F5F5"
+                                            label="New password"
+                                            required
+                                        />
+
+                                        <v-alert dismissible :type=alert.type  elevation="6" v-if="alert.show" class="mt-5 mx-auto" width="300">
+                                            {{alert.msg}}
+                                        </v-alert>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -144,6 +161,7 @@
 
                         <v-card-actions>
                             <v-spacer></v-spacer>
+
                             <v-btn
                                 color="blue darken-1"
                                 text
@@ -151,13 +169,14 @@
                             >
                                 Close
                             </v-btn>
-                            <!-- <v-btn
+
+                            <v-btn
                                 color="blue darken-1"
                                 text
                                 @click="updateData()" 
                             >
                                 Save
-                            </v-btn> -->
+                            </v-btn> 
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -184,8 +203,12 @@
 </template>
 
 <style scoped>
-    .remove_margin{
+    .remove_margin {
         margin-bottom: 0px;
+    }
+
+    .v-divider {
+        margin : 15px 0px 15px 0px;
     }
 </style>
 
@@ -195,15 +218,43 @@
     import { mapState } from 'vuex'
 
     export default ({
-        data: () => ({
-            img: require("@/assets/img/halt.jpeg"),
-            fitcoin: require("@/assets/img/fitcoin.png"),
-            // dialogm1: '',
-            // dialog: false,
+        data : () => ({
+            new_password         : '',
+            old_password         : '',
+            alert                : {
+                show : false,
+                type : '',
+                msg  : ''
+            },
+            dialog               : false,
+            img                  : require("@/assets/img/halt.jpeg"),
+            fitcoin              : require("@/assets/img/fitcoin.png"),
+            current_data         : {
+                firstName    : '',
+                lastName     : '',
+                username     : '',
+                phone        : '',
+                email        : '',
+                adress       : '',
+                postalCode   : '',
+            },
+            EmailRulesValidation : [
+                value => !!value || 'Email is required.',
+                value => value.indexOf('@') !== 0 || 'Email should have a username.',
+                value => value.includes('@') || 'Email should have an @.',
+                value => value.indexOf('.') - value.indexOf('@') > 1 || 'Email should contain a valid domain',
+                value => value.indexOf('.') <= value.length - 3 || 'Email should contain a valid domain extention.',
+            ],
+            zipCodeValidation : [
+                value => /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/.test(value) || 'Please enter a valid zipcode (eg : 59117)'
+            ],
+            phoneNumberValidation : [
+                value => /^((\+)33|0)[1-9](\d{2}){4}$/.test(value) || 'Please enter a valid phone number (eg : +336 10 42 37 65)'
+            ]
         }),
 
-        //* When the vue is generate     
-        mounted: function() {
+        //* When the vue is generate
+        mounted : function() {
             //* If not connect
             if (this.$store.state.user.id == -1) {
                 router.push('/');
@@ -211,37 +262,57 @@
             }
 
             //* Get user info
-            this.$store.dispatch('getUserInfos').then((rs) => {
-                console.log(rs)
-            }).catch((error) => {
-                console.log(error)
-            })
-
-            //* Update user info
-            /*
-                this.$store.dispatch('updateData').then((rs) => {
-                    console.log(rs)
-                }).catch((error) => {
+            this.$store.dispatch('getUserInfos').then(
+                (rs) => {
+                    rs.data.dateRegister = new Date(rs.data.dateRegister).toLocaleDateString();
+                    this.current_data    = rs.data
+                }
+            ).catch(
+                (error) => {
                     console.log(error)
-                })
-            */
+                }
+            )
         },
 
-        computed:{
+        computed : {
             ...mapState({
                 user: 'user',
             })
         },
-        methods: {
+
+        methods : {
+            //* Disconnect user
             logout: () => {
                 store.commit('logout');
                 router.push('/');
             },
-            /*
-                updateData: () => {
-                    store.commit('updateData');
-                } 
-            */
+
+            //* Update user
+            updateData() {
+                store.dispatch('putUser', {
+                    firstName    : this.current_data.firstName,
+                    lastName     : this.current_data.lastName,
+                    username     : this.current_data.username,
+                    phone        : this.current_data.phone,
+                    email        : this.current_data.email,
+                    adress       : this.current_data.adress,
+                    postalCode   : this.current_data.postalCode,
+                    old_password : this.old_password,
+                    new_password : this.new_password
+                }).then(
+                    (rs) => {
+                        this.alert.show = true
+                        this.alert.msg  = rs
+                        this.alert.type = 'success'
+                    }
+                ).catch(
+                    (error) => {
+                        this.alert.show = true
+                        this.alert.msg  = error
+                        this.alert.type = 'error'
+                    }
+                );
+            } 
         }
-    })
+    });
 </script>
