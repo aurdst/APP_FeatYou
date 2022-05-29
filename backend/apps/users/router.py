@@ -36,13 +36,9 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
         banqCardNumb    = 0000000000000000,
         dateRegister    = user.dateRegister,
         adress          = user.adress,
-<<<<<<< HEAD
         sport           = user.sport,
         lieux           = user.lieux,
         pict            = ''
-=======
-        pict            = "null"
->>>>>>> 73d1e3d (putuser & login error)
     )
 
     query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 

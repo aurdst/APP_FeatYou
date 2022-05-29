@@ -152,17 +152,18 @@
 
   export default ({
     data: () => ({
-      email_reg   : '',
-      adress_reg  : '',
-      lastname_reg: '',
-      username_reg: '',
-      name_reg    : '',
-      postal_reg  : '',
-      phone_reg   : '',
-      password_reg: '',
-      select_sport: '',
-      selectLieux: '',
-      sports: [
+      email_reg    : '',
+      adress_reg   : '',
+      lastname_reg : '',
+      username_reg : '',
+      name_reg     : '',
+      postal_reg   : '',
+      phone_reg    : '',
+      password_reg : '',
+      select_sport : '',
+      selectLieux  : '',
+      message      : '',
+      sports       : [
         'Musculation',
         'Yoga',
         'Running',
@@ -174,8 +175,8 @@
         'Running',
         'Zumba',
       ],
-      checkbox: false,
-      checkbox_interieur: false,
+      checkbox            : false,
+      checkbox_interieur  : false,
       EmailRulesValidation: [
         value => !!value || 'Email is required.',
         value => value.indexOf('@') !== 0 || 'Email should have a username.',
@@ -183,7 +184,6 @@
         value => value.indexOf('.') - value.indexOf('@') > 1 || 'Email should contain a valid domain',
         value => value.indexOf('.') <= value.length - 3 || 'Email should contain a valid domain extention.',
       ],
-      message: '',
       ValidatePasswordRules: [
         value => !!value || 'Password is required.',
       ],
@@ -210,8 +210,7 @@
           sport          : this.select_sport,
           lieu           : this.selectLieux
         }).then((response) => {
-          // sendLogin();
-          // TODO connect when account has been created
+          //TODO connect when account has been created
           console.log(response);
         }, (error) => {
           console.log(error);
