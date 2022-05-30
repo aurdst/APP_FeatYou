@@ -27,7 +27,7 @@
                 <p class="text-left zone_data">{{ user.phone }}</p>
 
                 <p class="text-left label_profil remove_margin">Inscrit depuis le :</p>
-                <p class="text-left zone_data">{{ user.dateRegister }}</p>
+                <p class="text-left zone_data">{{  new Date(user.dateRegister).toLocaleDateString() }}</p>
 
                 <p class="text-left label_profil remove_margin">Carte enregistrée :</p>
                 <p class="text-left zone_data">{{ user.banqCardNumb }}</p>
@@ -264,7 +264,6 @@
             //* Get user info
             this.$store.dispatch('getUserInfos').then(
                 (rs) => {
-                    rs.data.dateRegister = new Date(rs.data.dateRegister).toLocaleDateString();
                     this.current_data    = rs.data
                 }
             ).catch(
