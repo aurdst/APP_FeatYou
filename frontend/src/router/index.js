@@ -13,6 +13,7 @@ import ConseilsSport from '../views/ConseilsSport.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import registerCoach from '../views/RegisterCoach.vue'
+import CoachView from '../views/CoachView.vue'
 
 Vue.use(VueRouter)
 
@@ -87,6 +88,12 @@ const routes = [
     name: 'registerCoach',
     component: registerCoach
   },
+  {
+    path: '/coach_view',
+    name: 'coach_view',
+    component: CoachView
+  },
+  
 ]
 
 const router = new VueRouter({

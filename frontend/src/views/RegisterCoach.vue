@@ -37,11 +37,11 @@
             />
 
             <v-text-field
-              v-model="name_reg"
+              v-model="firstname_reg"
               outlined
               color="black"
               background-color="#F5F5F5"
-              label="Name"
+              label="FirstName"
               required
             />
 
@@ -67,6 +67,7 @@
             <v-text-field
               v-model="phone_reg"
               outlined
+              :rules="phoneNumberValidation"
               color="black"
               background-color="#F5F5F5"
               label="Phone Number"
@@ -86,6 +87,7 @@
               v-model="postal_reg"
               outlined
               color="black"
+              :rules="zipCodeValidation"
               background-color="#F5F5F5"
               label="PostalCode"
               required
@@ -103,7 +105,6 @@
             <v-select
               v-model="selectSport"
               :items="sports"
-              :error-messages="selectErrors"
               label="Sport"
               required
               multiple
@@ -122,7 +123,6 @@
             ></v-select>
 
             <div class="text-center">
-              
               <v-btn @click="createAccount()" primary mb-5 class="btn_log">
                 Créer un compte
               </v-btn>
@@ -136,10 +136,10 @@
                 </v-alert>
 
               <router-link to="/">
-                 <p class="mt-5">             
+                <p class="mt-5">             
                   Already have an account ? Login here
-                 </p>
-               </router-link>
+                </p>
+              </router-link>
             </div>
           </form>
         </div>
@@ -152,18 +152,18 @@
 
   export default ({
     data: () => ({
-      email_reg    : '',
-      adress_reg   : '',
-      lastname_reg : '',
-      username_reg : '',
-      name_reg     : '',
-      postal_reg   : '',
-      phone_reg    : '',
-      password_reg : '',
-      select_sport : '',
-      selectLieux  : '',
-      message      : '',
-      sports       : [
+      email_reg     : '',
+      adress_reg    : '',
+      lastname_reg  : '',
+      username_reg  : '',
+      firstname_reg : '',
+      postal_reg    : '',
+      phone_reg     : '',
+      password_reg  : '',
+      selectSport   : '',
+      selectLieux   : '',
+      message       : '',
+      sports        : [
         'Musculation',
         'Yoga',
         'Running',
@@ -172,8 +172,8 @@
       lieux: [
         'Lille',
         'Lomme',
-        'Running',
-        'Zumba',
+        'La Madeleine',
+        'Marcq en Baroeul',
       ],
       checkbox            : false,
       checkbox_interieur  : false,
@@ -187,17 +187,22 @@
       ValidatePasswordRules: [
         value => !!value || 'Password is required.',
       ],
+      zipCodeValidation : [
+        value => /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/.test(value) || 'Please enter a valid zipcode (e.g : 59117)'
+      ],
+      phoneNumberValidation : [
+        value => /^((\+)33|0)[1-9](\d{2}){4}$/.test(value) || 'Please enter a valid phone number (e.g : +336 10 42 37 65)'
+      ]
     }),
 
     computed:{
       ...mapState(['status'])
     },
 
-
     methods: {
       createAccount() {
         this.$store.dispatch('createAccount', {
-          firstName      : this.username_reg,
+          firstName      : this.firstname_reg,
           lastName       : this.lastname_reg,
           username       : this.username_reg,
           phone          : this.phone_reg,
@@ -206,15 +211,21 @@
           mail           : this.email_reg,
           hashed_password: this.password_reg,
           iscoach        : true,
-          isadmin        : false,
-          sport          : this.select_sport,
-          lieu           : this.selectLieux
-        }).then((response) => {
-          //TODO connect when account has been created
-          console.log(response);
-        }, (error) => {
-          console.log(error);
-        })
+          sports         : JSON.stringify(this.selectSport),
+          lieux          : JSON.stringify(this.selectLieux),
+          coin           : 0,
+        }).then(
+          () => {
+            //* Login user registered
+            this.$store.dispatch('loginAccount', { 
+              username : this.username_reg,
+              password : this.password_reg,
+            });
+          }, 
+          (error) => {
+            console.log(error);
+          }
+        )
       }
     },
   })

@@ -22,15 +22,6 @@ class UserSchema(BaseModel):
     class Config:
         orm_mode = True
 
-
-class Sport(BaseModel):
-    sport: Optional[str]
-
-
-class Lieu(BaseModel):
-    sport: Optional[str]
-
-
 class UpdateUserSchema(BaseModel):
     firstName: str
     lastName: str
@@ -42,8 +33,8 @@ class UpdateUserSchema(BaseModel):
     new_password: Optional[str]
     old_password: Optional[str]
     pict: Optional[str]
-    sport: List[Sport] = []
-    lieux: List[Lieu] = []
+    sport: Optional[str]
+    lieux: Optional[str]
 
     class Config:
         orm_mode = True
@@ -61,8 +52,9 @@ class UserCreateSchema(BaseModel):
     dateRegister: datetime = datetime.utcnow()
     hashed_password: str
     pict: Optional[str]
-    sport: Optional[str]
+    sports: Optional[str]
     lieux: Optional[str]
+    coin: int
 
     class Config:
         orm_mode = True
@@ -72,6 +64,7 @@ class UserViewSchema(BaseModel):
     firstName: str
     lastName: str
     isadmin: Optional[bool]
+    iscoach: Optional[bool]
     phone: str
     adress: str
     email: str
@@ -79,6 +72,7 @@ class UserViewSchema(BaseModel):
     banqCardNumb: int
     dateRegister: datetime = datetime.utcnow()
     pict: Optional[str]
+    coin: int
 
     class Config:
         orm_mode = True
