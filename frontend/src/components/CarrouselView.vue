@@ -11,12 +11,12 @@
 export default ({
     data: () => ({
         images: [
-              { url: require("@/assets/img/1.jpg"), alt: 'Commencer une activité sportive' },
-              { url: require("@/assets/img/2.jpg"), alt: 'Feat you est officiellement ouvert' },
-              { url: require("@/assets/img/3.jpg"), alt: 'I love you nature' },
-              { url: require("@/assets/img/4.jpg"), alt: 'Quel genre de sportif es tu ?' },
-          ]
-      }),
+            { url: require("@/assets/img/1.jpg"), alt: 'Commencer une activité sportive' },
+            { url: require("@/assets/img/2.jpg"), alt: 'Feat you est officiellement ouvert' },
+            { url: require("@/assets/img/3.jpg"), alt: 'I love you nature' },
+            { url: require("@/assets/img/4.jpg"), alt: 'Quel genre de sportif es tu ?' },
+        ]
+    }),
 })
 </script>
 

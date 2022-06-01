@@ -27,7 +27,7 @@
                 <p class="text-left zone_data">{{ user.phone }}</p>
 
                 <p class="text-left label_profil remove_margin">Inscrit depuis le :</p>
-                <p class="text-left zone_data">{{  new Date(user.dateRegister).toLocaleDateString() }}</p>
+                <p class="text-left zone_data">{{ new Date(user.dateRegister).toLocaleDateString('fr-FR') }}</p>
 
                 <p class="text-left label_profil remove_margin">Carte enregistrée :</p>
                 <p class="text-left zone_data">{{ user.banqCardNumb }}</p>
@@ -185,13 +185,33 @@
             <div class="ma-auto mt-5 mb-15 container_fitcoin">
                 <div class="div_action">
                     <img :src="fitcoin" />
-                    <p class="text_fitcoins">{{}} Fitcoins</p>
+                    <p class="text_fitcoins">{{user.coin}} Fitcoins</p>
                 </div>
 
                 <div class="div_action_btn">
                     <router-link to="/home">
-                        <v-btn block class="btn_lowercase">Acheter des fitcoin</v-btn>
+                        <v-btn @click="buy_featcoin()" block class="btn_lowercase">Acheter des fitcoin</v-btn>
                     </router-link>
+
+                    <!-- Dialog featcoin -->
+                    <v-dialog
+                    v-model="dialog_featcoin"
+                    max-width="600px"
+                    >
+                        <v-card>
+                            <v-card-title>
+                                <span class="text-h5">Choisir le moyen de paiement</span>
+                            </v-card-title>
+
+                            <v-btn
+                                color="blue darken-1"
+                                text
+                                @click="dialog_featcoin = false"
+                            >
+                                Close
+                            </v-btn>
+                        </v-card>
+                    </v-dialog>
 
                     <router-link to="/home">
                         <v-btn block class="mt-5 pt-5 pb-5 btn_lowercase">Réserver une séance</v-btn>
@@ -227,6 +247,7 @@
                 msg  : ''
             },
             dialog               : false,
+            dialog_featcoin : false,
             img                  : require("@/assets/img/halt.jpeg"),
             fitcoin              : require("@/assets/img/fitcoin.png"),
             current_data         : {
@@ -246,10 +267,10 @@
                 value => value.indexOf('.') <= value.length - 3 || 'Email should contain a valid domain extention.',
             ],
             zipCodeValidation : [
-                value => /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/.test(value) || 'Please enter a valid zipcode (eg : 59117)'
+                value => /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/.test(value) || 'Please enter a valid zipcode (e.g : 59117)'
             ],
             phoneNumberValidation : [
-                value => /^((\+)33|0)[1-9](\d{2}){4}$/.test(value) || 'Please enter a valid phone number (eg : +336 10 42 37 65)'
+                value => /^((\+)33|0)[1-9](\d{2}){4}$/.test(value) || 'Please enter a valid phone number (e.g : +336 10 42 37 65)'
             ]
         }),
 
@@ -264,7 +285,7 @@
             //* Get user info
             this.$store.dispatch('getUserInfos').then(
                 (rs) => {
-                    this.current_data    = rs.data
+                    this.current_data = rs.data
                 }
             ).catch(
                 (error) => {
@@ -311,7 +332,11 @@
                         this.alert.type = 'error'
                     }
                 );
-            } 
+            },
+            
+            buy_featcoin() {
+                this.dialog_featcoin = true;
+            }
         }
     });
 </script>

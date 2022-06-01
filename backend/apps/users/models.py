@@ -20,3 +20,4 @@ class UserModel(Base):
     pict = Column(String)
     sport = Column(String)
     lieux = Column(String)
+    coin = Column(Integer)

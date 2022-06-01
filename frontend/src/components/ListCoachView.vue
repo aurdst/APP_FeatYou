@@ -4,71 +4,59 @@
     class="mx-auto"
   >
     <v-spacer></v-spacer>
-    <v-btn class="btn_list ma-3" to="/conseils">Go -></v-btn>
-    <v-list three-line>
-      <template v-for="(item, index) in items">
-        <v-subheader
-          v-if="item.header"
-          :key="item.header"
-          v-text="item.header"
-        ></v-subheader>
 
+    <v-btn class="btn_list ma-3" to="/conseils">
+      Voir tout nos coachs
+      <v-icon
+        dark
+        right
+      >
+        mdi-arrow-right
+      </v-icon>
+    </v-btn>
+
+    <v-list three-line>
+      <template v-for="(item, index) in coachs">
         <v-divider
-          v-else-if="item.divider"
+          v-if="item.divider"
           :key="index"
           :inset="item.inset"
         ></v-divider>
 
         <v-list-item
-          v-else
-          :key="item.title"
+          :key="item"
         >
-          <v-list-item-avatar>
-            <v-img :src="item.avatar"></v-img>
-          </v-list-item-avatar>
+          <!--
+            <v-list-item-avatar>
+              <v-img :src="item.avatar"></v-img>
+            </v-list-item-avatar>
+          -->
 
           <v-list-item-content>
-            <v-list-item-title v-html="item.title"></v-list-item-title>
-            <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+            <v-list-item-title v-html="item.lastName + ' ' + item.name"></v-list-item-title>
+            <v-list-item-subtitle v-html="item.sport"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
+
+        
+          <v-btn @click="go_to_profile(item.id)" :key="item">
+            Voir profile
+          </v-btn>
+       
       </template>
     </v-list>
   </v-card>
 </template>
 
 <script>
-import router from "../router";
-import { mapState } from 'vuex'
+  import router from "../router";
+  import { mapState } from 'vuex'
+  import store from "../store"
+  //import { sortItems } from "vuetify/lib/util/helpers";
 
   export default ({
     data: () => ({
-      items: [
-        { header: 'Coach' },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-          title: 'Bruno M',
-          subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-        },
-        { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-          title: 'Hugo F',
-          subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-        },
-        { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-          title: 'Brithney B',
-          subtitle: '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-        },
-        { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-          title: 'Rebecca F',
-          subtitle: '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-        },
-      ],
+      coachs: [],
     }),
 
     mounted: function() {
@@ -77,19 +65,53 @@ import { mapState } from 'vuex'
           router.push('/');
           return
       }
-      console.log("intomounted")
+
       //* Get user info
-      this.$store.dispatch('getAllUserInfos').then((rs) => {
-          console.log("intodispatch")
-          console.log(rs)
-      }).catch((error) => {
-          console.log(error)
-      })
+      this.$store.dispatch('getAllUserInfos').then(
+        (rs) => {
+          for (let i = 0; i < 10; i++) {
+            this.coachs.push(
+              {
+                // avatar : rs[i].pict',
+                id       : rs[i].id,
+                name     : rs[i].firstName,
+                lastName : rs[i].lastName,
+                sport    : rs[i].sport,
+              }
+            )
+          }
+          
+          return;
+        }
+      ).catch(
+        (error) => {
+          console.log(error);
+        }
+      );
     },
+
     computed:{
       ...mapState({
-          user: 'alluser',
+          coach: 'allcoachs',
       })
     },
+
+    methods : {
+      go_to_profile() {
+        store.dispatch('goToProfile', {
+            user_id    : this.coachs.id,
+        }).then(
+            (rs) => {
+              console.log(rs)
+            }
+        ).catch(
+            (error) => {
+                this.alert.show = true
+                this.alert.msg  = error
+                this.alert.type = 'error'
+            }
+        );
+      }
+    }
 })
 </script>

@@ -36,15 +36,16 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
         banqCardNumb    = 0000000000000000,
         dateRegister    = user.dateRegister,
         adress          = user.adress,
-        sport           = user.sport,
+        sport           = user.sports,
         lieux           = user.lieux,
-        pict            = ''
+        pict            = '',
+        coin            = 0
     )
 
     query = db.query(models.UserModel).filter(models.UserModel.email == datas.email).first() 
     if query:
         raise HTTPException(status_code=409, detail="user already exist")
-    
+
     db.add(datas)
     db.commit()
     db.refresh(datas)
@@ -57,7 +58,7 @@ def create_user(user: schemas.UserCreateSchema, db: Session = Depends(get_db)):
     response_model=List[schemas.UserViewSchema],
     summary="Get all user"
 )
-def get_all_user(db: Session = Depends(get_db), user: Log = Depends(get_current_user)):
+def get_all_user(db: Session = Depends(get_db)):
     query = db.query(models.UserModel).all()
     return query
 
@@ -101,15 +102,15 @@ def update_user(user_id: str, update_user: schemas.UpdateUserSchema, db: Session
             raise HTTPException(status_code=401, detail="Please enter your old password")
     else :
         user = to_put
-    
-    user.firstName   = update_user.firstName,
-    user.lastName    = update_user.lastName,
-    user.username    = update_user.username,
-    user.phone       = update_user.phone,
-    user.email       = update_user.email,
-    user.adress      = update_user.adress,
-    user.postalCode  = update_user.postalCode,
-    
+
+    user.firstName  = update_user.firstName,
+    user.lastName   = update_user.lastName,
+    user.username   = update_user.username,
+    user.phone      = update_user.phone,
+    user.email      = update_user.email,
+    user.adress     = update_user.adress,
+    user.postalCode = update_user.postalCode,
+
     db.commit()
 
     return user

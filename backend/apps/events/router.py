@@ -20,7 +20,8 @@ def create_event(event: schemas.EventSchema, db: Session = Depends(get_db)):
         description = event.description,
         idCategorie = event.idCategorie,
         idUser = event.idUser,
-        price = event.price
+        price = event.price,
+        listOfParticipant = event.listOfParticipant
     )
 
     query = db.query(models.eventModel).filter(event.id == datas.id).first()

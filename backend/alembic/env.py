@@ -36,7 +36,6 @@ import apps.subcategories.models as sub_models
 import apps.events.models as event_models
 import apps.messages.models as mess_models
 import apps.videos.models as video_models
-import apps.token.models as token_models
 import apps.users.models as user_models
 
 
@@ -47,7 +46,6 @@ target_metadata = event_models.Base.metadata
 target_metadata = mess_models.Base.metadata
 target_metadata = video_models.Base.metadata
 target_metadata = sub_models.Base.metadata
-target_metadata = token_models.Base.metadata
 target_metadata = user_models.Base.metadata
 
 

@@ -13,3 +13,4 @@ class EventModel(Base):
     price = Column(Float)
     pict = Column(String)
     date = datetime.utcnow()
+    listOfParticipant = Column(String)

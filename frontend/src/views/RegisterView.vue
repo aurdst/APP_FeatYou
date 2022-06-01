@@ -53,28 +53,30 @@
 
             <v-text-field
               v-model="phone_reg"
-              outlined
+              :rules="phoneNumberValidation"
               color="black"
               background-color="#F5F5F5"
               label="Phone Number"
               required
+              outlined
             />
 
             <v-text-field
               v-model="adress_reg"
-              outlined
               color="black"
               background-color="#F5F5F5"
               label="Adress"
               required
+              outlined
             />
 
             <v-text-field
               v-model="postal_reg"
-              outlined
+              :rules="zipCodeValidation"
               color="black"
               background-color="#F5F5F5"
               label="PostalCode"
+              outlined
               required
             />
 
@@ -115,35 +117,40 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+  import { mapState } from 'vuex'
 
   export default ({
     data: () => ({
-      email_reg   : '',
-      adress_reg  : '',
-      lastname_reg: '',
-      username_reg: '',
-      name_reg    : '',
-      postal_reg  : '',
-      phone_reg   : '',
-      password_reg: '',
-      EmailRulesValidation: [
+      message              : '',
+      email_reg            : '',
+      adress_reg           : '',
+      lastname_reg         : '',
+      username_reg         : '',
+      name_reg             : '',
+      postal_reg           : '',
+      phone_reg            : '',
+      password_reg         : '',
+      EmailRulesValidation : [
         value => !!value || 'Email is required.',
         value => value.indexOf('@') !== 0 || 'Email should have a username.',
         value => value.includes('@') || 'Email should have an @.',
         value => value.indexOf('.') - value.indexOf('@') > 1 || 'Email should contain a valid domain',
         value => value.indexOf('.') <= value.length - 3 || 'Email should contain a valid domain extention.',
       ],
-      message: '',
       ValidatePasswordRules: [
         value => !!value || 'Password is required.',
       ],
+      zipCodeValidation : [
+        value => /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/.test(value) || 'Please enter a valid zipcode (e.g : 59117)'
+      ],
+      phoneNumberValidation : [
+        value => /^((\+)33|0)[1-9](\d{2}){4}$/.test(value) || 'Please enter a valid phone number (e.g : +336 10 42 37 65)'
+      ]
     }),
 
     computed:{
       ...mapState(['status'])
     },
-
 
     methods: {
       createAccount() {
@@ -157,14 +164,21 @@ import { mapState } from 'vuex'
           mail           : this.email_reg,
           hashed_password: this.password_reg,
           iscoach        : false,
-          isadmin        : false,
-        }).then((response) => {
-          // sendLogin();
-          // TODO connect when account has been created
-          console.log(response);
-        }, (error) => {
-          console.log(error);
-        })
+          coin           : 0
+        }).then(
+          () => {
+            //* Login user registered
+            this.$store.dispatch('loginAccount', { 
+              username : this.username_reg,
+              password : this.password_reg,
+            });
+          }, 
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        return;
       }
     },
   })

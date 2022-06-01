@@ -43,37 +43,48 @@ if(!user) {
   }
 }
 
-let alluser = localStorage.getItem('alluser');
-if(!alluser) {
-  alluser = {
-    id          : -1,
-    access_token: '',
-    token_type  : '',
-  } 
+let allcoachs = localStorage.getItem('allcoachs');
+if(!allcoachs) {
+  allcoachs = {
+    firstName    : "",
+    lastName     : "",
+    isadmin      : false,
+    iscoach      : null,
+    phone        : "",
+    adress       : "",
+    email        : "",
+    postalCode   : 0,
+    banqCardNumb : 0,
+    dateRegister : "",
+    pict         : null,
+    coin         : 0
+  }
 } else {
   try {
-    alluser = JSON.parse(alluser);
+    allcoachs = JSON.parse(allcoachs);
   } catch (error) {
-    alluser = {
+    allcoachs = {
       firstName    : "",
       lastName     : "",
       isadmin      : false,
+      iscoach      : null,
       phone        : "",
       adress       : "",
       email        : "",
-      postalCode   : 59999,
+      postalCode   : 0,
       banqCardNumb : 0,
-      dateRegister : "2022-05-24T09: 31: 50.950885",
-      pict         : null
+      dateRegister : "",
+      pict         : null,
+      coin         : 0
     } 
   }
 }
 
 export default new Vuex.Store({
   state : {
-      status  : null,
-      user    : user,
-      alluser : alluser
+      status    : null,
+      user      : user,
+      allcoachs : allcoachs
   },
 
   getters : {
@@ -96,6 +107,10 @@ export default new Vuex.Store({
       state.user = info
     },
 
+    allcoachs: (state, allcoachs) => {
+      state.allcoachs = allcoachs
+    },
+
     logout: (state) => {
       state.user = {
         id: -1
@@ -113,6 +128,7 @@ export default new Vuex.Store({
 
   actions : {
     loginAccount : async function ({commit}, loginInfos) {
+      console.log(loginInfos)
       commit('setStatus', 'loading');
 
       await auth.post('/login', qs.stringify(loginInfos)).then(
@@ -121,12 +137,12 @@ export default new Vuex.Store({
             commit('logUser', response.data)
             commit('setStatus', '');
             router.push('profile');
-    
             return;
           }
         }
       ).catch(
-        () => {
+        (err) => {
+          console.log(err)
           commit('setStatus', 'failed_log');
           return;
         }
@@ -141,7 +157,6 @@ export default new Vuex.Store({
             commit('logUser', response.data)
             commit('setStatus', 'created');
             resolve(response);
-            router.push('profile');
             return
           }
         ).catch(
@@ -160,9 +175,17 @@ export default new Vuex.Store({
     },
 
     getAllUserInfos : async function ({commit}) {
-      const response = await instance.get('/getall')
-      commit('alluser', response.data);
-      return response;
+      const response = await instance.get('/get_all')
+
+      //* check if coach
+      let coachs = [];
+      for (let i = 0; i < response.data.length; i++) {
+        if (response.data[i].iscoach) {
+          coachs.push(response.data[i])
+        }
+      }
+      commit('allcoachs', coachs);
+      return coachs;
     },
 
     putUser : async function({commit}, infos) {
