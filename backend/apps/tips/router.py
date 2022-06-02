@@ -43,10 +43,23 @@ def create_tips(tips:schemas.CreateTipsSchema, db : Session = Depends(get_db)):
     response_model=schemas.TipsSchema,
     summary="Get tips by id"
 )
-def get_user(tips_id: str, db: Session = Depends(get_db)):
+def get_tips(tips_id: str, db: Session = Depends(get_db)):
     tips = db.query(models.TipsModel).filter(models.TipsModel.id == tips_id).first()
     if not tips:
         raise HTTPException(status_code=404, detail="[Not Found] Tips doesn't exist")
+
+    return tips
+
+#* Create a get routes for get one user in the db.
+@router.get(
+    "/allinfos", 
+    response_model=List[schemas.TipsSchema],
+    summary="Get all tips"
+)
+def get_all_tips( db: Session = Depends(get_db)):
+    tips = db.query(models.TipsModel).all()
+    if not tips:
+        raise HTTPException(status_code=404, detail="[Not Found] Not tips in the db")
 
     return tips
 
