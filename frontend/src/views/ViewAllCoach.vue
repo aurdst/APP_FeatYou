@@ -44,9 +44,9 @@
             this.coachs.push(
               {
                 // avatar : rs[i].pict',
-                name   : rs[i].firstName,
+                name     : rs[i].firstName,
                 lastName : rs[i].lastName,
-                sport   : rs[i].sport,
+                sport    : rs[i].sport,
               }
             )
           }
