@@ -19,6 +19,12 @@
     width: 70%;
     margin: auto;
 }
+
+.btn_view_sport{
+    display: block;
+    margin: auto;
+    width: 50%;
+}
 /* ConseilView */
 
 .text_conseil{

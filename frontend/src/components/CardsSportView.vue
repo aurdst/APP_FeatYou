@@ -10,13 +10,5 @@
     >
     </v-img>
 
-    <v-card-subtitle class="pb-0">
-      Categorie
-    </v-card-subtitle>
-
-    <v-card-text class="text--primary">
-      <div>Sport</div>
-    </v-card-text>
-
   </v-card>
 </template>

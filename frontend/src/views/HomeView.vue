@@ -21,6 +21,14 @@
       </v-col>
     </v-row>
 
+    <router-link to="sport_details">
+      <div class="btn_view_sport">
+        <v-btn solo class="mb-5">
+          Voir tout les sports
+        </v-btn>
+      </div>
+    </router-link>
+
     <v-row class="mb-6 mx-5">
       <v-col cols="12">
         <h2 class="text-center bg_home_seance">
@@ -41,7 +49,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="mb-6 mx-5">
+    <v-row class="mb-6">
       <List/>
     </v-row>
   </div>

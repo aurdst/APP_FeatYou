@@ -84,7 +84,8 @@ export default new Vuex.Store({
   state : {
       status    : null,
       user      : user,
-      allcoachs : allcoachs
+      allcoachs : allcoachs,
+      // coach : coach
   },
 
   getters : {
@@ -128,7 +129,6 @@ export default new Vuex.Store({
 
   actions : {
     loginAccount : async function ({commit}, loginInfos) {
-      console.log(loginInfos)
       commit('setStatus', 'loading');
 
       await auth.post('/login', qs.stringify(loginInfos)).then(
@@ -182,7 +182,7 @@ export default new Vuex.Store({
       for (let i = 0; i < response.data.length; i++) {
         if (response.data[i].iscoach) {
           coachs.push(response.data[i])
-        }
+        }   
       }
       commit('allcoachs', coachs);
       return coachs;
@@ -200,6 +200,17 @@ export default new Vuex.Store({
         }
       );
 
+      return rs;
+    },
+
+    go_to_profile : async function({commit}, user_id) {
+      const rs = await instance.get(`/infos/${JSON.parse(user_id)}`).then(
+        (response) => {
+        commit('coach', response.data);
+        router.push('coach_view');
+        return response;
+      }
+      );
       return rs;
     }
   },

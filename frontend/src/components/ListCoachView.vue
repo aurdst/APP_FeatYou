@@ -1,11 +1,10 @@
 <template>
   <v-card
-    max-width="450"
     class="mx-auto"
   >
     <v-spacer></v-spacer>
 
-    <v-btn class="btn_list ma-3" to="/conseils">
+    <v-btn class="btn_list ma-3" text to="/">
       Voir tout nos coachs
       <v-icon
         dark
@@ -36,12 +35,12 @@
             <v-list-item-title v-html="item.lastName + ' ' + item.name"></v-list-item-title>
             <v-list-item-subtitle v-html="item.sport"></v-list-item-subtitle>
           </v-list-item-content>
+          <br>
         </v-list-item>
 
-        
-          <v-btn @click="go_to_profile(item.id)" :key="item">
-            Voir profile
-          </v-btn>
+        <v-btn @click="go_to_profile(item.id)" text color="#daab39" :key="item" >
+          Voir profile
+        </v-btn>
        
       </template>
     </v-list>
@@ -73,14 +72,13 @@
             this.coachs.push(
               {
                 // avatar : rs[i].pict',
-                id       : rs[i].id,
+                // id       : rs[i].id,
                 name     : rs[i].firstName,
                 lastName : rs[i].lastName,
                 sport    : rs[i].sport,
               }
             )
           }
-          
           return;
         }
       ).catch(

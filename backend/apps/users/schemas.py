@@ -35,6 +35,7 @@ class UpdateUserSchema(BaseModel):
     pict: Optional[str]
     sport: Optional[str]
     lieux: Optional[str]
+    coin: Optional[int]
 
     class Config:
         orm_mode = True
@@ -54,7 +55,7 @@ class UserCreateSchema(BaseModel):
     pict: Optional[str]
     sports: Optional[str]
     lieux: Optional[str]
-    coin: int
+    coin: Optional[int]
 
     class Config:
         orm_mode = True
@@ -72,7 +73,9 @@ class UserViewSchema(BaseModel):
     banqCardNumb: int
     dateRegister: datetime = datetime.utcnow()
     pict: Optional[str]
-    coin: int
+    coin: Optional[int]
+    sport: Optional[str]
+    lieux: Optional[str]
 
     class Config:
         orm_mode = True
