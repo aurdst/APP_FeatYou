@@ -8,7 +8,7 @@
         </v-col>
 
         <v-col cols="12" class="mt-5">
-            <v-img class="rounded-circle text-center mx-auto" :src="img" width="150" height="150"></v-img>
+            <v-img class="rounded-circle text-center mx-auto" :src="img" width="80" height="80"></v-img>
 
             <div class="profile_text ma-auto mt-5 pa-5">
                 <p class="text-left label_profil remove_margin">Nom :</p>

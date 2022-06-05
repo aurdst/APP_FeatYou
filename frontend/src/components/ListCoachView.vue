@@ -1,6 +1,8 @@
 <template>
   <v-card
     class="mx-auto"
+    fluid
+    width="90%"
   >
     <v-spacer></v-spacer>
 
@@ -24,23 +26,26 @@
 
         <v-list-item
           :key="item"
+          class="css_item_coach"
         >
-          <!--
-            <v-list-item-avatar>
-              <v-img :src="item.avatar"></v-img>
-            </v-list-item-avatar>
-          -->
+          
+          <v-list-item-avatar>
+            <!-- <v-img :src="item.avatar"></v-img> -->
+          </v-list-item-avatar>
+         
 
           <v-list-item-content>
-            <v-list-item-title v-html="item.lastName + ' ' + item.name"></v-list-item-title>
-            <v-list-item-subtitle v-html="item.sport"></v-list-item-subtitle>
+            <v-list-item-title class="txt_coach_preview" v-html="item.lastName + ' ' + item.name"></v-list-item-title>
+            <v-list-item-subtitle class="txt_coach_preview" v-html="item.sport"></v-list-item-subtitle>
           </v-list-item-content>
+
           <br>
+
+          <v-btn @click="go_to_profile(item.id)" text color="#FFF" small :key="item" >
+            Voir profile
+          </v-btn>
         </v-list-item>
 
-        <v-btn @click="go_to_profile(item.id)" text color="#daab39" :key="item" >
-          Voir profile
-        </v-btn>
        
       </template>
     </v-list>
@@ -71,8 +76,7 @@
           for (let i = 0; i < 10; i++) {
             this.coachs.push(
               {
-                // avatar : rs[i].pict',
-                // id       : rs[i].id,
+                avatar : rs[i].pict,
                 name     : rs[i].firstName,
                 lastName : rs[i].lastName,
                 sport    : rs[i].sport,
