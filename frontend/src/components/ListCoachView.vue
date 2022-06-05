@@ -42,7 +42,7 @@
           <br>
 
           <v-btn @click="go_to_profile(item.id)" text color="#FFF" small :key="item" >
-            Voir profile
+            <v-icon small>mdi-arrow-right</v-icon>
           </v-btn>
         </v-list-item>
 
@@ -76,7 +76,7 @@
           for (let i = 0; i < 10; i++) {
             this.coachs.push(
               {
-                avatar : rs[i].pict,
+                // avatar : rs[i].pict,
                 name     : rs[i].firstName,
                 lastName : rs[i].lastName,
                 sport    : rs[i].sport,

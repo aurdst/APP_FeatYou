@@ -1,15 +1,17 @@
 <template>
     <div>
+      <div class="container_view_coach">
         <h1>{{}}</h1>
         <p>{{}}</p>
-        <br>
-        <h2>Activités principales :</h2>
         <!-- Here mettre les sport -->
         <p>{{}}</p>
-        <br>
-        <h2>Lieux d'intervention :</h2>
         <!-- Here mettre les lieux -->
         <p>{{}}</p>
+      </div>
+      <br>
+      <div class="mx-auto">
+        <p class="p_coach_view">Prochain cours de {{}}  :</p>
+      </div>
     </div>
 </template>
 

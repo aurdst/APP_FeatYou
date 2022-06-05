@@ -4,7 +4,6 @@ import HomeView from '../views/HomeView.vue'
 import ConseilsView from '../views/ConseilsView.vue'
 import ConseilsDetailsView  from '../views/ConseilsDetailsView.vue'
 import SportCategorie from '../views/SportCategorie.vue'
-import SportDetails from '../views/SportDetails.vue'
 import ProfileView from '../views/ProfileView.vue'
 import ConversationView from '../views/ConversationView.vue'
 import InfosView from '../views/InfosView.vue'
@@ -14,6 +13,13 @@ import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import registerCoach from '../views/RegisterCoach.vue'
 import CoachView from '../views/CoachView.vue'
+import MuscuView from '../views/MuscuView.vue'
+import YogaView from '../views/YogaView.vue'
+import RunningView from '../views/RunningView.vue'
+import StepView from '../views/StepView.vue'
+import ZumbaView from '../views/ZumbaView.vue'
+import CrossfitView from '../views/CrossfitView.vue'
+
 
 Vue.use(VueRouter)
 
@@ -44,14 +50,39 @@ const routes = [
     component: ConseilsDetailsView
   },
   {
-    path: '/sports',
-    name: 'sports',
-    component: SportCategorie
+    path: '/musculation',
+    name: 'musculation',
+    component: MuscuView
   },
   {
-    path: '/sport_details',
-    name: 'sportdetails',
-    component: SportDetails
+    path: '/running',
+    name: 'running',
+    component: RunningView
+  },
+  {
+    path: '/crossfit',
+    name: 'crossfit',
+    component: CrossfitView
+  },
+  {
+    path: '/yoga',
+    name: 'yoga',
+    component: YogaView
+  },
+  {
+    path: '/step',
+    name: 'step',
+    component: StepView
+  },
+  {
+    path: '/zumba',
+    name: 'zumba',
+    component: ZumbaView
+  },
+  {
+    path: '/categorie',
+    name: 'categorie',
+    component: SportCategorie
   },
   {
     path: '/profile',

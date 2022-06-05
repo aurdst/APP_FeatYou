@@ -27,39 +27,39 @@
       </v-col>
     </v-row>
 
-    <router-link to="sport">
+    <router-link to="categorie">
       <div class="btn_view_sport">
         <v-btn solo class="mb-5 btn_log ">
-          Voir tout les sports
+          Voir nos cours
         </v-btn>
       </div>
     </router-link>
     
     <CreateEvent/>
-
-    <v-row class="mb-6 mx-5" no-gutters>
-      <v-col cols="12">
-        <h2 class="text-center bg_home_seance">
-          Séances à venir 
-        </h2>
-      </v-col>
-
-      <v-col cols="12">
-        <p class="text-center">
-          {{}} 
-        </p>
-      </v-col>
-
-      <v-col cols="12">
-        <p class="text-center btn_seance">
-          Voir toutes mes séances 
-        </p>
-      </v-col>
-    </v-row>
-
-    <v-row class="mb-6" fluid no-gutters>
-      <List/>
-    </v-row>
+    <div class="container_current_event">
+      <v-row class="mb-6 mx-5" no-gutters>
+        <v-col cols="12">
+          <h2 class="text-center bg_home_seance">
+            Séances à venir 
+          </h2>
+        </v-col>
+  
+        <v-col cols="12">
+          <p class="text-center">
+            {{}} 
+          </p>
+        </v-col>
+  
+        <v-col cols="12">
+          <p class="text-center btn_seance">
+            Voir toutes mes séances 
+          </p>
+        </v-col>
+      </v-row>
+    </div>
+      <v-row class="mb-6" fluid no-gutters>
+        <List/>
+      </v-row>
   </div>
 </template>
 
