@@ -6,10 +6,12 @@
   >
     <v-spacer></v-spacer>
 
-    <v-btn class="btn_list ma-3" text to="/">
-      Voir tout nos coachs
+    <v-btn class="btn_list mt-3" text to="/">
+      Choisissez vôtre coach
       <v-icon
+        color="#DAAB39"
         dark
+        medium
         right
       >
         mdi-arrow-right

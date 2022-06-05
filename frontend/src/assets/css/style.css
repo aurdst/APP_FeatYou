@@ -11,6 +11,24 @@
     font-size: medium;
 }
 
+.p_cards_label{
+    text-align: center;
+    background-color: #5C3C90;
+    margin-bottom: 0!important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+.p_choose{
+    text-align: center;
+    font-weight: 800;
+    margin-top: 10px;
+    font-size: 1.3em;
+    color: #504F4F;
+    text-transform: uppercase;
+}
+
 .container_current_event{
     box-shadow: 3px 3px 15px rgba(160, 160, 160, 0.425);
     width: 90%;

@@ -104,53 +104,57 @@
         <h2 class="text-left ml-5 mt-10">Suivez-nous</h2>
     </v-col>
 
-        <v-col clos="2" class="ml-5">
-            <v-avatar
-                class="mt-3"
-                size="46"
-            >
-                <img
-                :src="icon_tiktok"
-                alt="icon_tiktok"
-                >   
-            </v-avatar>
-        </v-col>
-
-        <v-col clos="4" class="mt-7 mr-3 text_follow">
-            <p class="text_infos">featyou_officiel</p>
-        </v-col>
-
-        <v-col clos="2" class="mx-2">
-            <v-avatar
-                class="ml-5 mt-3"
-                size="46"
-            >
-                <img
-                :src="fb_icon"
-                alt="fb_icon"
-                >   
-            </v-avatar>
-        </v-col>
-
-        <v-col clos="4" class="mr-3 mt-7">
-            <p class="text_infos">featyou_officiel</p>
-        </v-col>
-
-            <v-col clos="2">
-                <v-avatar
-                    class="ml-5 mt-3"
-                    size="46"
-                >
-                    <img
-                    :src="icon_instagram"
-                    alt="icon_instagram"
-                    >   
-                </v-avatar>
-            </v-col>
-
-    <v-col clos="4" class="mt-7">
-        <p class="text_infos">featyou_officiel</p>
+    <v-col clos="2">
+        <v-avatar
+            class="ml-5 mt-3"
+            size="46"
+        >
+            <img
+            :src="icon_tiktok"
+            alt="mail"
+            >   
+        </v-avatar>
     </v-col>
+
+    <v-col clos="4" class="mr-6 mt-2">
+        <p class="text_infos mt-5">featyou_officiel</p>
+    </v-col>
+
+    <v-col clos="2">
+        <v-avatar
+            class="ml-5 mt-3"
+            size="46"
+        >
+            <img
+            :src="fb_icon"
+            alt="mail"
+            >   
+        </v-avatar>
+    </v-col>
+
+    <v-col clos="4" class="mr-6 mt-2">
+        <p class="text_infos mt-5">featyou_officiel</p>
+    </v-col>
+
+    <v-col cols="12">
+    </v-col>
+
+        <v-avatar
+            class="mx-auto mt-3"
+            size="46"
+        >
+            <img
+            :src="icon_instagram"
+            alt="mail"
+            >   
+        </v-avatar>
+
+    <v-col clos="4" class="mr-6 mt-2">
+        <p class="text_infos mt-5">featyou_officiel</p>
+    </v-col>
+
+
+
 
     <v-col cols="10" class="mt-5 mb-5 mx-auto">
         <div class="bg_news bg_fields_mail">

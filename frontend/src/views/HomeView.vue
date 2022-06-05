@@ -4,34 +4,39 @@
       class="mb-6 mx-auto" no-gutters
     >   
       <v-col cols="12">
-        <Carrousel to="/conseils"/>
+        <p class="p_choose">Choissez votre sport :</p>
       </v-col>
+      <br>
       <v-col cols="3"
         class="mx-auto"
       >
-        <router-link to="/sport_details">
-          <Cards/>
+        <router-link to="/musculation">
+          <CardsMuscu/>
         </router-link>
       </v-col>
 
       <v-col cols="3"
         class="mx-auto"
       >
-        <Cards/>
+        <router-link to="/crossfit">
+          <CardsCroosfit/>
+        </router-link>
       </v-col>
 
       <v-col cols="3"
         class="mx-auto"
       >
-        <Cards/>
+        <router-link to="/step">
+          <CardsStep/>
+        </router-link>
       </v-col>
     </v-row>
 
     <router-link to="categorie">
       <div class="btn_view_sport">
-        <v-btn solo class="mb-5 btn_log ">
+        <p solo class="mb-5 btn_seance">
           Voir nos cours
-        </v-btn>
+        </p>
       </div>
     </router-link>
     
@@ -64,16 +69,21 @@
 </template>
 
 <script>
-  import Carrousel from '../components/CarrouselView'
-  import Cards from '../components/CardsSportView.vue'
+  import CardsMuscu from '../components/CardsMuscu.vue'
   import List from '../components/ListCoachView.vue'
   import CreateEvent from '../components/CreateEvent.vue'
+  import CardsCroosfit from '@/components/CardsCroosfit.vue'
+  import CardsStep from '@/components/CardsStep.vue'
 
   export default {
     name: 'HomeView',
 
     components: {
-      Carrousel, Cards, List, CreateEvent
-    },
+    CardsMuscu,
+    List,
+    CreateEvent,
+    CardsCroosfit,
+    CardsStep
+},
   }
 </script>

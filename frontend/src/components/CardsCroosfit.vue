@@ -1,13 +1,14 @@
 <template>
   <v-card
-    class="mx-auto rounded-lg mt-5"
+    class="mx-auto"
     max-width="200"
   >
     <v-img
       class="white--text align-end"
       height="150px"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      src="../assets/img/crossfit.jpg"
     >
+        <p class="p_cards_label">Crossfit</p>
     </v-img>
 
   </v-card>
