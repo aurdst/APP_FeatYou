@@ -19,6 +19,7 @@ import RunningView from '../views/RunningView.vue'
 import StepView from '../views/StepView.vue'
 import ZumbaView from '../views/ZumbaView.vue'
 import CrossfitView from '../views/CrossfitView.vue'
+import HowMuchView from '../views/HowMuchView.vue'
 
 
 Vue.use(VueRouter)
@@ -118,6 +119,11 @@ const routes = [
     path: '/coach_view',
     name: 'coach_view',
     component: CoachView
+  },
+  {
+    path: '/buy_featcoin',
+    name: 'buyfeatcoin',
+    component: HowMuchView
   },
   
 ]

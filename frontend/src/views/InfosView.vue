@@ -138,7 +138,6 @@
 
     <v-col cols="12">
     </v-col>
-
         <v-avatar
             class="mx-auto mt-3"
             size="46"
@@ -152,9 +151,6 @@
     <v-col clos="4" class="mr-6 mt-2">
         <p class="text_infos mt-5">featyou_officiel</p>
     </v-col>
-
-
-
 
     <v-col cols="10" class="mt-5 mb-5 mx-auto">
         <div class="bg_news bg_fields_mail">

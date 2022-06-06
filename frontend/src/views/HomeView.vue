@@ -84,6 +84,6 @@
     CreateEvent,
     CardsCroosfit,
     CardsStep
-},
+    },
   }
 </script>

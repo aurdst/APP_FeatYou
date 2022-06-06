@@ -30,7 +30,8 @@
                 <p class="text-left zone_data">{{ new Date(user.dateRegister).toLocaleDateString('fr-FR') }}</p>
 
                 <p class="text-left label_profil remove_margin">Carte enregistrée :</p>
-                <p class="text-left zone_data">{{ user.banqCardNumb }}</p>
+                <p class="text-left zone_data" v-if="user.banqCardNumb == 0">Aucune</p>
+                <p class="text-left zone_data" v-else>{{ user.banqCardNumb }}</p>
             </div>
 
             <v-col cols="12">
@@ -189,7 +190,7 @@
                 </div>
 
                 <div class="div_action_btn">
-                    <router-link to="/home">
+                    <router-link to="/buy_featcoin">
                         <v-btn @click="buy_featcoin()" block class="btn_lowercase">Acheter des fitcoin</v-btn>
                     </router-link>
 
