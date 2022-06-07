@@ -13,6 +13,14 @@ const instance = axios.create({
   }
 });
 
+const instanceEvent = axios.create({
+  baseURL: 'http://localhost:8000/api/v1/events/',
+  headers: { 
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json'
+  }
+});
+
 const auth = axios.create({
   baseURL: 'http://localhost:8000/api/v1/auth/',
   headers: { 
@@ -43,22 +51,47 @@ if(!user) {
   }
 }
 
-let allcoachs = localStorage.getItem('allcoachs');
-if(!allcoachs) {
-  allcoachs = {
-    firstName    : "",
-    lastName     : "",
-    isadmin      : false,
-    iscoach      : null,
-    phone        : "",
-    adress       : "",
-    email        : "",
-    postalCode   : 0,
-    banqCardNumb : 0,
-    dateRegister : "",
-    pict         : null,
-    coin         : 0
+let event = localStorage.getItem('event');
+if(!event) {
+  event = {
+    id: null,
+    label: '',
+    description: '',
+    idUser: '',
+    date: '',
+    price : 0.0,
+    }
+  }else {
+    try {
+      allcoachs = JSON.parse(allcoachs);
+    } catch (error) {
+      event = {
+        id: null,
+        label: '',
+        description: '',
+        idUser: '',
+        date: '',
+        price : 0.0,
+        } 
+    }
   }
+
+  let allcoachs = localStorage.getItem('allcoachs');
+  if(!allcoachs) {
+    allcoachs = {
+      firstName    : "",
+      lastName     : "",
+      isadmin      : false,
+      iscoach      : null,
+      phone        : "",
+      adress       : "",
+      email        : "",
+      postalCode   : 0,
+      banqCardNumb : 0,
+      dateRegister : "",
+      pict         : null,
+      coin         : 0
+    }
 } else {
   try {
     allcoachs = JSON.parse(allcoachs);
@@ -84,7 +117,8 @@ export default new Vuex.Store({
   state : {
       status    : null,
       user      : user,
-      allcoachs : allcoachs
+      allcoachs : allcoachs,
+      // coach : coach
   },
 
   getters : {
@@ -105,6 +139,11 @@ export default new Vuex.Store({
 
     user: (state, info) => {
       state.user = info
+    },
+
+    event: (state, event)=> {
+      state.event = event
+      localStorage.getItem('event');
     },
 
     allcoachs: (state, allcoachs) => {
@@ -128,7 +167,6 @@ export default new Vuex.Store({
 
   actions : {
     loginAccount : async function ({commit}, loginInfos) {
-      console.log(loginInfos)
       commit('setStatus', 'loading');
 
       await auth.post('/login', qs.stringify(loginInfos)).then(
@@ -172,6 +210,20 @@ export default new Vuex.Store({
       const response = await instance.get(`/infos/${JSON.parse(localStorage.user).user.id}`)
       commit('user', response.data);
       return response;
+    },
+
+    createEvent : async function({commit}, eventInfo) {
+      console.log(eventInfo)
+      const rs = await instanceEvent.post('create_event', eventInfo).then(
+        (response) => {
+          commit('event', response.data);
+          console.log(response.data)
+          this.dialog = false;
+          return response;
+        }
+        );
+      console.log(rs.data)
+      return rs;
     },
 
     getAllUserInfos : async function ({commit}) {

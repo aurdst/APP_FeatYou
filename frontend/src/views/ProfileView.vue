@@ -8,7 +8,7 @@
         </v-col>
 
         <v-col cols="12" class="mt-5">
-            <v-img class="rounded-circle text-center mx-auto" :src="img" width="150" height="150"></v-img>
+            <v-img class="rounded-circle text-center mx-auto" :src="img" width="80" height="80"></v-img>
 
             <div class="profile_text ma-auto mt-5 pa-5">
                 <p class="text-left label_profil remove_margin">Nom :</p>
@@ -30,7 +30,8 @@
                 <p class="text-left zone_data">{{ new Date(user.dateRegister).toLocaleDateString('fr-FR') }}</p>
 
                 <p class="text-left label_profil remove_margin">Carte enregistrée :</p>
-                <p class="text-left zone_data">{{ user.banqCardNumb }}</p>
+                <p class="text-left zone_data" v-if="user.banqCardNumb == 0">Aucune</p>
+                <p class="text-left zone_data" v-else>{{ user.banqCardNumb }}</p>
             </div>
 
             <v-col cols="12">
@@ -189,7 +190,7 @@
                 </div>
 
                 <div class="div_action_btn">
-                    <router-link to="/home">
+                    <router-link to="/buy_featcoin">
                         <v-btn @click="buy_featcoin()" block class="btn_lowercase">Acheter des fitcoin</v-btn>
                     </router-link>
 
