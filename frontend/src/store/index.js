@@ -217,7 +217,7 @@ export default new Vuex.Store({
       const rs = await instanceEvent.post('create_event', eventInfo).then(
         (response) => {
           commit('event', response.data);
-          console.log('ok')
+          console.log(response.data)
           this.dialog = false;
           return response;
         }

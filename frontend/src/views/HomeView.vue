@@ -39,7 +39,6 @@
         </p>
       </div>
     </router-link>
-    
     <CreateEvent/>
     <div class="container_current_event">
       <v-row class="mb-6 mx-5" no-gutters>

@@ -21,6 +21,7 @@ def create_event(event: schemas.CreateEventSchema, db: Session = Depends(get_db)
         date = event.date,
         lieu = event.lieu,
         price = event.price,
+        hours = event.hours
     )
 
     query = db.query(models.EventModel).filter(models.EventModel.label == datas.label).first()

@@ -317,3 +317,8 @@ a:link {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.price{
+    text-align: center;
+    font-weight: 600;
+}

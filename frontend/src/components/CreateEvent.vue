@@ -93,6 +93,18 @@
                                     ></v-date-picker>
                                 </v-row>
                             </template>
+
+                            <template>
+                                <v-row justify="center">
+                                    <v-col>
+                                    <v-time-picker
+                                        v-model="hours"
+                                        color="#5C3C90"
+                                        format="24hr"
+                                    ></v-time-picker>
+                                    </v-col>
+                                </v-row>
+                            </template>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -133,6 +145,7 @@
       featcoin: require('@/assets/img/fitcoin.png'),
       label : '',
       description : '',
+      hours: null,
       lieu: 'Lille',
       idUser : null,
       date: null,
@@ -164,6 +177,7 @@
             description: this.description,
             date: this.date,
             lieu: this.lieu,
+            hours: this.hours,
             price: this.price,
         });
         this.dialog = false;

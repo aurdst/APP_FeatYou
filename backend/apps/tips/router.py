@@ -24,7 +24,7 @@ def create_tips(tips:schemas.CreateTipsSchema, db : Session = Depends(get_db)):
     new_tips_data = models.TipsModel(
         content = tips.content,
         title = tips.title,
-        category = tips.category
+        category = tips.category,
     )
 
     check_in_db = db.query(models.TipsModel).filter(models.TipsModel.title == new_tips_data.title).first()
