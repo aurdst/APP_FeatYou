@@ -322,3 +322,23 @@ a:link {
     text-align: center;
     font-weight: 600;
 }
+
+.radio{
+    margin-top: -30px;
+    margin-bottom: 15px;
+    height: 15px;
+}
+
+.container_radio{
+    margin-top: 0;
+    margin-bottom: 10px;
+    height: 15px;
+}
+
+.container_btn_buy{
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    width: 33%;
+    display: block;
+}
