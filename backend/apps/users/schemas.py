@@ -77,6 +77,21 @@ class UserViewSchema(BaseModel):
     class Config:
         orm_mode = True
 
+class CoachUserSchema(BaseModel):
+    id: int
+    firstName: str
+    lastName: str
+    username: str
+    phone: str
+    email: str
+    adress: str
+    postalCode: int
+    pict: Optional[str]
+    sport: str
+    lieux: str
+
+    class Config:
+        orm_mode = True
 class UserAuthSchema(BaseModel):
     username: str
     email: str

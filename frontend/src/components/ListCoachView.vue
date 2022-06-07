@@ -33,7 +33,7 @@
           -->
 
           <v-list-item-content>
-            <v-list-item-title v-html="item.lastName + ' ' + item.name"></v-list-item-title>
+            <v-list-item-title v-html="item.lastName + ' ' + item.firstName"></v-list-item-title>
             <v-list-item-subtitle v-html="item.sport"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -42,7 +42,6 @@
           <v-btn @click="go_to_profile(item.id)" :key="item">
             Voir profile
           </v-btn>
-       
       </template>
     </v-list>
   </v-card>
@@ -51,7 +50,7 @@
 <script>
   import router from "../router";
   import { mapState } from 'vuex'
-  import store from "../store"
+  // import store from "../store"
   //import { sortItems } from "vuetify/lib/util/helpers";
 
   export default ({
@@ -69,17 +68,8 @@
       //* Get user info
       this.$store.dispatch('getAllUserInfos').then(
         (rs) => {
-          for (let i = 0; i < 10; i++) {
-            this.coachs.push(
-              {
-                // avatar : rs[i].pict',
-                id       : rs[i].id,
-                name     : rs[i].firstName,
-                lastName : rs[i].lastName,
-                sport    : rs[i].sport,
-              }
-            )
-          }
+          console.log(rs)
+          this.coachs = rs;
           
           return;
         }
@@ -97,20 +87,11 @@
     },
 
     methods : {
-      go_to_profile() {
-        store.dispatch('goToProfile', {
-            user_id    : this.coachs.id,
-        }).then(
-            (rs) => {
-              console.log(rs)
-            }
-        ).catch(
-            (error) => {
-                this.alert.show = true
-                this.alert.msg  = error
-                this.alert.type = 'error'
-            }
-        );
+      go_to_profile(id) {
+        router.push({
+          path   : 'coach_view',
+          query  : { id: id }
+        });
       }
     }
 })

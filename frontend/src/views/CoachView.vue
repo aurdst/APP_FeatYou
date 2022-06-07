@@ -1,24 +1,30 @@
 <template>
     <div>
-        <h1>{{}}</h1>
-        <p>{{}}</p>
+        <h1>{{this.coach.firstName + ' ' + this.coach.lastName}}</h1>
+        <p>{{this.coach.email}}</p>
+
         <br>
+
         <h2>Activités principales :</h2>
-        <!-- Here mettre les sport -->
-        <p>{{}}</p>
+        <li :key="index" v-for="(item, index) in this.coach.sport">
+          {{ item }} 
+        </li>
+
         <br>
+
         <h2>Lieux d'intervention :</h2>
-        <!-- Here mettre les lieux -->
-        <p>{{}}</p>
+        <li :key="index" v-for="(item, index) in this.coach.lieux">
+          {{ item }} 
+        </li>
     </div>
 </template>
 
 <script>
   import router from "../router";
-  import { mapState } from 'vuex';
 
   export default ({
     data: () => ({
+      coach : null
     }),
 
     mounted: function() {
@@ -28,28 +34,25 @@
           return
       }
 
-        //* Get user info
-        this.$store.dispatch('getUserInfos').then(
-            (rs) => {
-                this.current_data = rs.data
-            }
+      //* Get router params
+      let query = router.history.current.query.id;
+
+      this.$store.dispatch('getCoachById', query).then(
+        (rs) => {
+          this.coach = rs.data;
+          console.log(this.coach)
+        }
       ).catch(
         (error) => {
           console.log(error);
         }
       );
+
+      return;
     },
 
-    computed:{
-      ...mapState({
-          coach: 'allcoachs',
-      })
-    },
+    computed : {},
 
-    methods : {
-      go_to_profile(user_id) {
-        router.push('/infos', {user_id})
-      }
-    }
+    methods : {}
 })
 </script>

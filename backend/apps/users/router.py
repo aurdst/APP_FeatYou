@@ -62,6 +62,27 @@ def get_all_user(db: Session = Depends(get_db)):
     query = db.query(models.UserModel).all()
     return query
 
+@router.get(
+    path="/get_coachs",
+    response_model=List[schemas.CoachUserSchema],
+    summary="Get all coach"
+)
+def get_all_coach(db: Session = Depends(get_db)):
+    return db.query(models.UserModel).filter(models.UserModel.iscoach == True).all()
+
+@router.get(
+    path="/coach/{coach_id}",
+    response_model=schemas.CoachUserSchema,
+    summary="Get all coach"
+)
+def get_coach(coach_id: str, db: Session = Depends(get_db)):
+    coach = db.query(models.UserModel).filter(models.UserModel.id == coach_id, models.UserModel.iscoach == True).first()
+    
+    if not coach:
+        raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
+
+    return coach
+
 #* Create a get routes for get one user in the db.
 @router.get(
     "/infos/{user_id}", 
