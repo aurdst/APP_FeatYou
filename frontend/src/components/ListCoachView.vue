@@ -30,11 +30,9 @@
           :key="item"
           class="css_item_coach"
         >
-          
           <v-list-item-avatar>
             <!-- <v-img :src="item.avatar"></v-img> -->
           </v-list-item-avatar>
-         
 
           <v-list-item-content>
             <v-list-item-title class="txt_coach_preview" v-html="item.lastName + ' ' + item.name"></v-list-item-title>
@@ -66,14 +64,13 @@
     mounted: function() {
       //* If not connect
       if (this.$store.state.user.id == -1) {
-          router.push('/');
-          return
+        router.push('/');
+        return
       }
 
       //* Get user info
       this.$store.dispatch('getAllUserInfos').then(
         (rs) => {
-          console.log(rs)
           this.coachs = rs;
           
           return;
@@ -94,8 +91,8 @@
     methods : {
       go_to_profile(id) {
         router.push({
-          path   : 'coach_view',
-          query  : { id: id }
+          path  : 'coach_view',
+          query : { id: id }
         });
       }
     }
