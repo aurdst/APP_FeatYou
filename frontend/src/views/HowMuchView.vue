@@ -115,14 +115,36 @@
                                         sm="6"
                                         md="4"
                                     >
-    
-                                        <v-alert dismissible :type=alert.type  elevation="6" v-if="alert.show" class="mt-5 mx-auto" width="300">
-                                            {{alert.msg}}
-                                        </v-alert>
                                     </v-col>
                                 </v-row>
                             </v-container>
                         </v-card-text>
+
+                        <v-row no-gutters>    
+                            <v-col clos="6">
+                                <v-card width="150" height="100" class="cards_select_coins pt-5 mt-5 mx-auto">
+                                    <v-img :src="fitcoin" width="70" height="70" class="img_coin mx-auto"></v-img>
+                                </v-card>
+                            </v-col>
+                            <v-col clos="6">
+                                <v-card width="150" height="100" class="cards_select_coins pt-5 mt-5 mx-auto">
+                                    <v-img :src="fitcoin" width="70" height="70" class="img_coin mx-auto"></v-img>
+                                </v-card>
+                            </v-col>
+                        </v-row>
+
+                        <v-row no-gutters>    
+                            <v-col clos="6">
+                                <v-card width="150" height="100" class="cards_select_coins pt-5 mt-5 mx-auto">
+                                    <v-img :src="fitcoin" width="70" height="70" class="img_coin mx-auto"></v-img>
+                                </v-card>
+                            </v-col>
+                            <v-col clos="6">
+                                <v-card width="150" height="100" class="cards_select_coins pt-5 mt-5 mx-auto">
+                                    <v-img :src="fitcoin" width="70" height="70" class="img_coin mx-auto"></v-img>
+                                </v-card>
+                            </v-col>
+                        </v-row>
     
                         <v-card-actions>
                             <v-spacer></v-spacer>
@@ -153,6 +175,10 @@
     export default ({
         data: () => ({
             fitcoin : require("@/assets/img/fitcoin.png"),
+            // paypal : require('@/assets/img/'),
+            // googlepay : require('@/assets/img/'),
+            // other : require('@/assets/img/'),
+            // againother : require('@/assets/img/'),
             dialog : false,
             select_2: null,
             select_5: null  
