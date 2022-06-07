@@ -14,6 +14,7 @@ from apps.users.router import router as user_router
 from apps.videos.router import router as video_router
 from apps.auth.router import router as auth_router
 from tools.send_email import router as email_router
+from apps.tips.router import router as tips_router
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 
@@ -22,6 +23,7 @@ origins = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",
     "http://localhost:8000",
+    "http://192.168.0.29:8080"
 ]
 
 middleware = [
@@ -48,6 +50,7 @@ app.include_router(messages_router, tags=["Messages"], prefix=f"/api/{API_VERSIO
 app.include_router(subcategories_router, tags=["SubCategories"], prefix=f"/api/{API_VERSION}/subcategories")
 app.include_router(video_router, tags=["Video"], prefix=f"/api/{API_VERSION}/video")
 app.include_router(email_router, tags=['Email'], prefix=f"/api/{API_VERSION}/email")
+app.include_router(tips_router, tags=['Tips'], prefix=f"/api/{API_VERSION}/tips")
 
 
 if __name__=="__main__":

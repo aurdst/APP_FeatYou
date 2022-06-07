@@ -19,7 +19,7 @@ config = context.config
 
 # this will overwrite the ini-file sqlalchemy.url path
 # with the path given in the config of the main code
-config.set_main_option("sqlalchemy.url", "postgresql://postgres:azerty@127.0.0.1:5432/featyou")
+config.set_main_option("sqlalchemy.url", "postgresql://postgres:4851C2a172@127.0.0.1:5432/featyou")
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -37,6 +37,7 @@ import apps.events.models as event_models
 import apps.messages.models as mess_models
 import apps.videos.models as video_models
 import apps.users.models as user_models
+import apps.tips.models as tips_models
 
 
 #here target_metadata was equal to None
@@ -47,6 +48,7 @@ target_metadata = mess_models.Base.metadata
 target_metadata = video_models.Base.metadata
 target_metadata = sub_models.Base.metadata
 target_metadata = user_models.Base.metadata
+target_metadata = tips_models.Base.metadata
 
 
 # other values from the config, defined by the needs of env.py,

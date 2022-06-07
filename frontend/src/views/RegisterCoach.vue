@@ -168,12 +168,18 @@
         'Yoga',
         'Running',
         'Zumba',
+        'Step',
+        'Crossfit'
       ],
       lieux: [
         'Lille',
         'Lomme',
         'La Madeleine',
         'Marcq en Baroeul',
+        'Hellemes',
+        'Villeneuve d\'ascq',
+        'Mons en Baroeul',
+        'Loos'
       ],
       checkbox            : false,
       checkbox_interieur  : false,
