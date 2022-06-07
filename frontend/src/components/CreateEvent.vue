@@ -8,10 +8,11 @@
     >
 
         <template v-slot:activator="{ on, attrs }">
-            <img width="200" height="155" :src="create_event"/>
+            <img width="280" height="190" class="cards_create_event" :src="create_event"/>
             <v-btn 
                 class="btn_event mb-5"
                 v-bind="attrs"
+                rounded-lg
                 v-on="on"
             ><v-icon>
                 mdi-plus
@@ -21,7 +22,7 @@
 
         <v-card>
             <v-card-title>
-                <span class="text-h5">User Profile</span>
+                <span class="text-h5">Créer un événement</span>
             </v-card-title>
 
             <v-card-text>
@@ -39,6 +40,12 @@
                                 label="Nom du cours"
                                 required
                             />
+
+                            <v-select
+                            :items="items"
+                            v-model="sport_select"
+                            label="Sport"
+                            ></v-select>
 
                             <v-textarea
                                 solo
@@ -150,7 +157,9 @@
       create_event: require('@/assets/img/create_event.png'),
       label : '',
       description : '',
+      sport_select: '',
       hours: null,
+      items: ['Yoga','Zumba','Running','Step', 'Musculation'],
       lieu: 'Lille',
       idUser : null,
       date: null,
@@ -182,6 +191,7 @@
             description: this.description,
             date: this.date,
             lieu: this.lieu,
+            sport: this.sport_select,
             hours: this.hours,
             price: this.price,
         });

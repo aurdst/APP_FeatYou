@@ -12,6 +12,7 @@ class EventSchema(BaseModel):
     idUser: int 
     date: str
     hours: str
+    sport: str
     lieu: str
     price: float
     listOfParticipant : List[Participant] = []
@@ -24,6 +25,7 @@ class CreateEventSchema(BaseModel):
     description: str
     date: str
     hours: str
+    sport: str
     lieu: str
     price: float
 

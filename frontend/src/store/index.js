@@ -56,6 +56,7 @@ if(!event) {
   event = {
     id: null,
     label: '',
+    sport: '',
     description: '',
     idUser: '',
     date: '',
@@ -71,10 +72,14 @@ if(!event) {
       event = {
         id: null,
         label: '',
+        sport: '',
         description: '',
         idUser: '',
         date: '',
+        hours: '',
+        lieu: '',
         price : 0.0,
+        listOfParticipant: []
         } 
     }
   }

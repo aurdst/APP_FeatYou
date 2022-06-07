@@ -1,5 +1,11 @@
 /* #HomeView */
 
+.cards_create_event{
+    margin: auto;
+    width: 70%;
+    display: block;
+}
+
 .btn_list{
     display: block !important;
 }
@@ -23,7 +29,8 @@
 .btn_event{
     background-color: #EEDCFF;
     border-radius: 150px;
-    height: 50px;
+    margin-top: -50px!important;
+    height: 60px!important;
     width: 3%;
     display: block;
     margin: auto;
