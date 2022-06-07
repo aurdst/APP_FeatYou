@@ -216,7 +216,7 @@ export default new Vuex.Store({
     },
 
     getEventInfos : async function ({commit}) {
-      const response = await instanceEvent.get('/infos/')
+      const response = await instanceEvent.get('/event/get_all')
       commit('event', response.data);
       return response;
     },

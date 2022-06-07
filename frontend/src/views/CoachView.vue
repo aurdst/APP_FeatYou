@@ -6,7 +6,7 @@
         <p :key="index" v-for="(item, index) in this.coach.sport">
           {{ item }} 
         </p>
-        <h2>Lieu d'd'exertion :</h2>
+        <h2>Lieu d'exertion :</h2>
         <p :key="index" v-for="(item, index) in this.coach.lieux">
           {{ item }} 
         </p>

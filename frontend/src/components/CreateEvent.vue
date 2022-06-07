@@ -8,11 +8,15 @@
     >
 
         <template v-slot:activator="{ on, attrs }">
+            <img width="200" height="125" :src="create_event"/>
             <v-btn 
-                class="btn_profile btn_log mb-5"
+                class="btn_event mb-5"
                 v-bind="attrs"
                 v-on="on"
-            >Créer un cours</v-btn>
+            ><v-icon>
+                mdi-plus
+            </v-icon>
+            </v-btn>
         </template>
 
         <v-card>
@@ -143,6 +147,7 @@
     data: () => ({
       dialog : false,
       featcoin: require('@/assets/img/fitcoin.png'),
+      create_event: require('@/assets/img/create_event.png'),
       label : '',
       description : '',
       hours: null,
