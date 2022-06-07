@@ -1,3 +1,4 @@
+from ast import Str
 from datetime import datetime
 from sqlalchemy import Float,Column,ForeignKey, Integer, String, DateTime
 from database.database import Base
@@ -10,7 +11,9 @@ class EventModel(Base):
     description = Column(String)
     idUser = Column(Integer)
     date = Column(String)
+    sport = Column(String)
     price = Column(Float)
     lieu = Column(String)
     hours = Column(String)
     listOfParticipant = Column(String)
+    # listOfParticipant = Column(Integer, ForeignKey("users.id"))

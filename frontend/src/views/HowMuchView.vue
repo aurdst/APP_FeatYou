@@ -87,18 +87,64 @@
             </v-col>
         </v-row>
 
-        <v-row no-gutters>
-            <v-col>
-                <div class="container_btn_buy">
-                    <v-btn class="btn_lowercase">
-                        Payer
-                    </v-btn>
-                </div>
+        <v-row>
+            <v-col cols="12">
+                <v-dialog
+                    v-model="dialog"
+                    persistent
+                    max-width="600px"
+                >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn 
+                            class="btn_profile btn_log"
+                            v-bind="attrs"
+                            v-on="on"
+                        >Payer</v-btn>
+                    </template>
+    
+                    <v-card>
+                        <v-card-title>
+                            <span class="text-h5">Methods of paiment</span>
+                        </v-card-title>
+    
+                        <v-card-text>
+                            <v-container>
+                                <v-row>
+                                    <v-col
+                                        cols="12"
+                                        sm="6"
+                                        md="4"
+                                    >
+    
+                                        <v-alert dismissible :type=alert.type  elevation="6" v-if="alert.show" class="mt-5 mx-auto" width="300">
+                                            {{alert.msg}}
+                                        </v-alert>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+    
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+    
+                            <v-btn
+                                color="blue darken-1"
+                                text
+                                @click="dialog = false"
+                            >
+                                Close
+                            </v-btn>
+    
+                            <v-btn
+                                color="blue darken-1"
+                                text
+                            >
+                                Save
+                            </v-btn> 
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </v-col>
-        </v-row>
-
-        <v-row no-gutters>
-            
         </v-row>
     </div>
 </template>
@@ -107,6 +153,7 @@
     export default ({
         data: () => ({
             fitcoin : require("@/assets/img/fitcoin.png"),
+            dialog : false,
             select_2: null,
             select_5: null  
         })

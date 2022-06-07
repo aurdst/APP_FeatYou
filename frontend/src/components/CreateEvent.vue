@@ -36,6 +36,14 @@
                                 required
                             />
 
+                            <v-select
+                                :items="items"
+                                v-model="selectSport"
+                                :menu-props="{ top: true, offsetY: true }"
+                                label="Choisissez le Sport"
+                                :return-object="false"
+                            ></v-select>
+
                             <v-textarea
                                 solo
                                 name="input-7-4"
@@ -146,7 +154,9 @@
       label : '',
       description : '',
       hours: null,
+      selectSport: '',
       lieu: 'Lille',
+      items: ['Musculation', 'Running', 'Yoga', 'Step', 'Crossfit'],
       idUser : null,
       date: null,
       price: null,
@@ -176,11 +186,13 @@
             label: this.label,
             description: this.description,
             date: this.date,
+            sport: JSON.stringify(this.items),
             lieu: this.lieu,
             hours: this.hours,
             price: this.price,
         });
         this.dialog = false;
+        console.log(this.items)
       }
     },
   })

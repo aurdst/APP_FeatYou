@@ -214,7 +214,7 @@
                         </v-card>
                     </v-dialog>
 
-                    <router-link to="/home">
+                    <router-link to="/categorie">
                         <v-btn block class="mt-5 pt-5 pb-5 btn_lowercase">Réserver une séance</v-btn>
                     </router-link>
                 </div>

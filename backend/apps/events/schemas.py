@@ -9,7 +9,8 @@ class EventSchema(BaseModel):
     id: int
     label: str
     description: str
-    idUser: int 
+    idUser: int
+    sport: str
     date: str
     hours: str
     lieu: str
@@ -23,6 +24,7 @@ class CreateEventSchema(BaseModel):
     label: str
     description: str
     date: str
+    sport: str
     hours: str
     lieu: str
     price: float
