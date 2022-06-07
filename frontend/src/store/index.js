@@ -59,7 +59,10 @@ if(!event) {
     description: '',
     idUser: '',
     date: '',
+    hours: '',
+    lieu: '',
     price : 0.0,
+    listOfParticipant: []
     }
   }else {
     try {
@@ -209,6 +212,12 @@ export default new Vuex.Store({
     getUserInfos : async function ({commit}) {
       const response = await instance.get(`/infos/${JSON.parse(localStorage.user).user.id}`)
       commit('user', response.data);
+      return response;
+    },
+
+    getEventInfos : async function ({commit}) {
+      const response = await instanceEvent.get('/infos/')
+      commit('event', response.data);
       return response;
     },
 

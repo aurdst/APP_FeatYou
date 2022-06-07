@@ -8,5 +8,4 @@ class TipsModel(Base):
     content = Column(String)
     title = Column(String)
     category = Column(String)
-    hours = Column(String)
     pict = Column(String)

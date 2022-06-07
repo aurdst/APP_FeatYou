@@ -38,6 +38,19 @@ export default({
     data: () => ({
         musculation: require("@/assets/img/musculation.jpg"),
     }),
+
+    mounted : function() {
+        //* Get user info
+        this.$store.dispatch('getEventInfos').then(
+            (rs) => {
+                this.current_data = rs.data
+            }
+        ).catch(
+            (error) => {
+                console.log(error)
+            }
+        )
+    }
 })
 
 </script>

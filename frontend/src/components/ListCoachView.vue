@@ -47,11 +47,6 @@
             <v-icon small>mdi-arrow-right</v-icon>
           </v-btn>
         </v-list-item>
-
-        
-          <v-btn @click="go_to_profile(item.id)" :key="item">
-            Voir profile
-          </v-btn>
       </template>
     </v-list>
   </v-card>

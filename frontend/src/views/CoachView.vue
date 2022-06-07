@@ -1,21 +1,15 @@
 <template>
-    <div>
-        <h1>{{this.coach.firstName + ' ' + this.coach.lastName}}</h1>
+    <div class="text_coach">
+        <h2>{{this.coach.firstName + ' ' + this.coach.lastName}}</h2>
         <p>{{this.coach.email}}</p>
-
-        <br>
-
-        <h2>Activités principales :</h2>
-        <li :key="index" v-for="(item, index) in this.coach.sport">
+        <h2>Sport pratiqué :</h2>
+        <p :key="index" v-for="(item, index) in this.coach.sport">
           {{ item }} 
-        </li>
-
-        <br>
-
-        <h2>Lieux d'intervention :</h2>
-        <li :key="index" v-for="(item, index) in this.coach.lieux">
+        </p>
+        <h2>Lieu d'd'exertion :</h2>
+        <p :key="index" v-for="(item, index) in this.coach.lieux">
           {{ item }} 
-        </li>
+        </p>
     </div>
 </template>
 
