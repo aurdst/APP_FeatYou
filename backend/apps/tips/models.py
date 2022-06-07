@@ -8,4 +8,4 @@ class TipsModel(Base):
     content = Column(String)
     title = Column(String)
     category = Column(String)
-    pict = Column(String)
+    url_pict = Column(String)

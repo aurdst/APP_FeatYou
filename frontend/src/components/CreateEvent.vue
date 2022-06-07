@@ -8,7 +8,7 @@
     >
 
         <template v-slot:activator="{ on, attrs }">
-            <img width="200" height="125" :src="create_event"/>
+            <img width="200" height="155" :src="create_event"/>
             <v-btn 
                 class="btn_event mb-5"
                 v-bind="attrs"
