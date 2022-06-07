@@ -227,17 +227,15 @@ export default new Vuex.Store({
     },
 
     getAllUserInfos : async function ({commit}) {
-      const response = await instance.get('/get_all')
+      const response = await instance.get('/get_coachs')
 
-      //* check if coach
-      let coachs = [];
       for (let i = 0; i < response.data.length; i++) {
-        if (response.data[i].iscoach) {
-          coachs.push(response.data[i])
-        }   
+        response.data[i].lieux = JSON.parse(response.data[i].lieux);
+        response.data[i].sport = JSON.parse(response.data[i].sport);
       }
-      commit('allcoachs', coachs);
-      return coachs;
+
+      commit('allcoachs', response);
+      return response.data;
     },
 
     putUser : async function({commit}, infos) {
@@ -255,17 +253,14 @@ export default new Vuex.Store({
       return rs;
     },
 
-    go_to_profile : async function({commit}, user_id) {
-      const rs = await instance.get(`/infos/${JSON.parse(user_id)}`).then(
-        (response) => {
-        commit('coach', response.data);
-        router.push('coach_view');
-        return response;
-      }
-      );
-      return rs;
-    },
-    
+    getCoachById : async function({commit}, id) {
+      const response = await instance.get(`/coach/${id}`);
+      response.data.lieux = JSON.parse(response.data.lieux);
+      response.data.sport = JSON.parse(response.data.sport);
+
+      commit;
+      return response;
+    }
   },
 
   modules: {}
