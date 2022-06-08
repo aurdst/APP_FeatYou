@@ -6,7 +6,7 @@
   >
     <v-spacer></v-spacer>
 
-    <v-btn class="btn_list mt-3" text to="/">
+    <v-btn class="btn_list mt-3" text to="musculation">
       Choisissez vôtre coach
       <v-icon
         color="#DAAB39"
