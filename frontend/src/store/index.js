@@ -56,6 +56,7 @@ if(!event) {
   event = {
     id: null,
     label: '',
+    sport: '',
     description: '',
     idUser: '',
     date: '',
@@ -71,6 +72,7 @@ if(!event) {
       event = {
         id: null,
         label: '',
+        sport: '',
         description: '',
         idUser: '',
         date: '',
@@ -219,7 +221,7 @@ export default new Vuex.Store({
     },
 
     getEventInfos : async function ({commit}) {
-      const response = await instanceEvent.get('/event/get_all')
+      const response = await instanceEvent.get('/get_all')
       commit('event', response.data);
       return response;
     },
@@ -227,6 +229,13 @@ export default new Vuex.Store({
     getEvents : async function ({commit}, sport) {
       const response = await instanceEvent.get(`/events/${sport}`);
       commit('event', response.data);
+      return response;
+    },
+    
+    getEventbyUserId : async function ({commit}, id) {
+      const response = await instanceEvent.get(`by_user/${id}`)
+      commit;
+
       return response;
     },
 
@@ -237,6 +246,7 @@ export default new Vuex.Store({
           commit('event', response.data);
           console.log(response.data)
           this.dialog = false;
+          this.confirm = true;
           return response;
         }
       );

@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from pydantic.schema import Optional
 from typing import List
+
 from apps.users.schemas import CoachUserSchema
 
 class Participant(BaseModel):
@@ -21,9 +22,24 @@ class EventSchema(BaseModel):
     class Config:
         orm_mode = True
 
+class AllEventSchema(BaseModel):
+    id: int
+    label: str
+    description: str
+    idUser: int
+    date: str
+    hours: str
+    sport: str
+    lieu: str
+    price: float
+
+    class Config:
+        orm_mode = True
+
 class CreateEventSchema(BaseModel):
     label: str
     description: str
+    idUser: int 
     date: str
     idUser: int 
     hours: str

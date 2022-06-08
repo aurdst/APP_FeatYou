@@ -19,12 +19,7 @@
     </v-btn>
 
     <v-list three-line>
-      <template v-for="(item, index) in coachs">
-        <v-divider
-          v-if="item.divider"
-          :key="index"
-          :inset="item.inset"
-        ></v-divider>
+      <template v-for="(item) in coachs">
 
         <v-list-item
           :key="item"
@@ -34,13 +29,11 @@
             <!-- <v-img :src="item.avatar"></v-img> -->
           </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title class="txt_coach_preview" v-html="item.lastName + ' ' + item.name"></v-list-item-title>
+          <v-list-item-content class="list_item">
+            <v-list-item-title class="txt_coach_preview" v-html="item.lastName + ' ' + item.firstName"></v-list-item-title>
             <v-list-item-subtitle class="txt_coach_preview" v-html="item.sport"></v-list-item-subtitle>
           </v-list-item-content>
-
           <br>
-
           <v-btn @click="go_to_profile(item.id)" text color="#FFF" small :key="item" >
             <v-icon small>mdi-arrow-right</v-icon>
           </v-btn>
@@ -53,8 +46,6 @@
 <script>
   import router from "../router";
   import { mapState } from 'vuex'
-  // import store from "../store"
-  //import { sortItems } from "vuetify/lib/util/helpers";
 
   export default ({
     data: () => ({

@@ -181,7 +181,7 @@
                     </v-card>
                 </v-dialog>
             </v-col>
-
+        <div v-if="iscoach == false">
             <div class="ma-auto mt-5 mb-15 container_fitcoin">
                 <div class="div_action">
                     <img :src="fitcoin" />
@@ -218,6 +218,7 @@
                     </router-link>
                 </div>
             </div>
+        </div>
         </v-col>
     </v-row>
 </template>
@@ -240,6 +241,7 @@
     export default ({
         data : () => ({
             new_password         : '',
+            iscoach : JSON.parse(localStorage.getItem('user')).user.iscoach,
             old_password         : '',
             alert                : {
                 show : false,

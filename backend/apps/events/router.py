@@ -12,7 +12,7 @@ from . import schemas
 
 router: APIRouter = APIRouter()
 
-#Route for create a event
+#* Route for create a event
 @router.post("/create_event/", status_code=status.HTTP_201_CREATED)
 def create_event(event: schemas.CreateEventSchema, db: Session = Depends(get_db)):
     datas = models.EventModel(
@@ -38,8 +38,8 @@ def create_event(event: schemas.CreateEventSchema, db: Session = Depends(get_db)
     
     return datas
 
-#* Create a get all event
-@router.get("/event/get_all")
+#* Get all event
+@router.get("/event/get_all", response_model=List[schemas.AllEventSchema])
 def get_all_event(db: Session = Depends(get_db)):
     events = db.query(models.EventModel).all()
 
@@ -62,9 +62,18 @@ def get_by_sport(sport: str, db: Session = Depends(get_db)):
     return events
 
 #* Create a get routes for get one event in the db.
-@router.get("/event/{event_id}/", response_model=List[schemas.EventSchema])
-def get_by_id(event_id: str, db: Session = Depends(get_db)):
-    query = db.query(models.EventModel.id).filter(models.EventModel.id == event_id)
+@router.get("/event/{event_id}/", response_model=schemas.EventSchema)
+def get_by_id(event_id: int, db: Session = Depends(get_db)):
+    query = db.query(models.EventModel).filter(models.EventModel.id == event_id).all()
+    if not query:
+        raise HTTPException(status_code=404, detail="[Not Found] event doesn't exist")
+
+    return query
+
+#* Create a get routes for get one event in the db by user id.
+@router.get("/by_user/{user_id}/", response_model=List[schemas.AllEventSchema])
+def get_by_user_id(user_id: int, db: Session = Depends(get_db)):
+    query = db.query(models.EventModel).filter(models.EventModel.idUser == user_id).all()
 
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] event doesn't exist")
