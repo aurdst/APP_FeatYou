@@ -52,7 +52,7 @@ def get_event(event_id: int, db: Session = Depends(get_db)):
     return query
 
 # Create a get routes for get one event in the db.
-@router.get("/by_user/{user_id}/", response_model=List[schemas.EventSchema])
+@router.get("/by_user/{user_id}/", response_model=List[schemas.AllEventSchema])
 def get_by_user_id(user_id: int, db: Session = Depends(get_db)):
     query = db.query(models.EventModel).filter(models.EventModel.idUser == user_id).all()
     if not query:
