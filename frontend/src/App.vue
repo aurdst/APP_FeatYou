@@ -59,7 +59,7 @@
 
         <v-spacer/>
 
-          <router-link to="/conversation">
+          <router-link to="/maintenance">
             <v-avatar
             size="45"
             >
