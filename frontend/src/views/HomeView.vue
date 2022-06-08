@@ -1,15 +1,17 @@
 <template>
-  <div>
     <v-row
       class="mb-6 mx-auto" no-gutters
     >
-      <div v-if="iscoach == false">
-        <v-col cols="12">
+        <v-col cols="12" v-if="iscoach == false">
           <p class="p_choose">Choissez votre sport :</p>
         </v-col>
+        
         <br>
+        <br>
+
         <v-col cols="3"
           class="mx-auto"
+          v-if="iscoach == false"
         >
           <router-link to="/musculation">
             <CardsMuscu/>
@@ -18,6 +20,7 @@
 
         <v-col cols="3"
           class="mx-auto"
+          v-if="iscoach == false"
         >
           <router-link to="/crossfit">
             <CardsCroosfit/>
@@ -26,11 +29,15 @@
 
         <v-col cols="3"
           class="mx-auto"
+          v-if="iscoach == false"
         >
           <router-link to="/step">
             <CardsStep/>
           </router-link>
 
+        </v-col>
+
+        <v-col cols="12" class="mt-5" v-if="iscoach == false">
           <router-link to="categorie">
             <div class="btn_view_sport">
               <p solo class="mb-5 btn_seance">
@@ -39,28 +46,28 @@
             </div>
           </router-link>
         </v-col>
-      </div>
-      
-    </v-row>
+
+      <v-row no-gutters>
+        <v-col cols="12" v-if="iscoach == true">
+          <br>
+          <h2 class="title_home">Bonjour {{current_user_name}}</h2>
+          <br>
+          <CreateEvent/>
+        </v-col>
+      </v-row>
+
+      <v-row no-gutters>
+        <v-col cols="12">
+          <v-dialog v-model="confirm">
+            <v-alert
+              type="success"
+            >Vôtre événement est créer !</v-alert>
+          </v-dialog>
+        </v-col>
+      </v-row>
 
 
-    <div v-if="iscoach == true">
-      <h2 class="title_home">Bonjour {{current_user_name}}</h2>
-      <CreateEvent/>
-    </div>
-
-    <v-row no-gutters>
-      <v-col cols="12">
-        <v-dialog v-model="confirm">
-          <v-alert
-            type="success"
-          >Vôtre événement est créer !</v-alert>
-        </v-dialog>
-      </v-col>
-    </v-row>
-
-
-    <div class="container_current_event">
+    <div class="container_current_event mx-auto">
       <v-row class="mb-6 mx-5" no-gutters>
         <v-col cols="12">
           <h2 class="text-center bg_home_seance">
@@ -73,7 +80,7 @@
             {{}} 
           </p>
         </v-col>
-  
+
         <v-col cols="12">
           <p class="text-center btn_seance">
             Voir toutes mes séances 
@@ -81,10 +88,13 @@
         </v-col>
       </v-row>
     </div>
-      <v-row class="mb-6" fluid no-gutters>
+
+    <v-row no-gutters  v-if="iscoach == false">
+      <v-col class="mb-6">
         <List/>
-      </v-row>
-  </div>
+      </v-col>
+    </v-row>
+  </v-row>
 </template>
 
 <script>

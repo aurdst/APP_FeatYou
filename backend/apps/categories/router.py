@@ -8,6 +8,7 @@ from .tools import id_generator
 # import sqlalchemy_utils
 
 from . import models
+from apps.users import models
 from . import schemas
 
 #Auth with OAuth2
@@ -45,7 +46,7 @@ async def create_categorie(category: schemas.CategoriesSchema, db : Session = De
     status_code=status.HTTP_201_CREATED,
     summary="Add a file"
 )
-async def upload_file(id:str, file : UploadFile, db : Session = Depends(get_db)): #  url:str,
+async def upload_file(user_id:int, file : UploadFile, db : Session = Depends(get_db)): #  url:str,
     # Error 422 : 422 Unprocessable Entity
     # When i try use file (param), the script return 422 Unprocessable Entity. I don't know why
     with open("uploaded/" + file.filename, "wb") as img:
@@ -53,20 +54,18 @@ async def upload_file(id:str, file : UploadFile, db : Session = Depends(get_db))
 
     url = str('uploaded/_'+id_generator()+file.filename)
     try:
-        query = db.query(models.CategorieModel).filter(models.CategorieModel.id == id).first()
+        user = db.query(models.UserModel).filter(models.UserModel.id == user_id).first()
+        if not user:
+            raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
 
-        if not query:
-            raise HTTPException(status_code=404, detail="[Not Found] Categorie doesn't exist")
+        print(type(user))
+
+        # user.pict = url,
+
+        # db.commit()
+
     except Exception as e:
         print(e)
-
-    insert_img = models.CategorieModel(
-        img_url = url,
-    )
-
-    db.add(insert_img)
-    db.commit()
-    db.refresh(insert_img)
         
     return file.content_type, url
 

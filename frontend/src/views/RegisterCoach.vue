@@ -3,7 +3,7 @@
       <v-col>
         <div class="bg_login">
           <h2 class="text-center mt-10 mb-5 Title_log">
-            Devenir adhérant
+            Inscription pour devenir Coach FeatYou
           </h2>
 
           <router-link to='/register'>

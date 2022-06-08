@@ -1,5 +1,5 @@
 <template>
-    <div class="text_coach">
+    <v-row no-gutters class="text_coach">
         <h2>{{this.coach.firstName + ' ' + this.coach.lastName}}</h2>
         <p>{{this.coach.email}}</p>
         <h2>Sport pratiqué :</h2>
@@ -10,9 +10,7 @@
         <p :key="index" v-for="(item, index) in this.coach.lieux">
           {{ item }} 
         </p>
-
-
-    </div>
+    </v-row>
 </template>
 
 <script>
@@ -30,7 +28,6 @@
           return
       }
 
-      this.$store.dispatch(getEventInfos)
 
       //* Get router params
       let query = router.history.current.query.id;
