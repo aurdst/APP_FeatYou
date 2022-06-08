@@ -13,7 +13,8 @@ class EventSchema(BaseModel):
     idUser: CoachUserSchema 
     date: str
     hours: str
-    lieu: str
+    adress: str
+    duree: str
     price: float
     sport: str
 
@@ -26,10 +27,11 @@ class CreateEventSchema(BaseModel):
     date: str
     idUser: int 
     hours: str
+    adress: str
+    duree: str
     sport: str
-    lieu: str
-    price: float
-    listOfParticipant : List[Participant] = []
+    price: int
+    listOfParticipant: List[Participant] = []
 
     class Config:
         orm_mode = True
