@@ -226,9 +226,16 @@ export default new Vuex.Store({
       return response;
     },
 
+    getEvents : async function ({commit}, sport) {
+      const response = await instanceEvent.get(`/events/${sport}`);
+      commit('event', response.data);
+      return response;
+    },
+    
     getEventbyUserId : async function ({commit}, id) {
       const response = await instanceEvent.get(`by_user/${id}`)
       commit;
+
       return response;
     },
 
@@ -242,8 +249,8 @@ export default new Vuex.Store({
           this.confirm = true;
           return response;
         }
-        );
-      console.log(rs.data)
+      );
+      
       return rs;
     },
 

@@ -27,7 +27,10 @@
 
         <v-col cols="12">
             <h2 class="text-left ma-3">Pour découvrir :</h2>
-            <v-btn large class="large mb-15 ml-3">Je réserve ma séance</v-btn>
+
+            <router-link :to="{ name: 'seances', query: { sport: 'crossfit' }}">
+                <v-btn large class="large mb-15 ml-3">Voir les séances</v-btn>
+            </router-link>
         </v-col>
     </v-row>
 </template>

@@ -75,11 +75,11 @@ def get_all_coach(db: Session = Depends(get_db)):
     response_model=schemas.CoachUserSchema,
     summary="Get coach"
 )
-def get_coach(coach_id: str, db: Session = Depends(get_db)):
+def get_coach(coach_id: int, db: Session = Depends(get_db)):
     coach = db.query(models.UserModel).filter(models.UserModel.id == coach_id, models.UserModel.iscoach == True).first()
-    
+
     if not coach:
-        raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
+        raise HTTPException(status_code=404, detail="[Not Found] Coach not found")
 
     return coach
 

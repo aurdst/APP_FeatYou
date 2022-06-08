@@ -1,6 +1,7 @@
-from datetime import datetime
 from pydantic import BaseModel
-from typing import List, Optional
+from pydantic.schema import Optional
+from typing import List
+
 from apps.users.schemas import CoachUserSchema
 
 class Participant(BaseModel):
@@ -10,13 +11,13 @@ class EventSchema(BaseModel):
     id: int
     label: str
     description: str
-    idUser: Optional[CoachUserSchema]
+    idUser: CoachUserSchema 
     date: str
     hours: str
-    sport: str
-    lieu: str
+    adress: str
+    duree: str
     price: float
-    listOfParticipant : List[Participant] = []
+    sport: str
 
     class Config:
         orm_mode = True
@@ -40,10 +41,13 @@ class CreateEventSchema(BaseModel):
     description: str
     idUser: int 
     date: str
+    idUser: int 
     hours: str
+    adress: str
+    duree: str
     sport: str
-    lieu: str
-    price: float
+    price: int
+    listOfParticipant: List[Participant] = []
 
     class Config:
         orm_mode = True

@@ -28,50 +28,18 @@
 
         <v-col cols="12">
             <h2 class="text-left ma-3">Pour découvrir :</h2>
-            <v-btn large class="large mb-15 ml-3">Je réserve ma séance</v-btn>
-        </v-col>
 
-        <v-col>
-            <p>{{event.lieu}}</p>
+            <router-link :to="{ name: 'seances', query: { sport: 'musculation' }}">
+                <v-btn large class="large mb-15 ml-3">Voir les séances</v-btn>
+            </router-link>
         </v-col>
     </v-row>
 </template>
+
 <script>
-import { mapState } from 'vuex'
-
-export default({
-    data: () => ({
-        musculation: require("@/assets/img/musculation.jpg"),
-            current_data         : {
-                id    : '',
-                label     : '',
-                description     : '',
-                date        : '',
-                lieu        : '',
-                hours       : '',
-                price   : '',
-            },
-    }),
-
-    mounted : function() {
-        //* Get user info
-        this.$store.dispatch('getEventInfos').then(
-            (rs) => {
-                this.current_data = rs.data
-                console.log(this.current_data)
-            }
-        ).catch(
-            (error) => {
-                console.log(error)
-            }
-        )
-    },
-
-    computed : {
-        ...mapState({
-            event: 'event',
-        })
-    },
-})
-
+    export default({
+        data : () => ({
+            musculation  : require("@/assets/img/musculation.jpg"),
+        }),
+    });
 </script>

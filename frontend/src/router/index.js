@@ -20,6 +20,7 @@ import StepView from '../views/StepView.vue'
 import ZumbaView from '../views/ZumbaView.vue'
 import CrossfitView from '../views/CrossfitView.vue'
 import HowMuchView from '../views/HowMuchView.vue'
+import ListOfSeances from '../views/ListOfSeances.vue'
 
 
 Vue.use(VueRouter)
@@ -124,6 +125,11 @@ const routes = [
     path: '/buy_featcoin',
     name: 'buyfeatcoin',
     component: HowMuchView
+  },
+  {
+    path: '/seances',
+    name: 'seances',
+    component: ListOfSeances
   },
   
 ]
