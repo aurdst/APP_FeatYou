@@ -17,6 +17,12 @@
     font-size: medium;
 }
 
+.title_home{
+    margin: auto;
+    width: 60%;
+    text-align: center;
+}
+
 .p_cards_label{
     text-align: center;
     background-color: #5C3C90;

@@ -10,6 +10,8 @@
         <p :key="index" v-for="(item, index) in this.coach.lieux">
           {{ item }} 
         </p>
+
+
     </div>
 </template>
 
@@ -27,6 +29,8 @@
           router.push('/');
           return
       }
+
+      this.$store.dispatch(getEventInfos)
 
       //* Get router params
       let query = router.history.current.query.id;

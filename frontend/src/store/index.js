@@ -63,7 +63,7 @@ if(!event) {
     hours: '',
     lieu: '',
     price : 0.0,
-    listOfParticipant: []
+    listOfParticipant: '[]'
     }
   }else {
     try {
@@ -79,7 +79,7 @@ if(!event) {
         hours: '',
         lieu: '',
         price : 0.0,
-        listOfParticipant: []
+        listOfParticipant: '[]'
         } 
     }
   }
@@ -233,6 +233,7 @@ export default new Vuex.Store({
           commit('event', response.data);
           console.log(response.data)
           this.dialog = false;
+          this.confirm = true;
           return response;
         }
         );

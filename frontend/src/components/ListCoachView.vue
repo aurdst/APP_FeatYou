@@ -37,7 +37,7 @@
          
 
           <v-list-item-content>
-            <v-list-item-title class="txt_coach_preview" v-html="item.lastName + ' ' + item.name"></v-list-item-title>
+            <v-list-item-title class="txt_coach_preview" v-html="item.lastName + ' ' + item.firstName"></v-list-item-title>
             <v-list-item-subtitle class="txt_coach_preview" v-html="item.sport"></v-list-item-subtitle>
           </v-list-item-content>
 

@@ -73,7 +73,7 @@ def get_all_coach(db: Session = Depends(get_db)):
 @router.get(
     path="/coach/{coach_id}",
     response_model=schemas.CoachUserSchema,
-    summary="Get all coach"
+    summary="Get coach"
 )
 def get_coach(coach_id: str, db: Session = Depends(get_db)):
     coach = db.query(models.UserModel).filter(models.UserModel.id == coach_id, models.UserModel.iscoach == True).first()

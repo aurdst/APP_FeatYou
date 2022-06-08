@@ -2,44 +2,64 @@
   <div>
     <v-row
       class="mb-6 mx-auto" no-gutters
-    >   
+    >
+      <div v-if="iscoach == false">
+        <v-col cols="12">
+          <p class="p_choose">Choissez votre sport :</p>
+        </v-col>
+        <br>
+        <v-col cols="3"
+          class="mx-auto"
+        >
+          <router-link to="/musculation">
+            <CardsMuscu/>
+          </router-link>
+        </v-col>
+
+        <v-col cols="3"
+          class="mx-auto"
+        >
+          <router-link to="/crossfit">
+            <CardsCroosfit/>
+          </router-link>
+        </v-col>
+
+        <v-col cols="3"
+          class="mx-auto"
+        >
+          <router-link to="/step">
+            <CardsStep/>
+          </router-link>
+
+          <router-link to="categorie">
+            <div class="btn_view_sport">
+              <p solo class="mb-5 btn_seance">
+                Voir nos cours
+              </p>
+            </div>
+          </router-link>
+        </v-col>
+      </div>
+      
+    </v-row>
+
+
+    <div v-if="iscoach == true">
+      <h2 class="title_home">Bonjour {{current_user_name}}</h2>
+      <CreateEvent/>
+    </div>
+
+    <v-row no-gutters>
       <v-col cols="12">
-        <p class="p_choose">Choissez votre sport :</p>
-      </v-col>
-      <br>
-      <v-col cols="3"
-        class="mx-auto"
-      >
-        <router-link to="/musculation">
-          <CardsMuscu/>
-        </router-link>
-      </v-col>
-
-      <v-col cols="3"
-        class="mx-auto"
-      >
-        <router-link to="/crossfit">
-          <CardsCroosfit/>
-        </router-link>
-      </v-col>
-
-      <v-col cols="3"
-        class="mx-auto"
-      >
-        <router-link to="/step">
-          <CardsStep/>
-        </router-link>
+        <v-dialog v-model="confirm">
+          <v-alert
+            type="success"
+          >Vôtre événement est créer !</v-alert>
+        </v-dialog>
       </v-col>
     </v-row>
 
-    <router-link to="categorie">
-      <div class="btn_view_sport">
-        <p solo class="mb-5 btn_seance">
-          Voir nos cours
-        </p>
-      </div>
-    </router-link>
-    <CreateEvent/>
+
     <div class="container_current_event">
       <v-row class="mb-6 mx-5" no-gutters>
         <v-col cols="12">
@@ -84,5 +104,11 @@
     CardsCroosfit,
     CardsStep
     },
+
+    data: () => ({
+      current_user_name: JSON.parse(localStorage.getItem('user')).user.username,
+      iscoach : JSON.parse(localStorage.getItem('user')).user.iscoach,
+      confirm : false,
+    })
   }
 </script>
