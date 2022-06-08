@@ -235,7 +235,9 @@ export default new Vuex.Store({
     getEventbyUserId : async function ({commit}, id) {
       const response = await instanceEvent.get(`by_user/${id}`)
       commit;
-
+      if (response == 200) {
+        this.not_coach = true;
+      }
       return response;
     },
 
