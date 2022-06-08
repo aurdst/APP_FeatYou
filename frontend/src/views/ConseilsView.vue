@@ -4,9 +4,9 @@
             <h2 class="text-center">NOS CONSEILS</h2>
         </v-col>
 
-        <v-col cols="12">
+        <v-col cols="12" class="mx-auto">
             <router-link to="/conseils_details">
-                <div style="height: 170px;" class="bg_conseils_sport">
+                <div style="height: 170px;" class="bg_conseils_sport mx-auto">
                 </div>
             </router-link>
 

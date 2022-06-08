@@ -1,45 +1,26 @@
 <template>
     <v-row no-gutters>
-        <v-row>
+        <router-link to="conseils">
+            <div class="container_btn_back mt-5 ml-5">
+                <v-btn>
+                    <v-icon>
+                        mdi-arrow-left
+                    </v-icon>
+                </v-btn>
+            </div>
+        </router-link>
+        <v-row no-gutters>
             <v-col cols="12">
-                <h1 class="text-center mb-5 mt-5">Un déjeuner equilibré</h1>
+                <h1 class="text-center mb-5 mt-5">Toujours bien s'étirer</h1>
             </v-col>
             <v-col cols="12">
-                <h1 class="text-center">Conseils</h1>
                 <p class="text-left mx-9"> 
-                    - tVero eos et accusamus sc et iusto odio dignissimos ducimus 
-                    <br>
-                    - qui blanditiis praesentium voluptatum jkbjhgv deleniti atque corrupti quos dolores et 
-                    <br>
-                    - quas molestias excepturi sint occaecati.
-                    <br>
-                    - qui blanditiis praesentium voluptatum jkbjhgv deleniti atque corrupti quos dolores et 
-                    <br>
-                    - quas molestias excepturi sint occaecati
+                    Le meilleur moment pour bien s'étirer, c'est après l'entraînement, quand le corps est encore chaud. Mais les étirements doivent rester courts, entre 10 et 20 secondes
                 </p>
-            </v-col>
-            <v-col clos="3" class="mt-5 ml-5">
-                <v-img class="rounded-circle text-center mx-auto" :src="img" width="60" height="60"/>
-            </v-col>
-
-            <v-col cols="3" class="mt-5">
-                <v-img class="rounded-circle text-center mx-auto" :src="img" width="60" height="60"/>
-            </v-col>
-
-            <v-col clos="3" class="mt-5">
-                <v-img class="rounded-circle text-center mx-auto" :src="img" width="60" height="60"/>
-            </v-col>
-
-            <v-col cols="3" class="mt-5 mr-5">
-                <v-img class="rounded-circle text-center mx-auto" :src="img" width="60" height="60"/>
-            </v-col>
-        </v-row>
-
-        <v-row class="ma-auto mt-5">
-            <v-col cols="12">
-                <div  style="background-color: blue; height: 140px;" rounded>
-                    <h2 class="text-center pt-12">coaching</h2>
-                </div>
+                <p class="text-left mx-9"> 
+                    Quelques exemples d'étirements :
+                </p>
+                <iframe width="370" height="295" src="https://www.youtube.com/embed/s-HoqxE-iDI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </v-col>
         </v-row>
     </v-row>
@@ -51,3 +32,10 @@ export default ({
     }),
 })
 </script>
+
+<style scoped>
+    iframe{
+        display: block;
+        margin: auto;
+    }
+</style>

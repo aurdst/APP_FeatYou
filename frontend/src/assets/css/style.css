@@ -261,14 +261,25 @@
 
 .bg_conseils_sport{
     background-image: url('../img/sportif.png');
+    background-size: cover;
+    margin: auto;
+    display: block;
 }
 
 .bg_conseils_nutritif{
     background-image: url('../img/nutritionnel.png');
+    background-size: cover;
 }
 
 .bg_conseils_pratique{
     background-image: url('../img/vie\ pratique.png');
+    background-size: cover;
+}
+
+.div_conseil_sportif{
+    background-image: url('../img/conseils_sport.jpg');
+    background-size: cover;
+    height: 170px;
 }
 
 /* Coach View */

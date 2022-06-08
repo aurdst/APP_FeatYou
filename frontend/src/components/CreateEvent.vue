@@ -1,9 +1,9 @@
 <template>
     <v-row no-gutters>
+        <img class="img_home" width="200" height="200" :src="create_event"/>
         <v-col cols="12">
             <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on, attrs }">
-                    <img width="200" height="155" :src="create_event"/>
 
                     <v-btn  class="btn_event mb-5" v-bind="attrs" v-on="on">
                         <v-icon>
@@ -90,6 +90,14 @@
                 </v-card>
             </v-dialog>
         </v-col>
+
+        <v-row no-gutters>
+            <v-col>
+                <v-dialog>
+                    <v-alert type="success">Cours créer avec succès !</v-alert>
+                </v-dialog>
+            </v-col>
+        </v-row>
     </v-row>
 </template>
 
@@ -102,6 +110,7 @@ export default ({
             featcoin          : require('@/assets/img/fitcoin.png'),
             create_event      : require('@/assets/img/create_event.png'),
             dialog            : false,
+            confirm           : true,
             hours             : null,
             date              : null,
             adress            : '',
@@ -169,7 +178,16 @@ export default ({
                 });
 
                 this.dialog = false;
+                this.confirm = true;
             }
         },
     })
 </script>
+
+<style scoped>
+.img_home{
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+</style>
