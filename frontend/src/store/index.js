@@ -62,7 +62,7 @@ if(!event) {
     hours: '',
     lieu: '',
     price : 0.0,
-    listOfParticipant: []
+    listOfParticipant: '[]'
     }
   }else {
     try {
@@ -74,7 +74,10 @@ if(!event) {
         description: '',
         idUser: '',
         date: '',
+        hours: '',
+        lieu: '',
         price : 0.0,
+        listOfParticipant: '[]'
         } 
     }
   }
@@ -221,6 +224,12 @@ export default new Vuex.Store({
       return response;
     },
 
+    getEvents : async function ({commit}, sport) {
+      const response = await instanceEvent.get(`/events/${sport}`);
+      commit('event', response.data);
+      return response;
+    },
+
     createEvent : async function({commit}, eventInfo) {
       console.log(eventInfo)
       const rs = await instanceEvent.post('create_event', eventInfo).then(
@@ -230,8 +239,8 @@ export default new Vuex.Store({
           this.dialog = false;
           return response;
         }
-        );
-      console.log(rs.data)
+      );
+      
       return rs;
     },
 

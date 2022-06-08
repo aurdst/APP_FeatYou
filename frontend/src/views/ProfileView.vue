@@ -40,7 +40,6 @@
                     persistent
                     max-width="600px"
                 >
-
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn 
                             class="btn_profile btn_log"
@@ -196,8 +195,8 @@
 
                     <!-- Dialog featcoin -->
                     <v-dialog
-                    v-model="dialog_featcoin"
-                    max-width="600px"
+                        v-model="dialog_featcoin"
+                        max-width="600px"
                     >
                         <v-card>
                             <v-card-title>
@@ -247,7 +246,7 @@
                 type : '',
                 msg  : ''
             },
-            dialog               : false,
+            dialog          : false,
             dialog_featcoin : false,
             img                  : require("@/assets/img/halt.jpeg"),
             fitcoin              : require("@/assets/img/fitcoin.png"),
