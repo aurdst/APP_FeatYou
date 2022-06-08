@@ -19,12 +19,7 @@
     </v-btn>
 
     <v-list three-line>
-      <template v-for="(item, index) in coachs">
-        <v-divider
-          v-if="item.divider"
-          :key="index"
-          :inset="item.inset"
-        ></v-divider>
+      <template v-for="(item) in coachs">
 
         <v-list-item
           :key="item"
@@ -51,8 +46,6 @@
 <script>
   import router from "../router";
   import { mapState } from 'vuex'
-  // import store from "../store"
-  //import { sortItems } from "vuetify/lib/util/helpers";
 
   export default ({
     data: () => ({

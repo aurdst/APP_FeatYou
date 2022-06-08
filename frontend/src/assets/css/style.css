@@ -6,6 +6,8 @@
     display: block;
 }
 
+
+
 .btn_list{
     display: block !important;
 }
@@ -282,6 +284,23 @@
     margin: auto;
     margin-top: 5%;
     text-align: center;
+}
+
+.container_sport > p{
+    margin-bottom: 0!important;
+    display: inline-block;
+}
+
+.container_sport{
+    margin-bottom: 0!important;
+    display: inline-block;
+    width: 20%;
+}
+
+.container_infos{
+    background-color: #EEDCFF;
+    width: 50%!important;
+    border-radius: 20px;
 }
 
 .text_coach{

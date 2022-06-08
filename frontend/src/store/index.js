@@ -221,8 +221,14 @@ export default new Vuex.Store({
     },
 
     getEventInfos : async function ({commit}) {
-      const response = await instanceEvent.get('/event/get_all')
+      const response = await instanceEvent.get('/get_all')
       commit('event', response.data);
+      return response;
+    },
+
+    getEventbyUserId : async function ({commit}, id) {
+      const response = await instanceEvent.get(`by_user/${id}`)
+      commit;
       return response;
     },
 
