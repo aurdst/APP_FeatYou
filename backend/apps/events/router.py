@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from database.database import get_db
 from typing import List
 from datetime import datetime
+from apps.users.router import get_coach
 
 from . import models
 from . import schemas
@@ -16,12 +17,14 @@ router: APIRouter = APIRouter()
 @router.post("/create_event/", status_code=status.HTTP_201_CREATED)
 def create_event(event: schemas.CreateEventSchema, db: Session = Depends(get_db)):
     datas = models.EventModel(
-        label = event.label,
+        label       = event.label,
         description = event.description,
-        date = event.date,
-        lieu = event.lieu,
-        price = event.price,
-        hours = event.hours
+        date        = event.date,
+        lieu        = event.lieu,
+        idUser      = event.idUser,
+        price       = event.price,
+        hours       = event.hours,
+        sport       = event.sport
     )
 
     query = db.query(models.EventModel).filter(models.EventModel.label == datas.label).first()
@@ -34,37 +37,47 @@ def create_event(event: schemas.CreateEventSchema, db: Session = Depends(get_db)
         
         return datas
 
-#Create a get all event
-@router.get("/event/get_all", response_model=List[schemas.EventSchema])
+#* Create a get all event
+@router.get("/event/get_all")
 def get_all_event(db: Session = Depends(get_db)):
-    query = db.query(models.EventModel).all()
-    return query
+    events = db.query(models.EventModel).all()
 
-# Create a get routes for get one event in the db.
+    for event in events :
+        event.idUser = get_coach(event.idUser)
+
+    return events
+
+#* Get all event by sport
+@router.get("/seances/{sport}")
+def get_by_id(sport: str, db: Session = Depends(get_db)):
+    return db.query(models.EventModel).filter(models.EventModel.sport == sport).all()
+
+#* Create a get routes for get one event in the db.
 @router.get("/event/{event_id}/", response_model=List[schemas.EventSchema])
-def get_all_event(event_id: str, db: Session = Depends(get_db)):
-    query = db.query(models.EventModel.id).filter(id == event_id)
+def get_by_id(event_id: str, db: Session = Depends(get_db)):
+    query = db.query(models.EventModel.id).filter(models.EventModel.id == event_id)
+
     if not query:
         raise HTTPException(status_code=404, detail="[Not Found] event doesn't exist")
 
     return query
 
-# Route for update one event
+#* Route for update one event
 @router.put("/event/update/{event_id}", response_model=schemas.EventSchema, status_code=status.HTTP_202_ACCEPTED)
 def update_event(event_id: str, update_event: schemas.EventSchema, db: Session = Depends(get_db)):
     event = db.query(models.EventModel).filter(update_event.id == event_id).first()
+
     if not event:
         raise HTTPException(status_code=404, detail="[Not Found] event doesn't exist")
 
     event.label = update_event.label,
     event.description = update_event.description,
 
-
     db.commit()
 
     return event
 
-#Route for deleted event
+#* Route for deleted event
 @router.delete("event/{event_id}")
 def delete_event_by_id(event_id: str, db: Session = Depends(get_db)):
     query : db.query(models.EventModel).filter_by(id == event_id).first()

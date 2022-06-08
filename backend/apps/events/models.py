@@ -11,6 +11,7 @@ class EventModel(Base):
     idUser = Column(Integer)
     date = Column(String)
     price = Column(Float)
+    sport = Column(String)
     lieu = Column(String)
     hours = Column(String)
     listOfParticipant = Column(String)
