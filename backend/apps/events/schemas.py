@@ -52,3 +52,10 @@ class CreateEventSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+class EventManaged(BaseModel):
+    id_event:int
+    id_participant:int
+    ammount:int
+    class Config:
+        orm_mode = True

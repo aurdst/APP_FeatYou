@@ -150,3 +150,25 @@ def delete_user_by_id(user_id: str, db: Session = Depends(get_db), user: Log = D
         raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
 
     db.commit()
+
+#* Route for add coinfeat to user
+@router.put(
+    path="/manage_coin",
+    status_code=status.HTTP_202_ACCEPTED,
+    summary="manage coin to a user specified in to_add.id properties",
+)
+def manage_coin(datas:schemas.UserCoinSchema, db: Session = Depends(get_db)):
+    user = db.query(models.UserModel).filter(models.UserModel.id == datas.id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="[Not Found] user doesn't exist")
+
+    if datas.operator == '+':
+        user.coin += datas.ammount
+    elif datas.operator == '-':
+        user.coin -= datas.ammount
+    else : 
+        raise HTTPException(status_code=422, detail="[ERROR 422 - Operator error] Unprocessable entity")
+
+    db.commit()
+
+    return user.coin
