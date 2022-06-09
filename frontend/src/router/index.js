@@ -21,6 +21,7 @@ import ZumbaView from '../views/ZumbaView.vue'
 import CrossfitView from '../views/CrossfitView.vue'
 import HowMuchView from '../views/HowMuchView.vue'
 import ListOfSeances from '../views/ListOfSeances.vue'
+import MaintenanceView from '../views/MaintenanceView.vue'
 
 
 Vue.use(VueRouter)
@@ -30,6 +31,11 @@ const routes = [
     path: '/',
     name: 'login',
     component: LoginView
+  },
+  {
+    path: '/maintenance',
+    name: 'maintenance',
+    component: MaintenanceView
   },
   {
     path: '/home',

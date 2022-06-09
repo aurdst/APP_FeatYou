@@ -29,9 +29,10 @@ class AllEventSchema(BaseModel):
     idUser: int
     date: str
     hours: str
-    sport: str
-    lieu: str
+    adress: str
+    duree: str
     price: float
+    sport: str
 
     class Config:
         orm_mode = True

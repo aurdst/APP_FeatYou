@@ -7,7 +7,7 @@
         <v-row no-gutters>    
             <v-col clos="6">
                 <v-spacer></v-spacer>
-                <v-card width="150" height="170" class="cards_select_coins pt-5 mt-5 mx-auto" @click="dialog_show = true, ammount=2">
+                <v-card width="190" height="170" class="cards_select_coins pt-5 mt-5 mx-auto" @click="dialog_show = true, ammount=2">
                     <v-img :src="fitcoin" width="70" height="70" class=" img_coin mx-auto"></v-img>
                     <p class="text_card_featcoin">2 featcoins</p>
                     <p class="price pb-5">15€</p>
@@ -15,7 +15,7 @@
             </v-col>
 
             <v-col clos="6">
-                <v-card width="150" height="170" class="cards_select_coins pt-5 mt-5 mx-auto" @click="dialog_show = true, ammount=5">
+                <v-card width="190" height="170" class="cards_select_coins pt-5 mt-5 mx-auto" @click="dialog_show = true, ammount=5">
                     <v-img :src="fitcoin" width="70" height="70" class="img_coin mx-auto"></v-img>
                     <p class="text_card_featcoin">5 featcoins</p>
                     <p class="price pb-5">35€</p>
@@ -26,7 +26,7 @@
         <v-row no-gutters>    
             <v-col clos="6">
                 <v-spacer></v-spacer>
-                <v-card width="150" height="170" class="cards_select_coins pt-5 mt-5 mx-auto" @click="dialog_show = true, ammount=10">
+                <v-card width="190" height="170" class="cards_select_coins pt-5 mt-5 mx-auto" @click="dialog_show = true, ammount=10">
                     <v-img :src="fitcoin" width="70" height="70" class=" img_coin mx-auto"></v-img>
                     <p class="text_card_featcoin">10 featcoins</p>
                     <p class="price pb-5">70€</p>
@@ -34,7 +34,7 @@
             </v-col>
             
             <v-col clos="6">
-                <v-card width="150" height="170" class="cards_select_coins pt-5 mt-5 mx-auto" @click="dialog_show = true, ammount=15">
+                <v-card width="190" height="170" class="cards_select_coins pt-5 mt-5 mx-auto" @click="dialog_show = true, ammount=15">
                     <v-img :src="fitcoin" width="70" height="70" class="img_coin mx-auto"></v-img>
                     <p class="text_card_featcoin">15 featcoins</p>
                     <p class="price pb-5">100€</p>
