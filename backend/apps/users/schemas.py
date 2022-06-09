@@ -107,3 +107,10 @@ class UserInDB(UserAuthSchema):
 
     class Config:
         orm_mode = True
+
+class UserCoinSchema(BaseModel):
+    id: int
+    ammount: int
+    operator: str
+    class Config:
+        orm_mode = True

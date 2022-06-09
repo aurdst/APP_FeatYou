@@ -70,15 +70,49 @@
     <div class="container_current_event mx-auto">
       <v-row class="mb-6 mx-5" no-gutters>
         <v-col cols="12">
-          <h2 class="text-center bg_home_seance">
+          <h2 class="text-center bg_home_seance" v-if="iscoach == true">
+            Vos scéances planifiées
+          </h2>
+
+          <h2 class="text-center bg_home_seance" v-else>
             Séances à venir 
           </h2>
         </v-col>
   
-        <v-col cols="12">
-          <p class="text-center">
-            {{}} 
-          </p>
+        <v-col cols="12" v-if="iscoach == true">
+          <div class="elevation-5 pa-5 my-5 rounded" :key="index" v-for="(event, index) in this.events[1]">
+            <v-row no-gutters>
+              <v-col cols="12">
+                {{event.label}} - {{event.duree}}
+              </v-col>
+
+              <v-col cols="12">
+                À {{event.hours}}
+              </v-col>
+
+              <v-col cols="12">
+                À {{event.adress}}
+              </v-col>
+            </v-row>
+          </div>
+        </v-col>
+
+        <v-col cols="12" v-else>
+          <div class="elevation-5 pa-5 my-5 rounded" :key="index" v-for="(event, index) in this.events[0]">
+            <v-row no-gutters>
+              <v-col cols="12">
+                {{event.label}} - {{event.duree}}
+              </v-col>
+
+              <v-col cols="12">
+                À {{event.hours}}
+              </v-col>
+
+              <v-col cols="12">
+                {{event.adress}}
+              </v-col>
+            </v-row>
+          </div>
         </v-col>
 
         <v-col cols="12">
@@ -105,20 +139,33 @@
   import CardsStep from '@/components/CardsStep.vue'
 
   export default {
-    name: 'HomeView',
+    name : 'HomeView',
 
     components: {
-    CardsMuscu,
-    List,
-    CreateEvent,
-    CardsCroosfit,
-    CardsStep
+      CardsMuscu,
+      List,
+      CreateEvent,
+      CardsCroosfit,
+      CardsStep
     },
 
     data: () => ({
       current_user_name: JSON.parse(localStorage.getItem('user')).user.username,
       iscoach : JSON.parse(localStorage.getItem('user')).user.iscoach,
       confirm : false,
-    })
+      events  : null
+    }),
+
+    mounted : function() {
+      this.$store.dispatch('getEventbyUserId', JSON.parse(localStorage.getItem('user')).user.id).then(
+          (rs) => {
+              this.events = rs.data
+          }
+      ).catch(
+          (error) => {
+              console.log(error)
+          }
+      )
+    },
   }
 </script>

@@ -20,20 +20,18 @@
 
     <v-list three-line>
       <template v-for="(item) in coachs">
-
-        <v-list-item
-          :key="item"
-          class="css_item_coach"
-        >
+        <v-list-item :key="item" class="css_item_coach">
           <v-list-item-avatar>
             <!-- <v-img :src="item.avatar"></v-img> -->
           </v-list-item-avatar>
 
           <v-list-item-content class="list_item">
             <v-list-item-title class="txt_coach_preview" v-html="item.lastName + ' ' + item.firstName"></v-list-item-title>
-            <v-list-item-subtitle class="txt_coach_preview" v-html="item.sport"></v-list-item-subtitle>
+            <v-list-item-subtitle class="txt_coach_preview" v-html="'- ' + i" :key="i" v-for="(i) in item.sport"></v-list-item-subtitle>
           </v-list-item-content>
+
           <br>
+
           <v-btn @click="go_to_profile(item.id)" text color="#FFF" small :key="item" >
             <v-icon small>mdi-arrow-right</v-icon>
           </v-btn>
@@ -62,6 +60,7 @@
       //* Get user info
       this.$store.dispatch('getAllUserInfos').then(
         (rs) => {
+          console.log(rs)
           this.coachs = rs;
           
           return;

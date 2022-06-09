@@ -170,6 +170,14 @@ export default new Vuex.Store({
       let u      = JSON.parse(localStorage.getItem('user'));
       u.user     = user;
       localStorage.setItem('user', JSON.stringify(u));
+    },
+
+    update_current_user_coin : (state, ammount) => {
+      let user = JSON.parse(localStorage.getItem('user'))
+      user.user.coin = ammount;
+
+      state.user = user
+      localStorage.setItem('user', JSON.stringify(user));
     }
   },
 
@@ -288,8 +296,22 @@ export default new Vuex.Store({
 
       commit;
       return response;
-    }
-  },
+    },
 
-  modules: {}
+    manage_coin : async function({commit}, datas) {
+      const response = await instance.put('/manage_coin', datas);
+      console.log(response)
+      commit('update_current_user_coin', response.data);
+
+      return response
+    },
+
+    manage_participant : async function({commit}, datas) {
+      const response = await instanceEvent.put('/manage_paricipant', datas);
+      console.log(response)
+      commit('update_current_user_coin', response.data);
+
+      return response
+    }
+  }
 });
