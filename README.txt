@@ -1,3 +1,5 @@
+"vue": "^2.6.14"
+
 FEAT YOU is an application of courses online, courses of coaching about fitness, yoga, running and more.
 
 This application is a school project.
